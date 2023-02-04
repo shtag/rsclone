@@ -54,7 +54,7 @@ const baseConfig = {
                     }
                 },
                 {
-                    from: 'src/assets' ,
+                    from: 'src/img' ,
                     to: 'img',
                     globOptions: {
                         ignore: ['*.ts', '*.scss', '*.js'],
