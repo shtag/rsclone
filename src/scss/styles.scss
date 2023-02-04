@@ -1,0 +1,7 @@
+@import 'base/_mixins.scss';
+@import 'base/variables.scss';
+
+html {
+    background-color: $black-color;
+    color: $white-color;
+}
