@@ -1,7 +1,23 @@
-@import 'base/_mixins.scss';
 @import 'base/variables.scss';
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
     background-color: $black-color;
     color: $white-color;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
 }
