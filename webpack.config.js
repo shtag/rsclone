@@ -58,7 +58,8 @@ const baseConfig = {
                     to: 'img',
                     globOptions: {
                         ignore: ['*.ts', '*.scss', '*.js'],
-                    }
+                    },
+                    noErrorOnMissing: true
                 }
             ],
         }),
