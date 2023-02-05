@@ -27,10 +27,9 @@ export class Header {
         </clipPath>
         </defs>
         </svg></button>
-        <button class="profile-btn">ф</button>
+        <a class="profile-btn">🐈</a>
         <input class="theme" type="checkbox">
     </div>
-        
             </header>
             `;
         root.innerHTML = HTMLHeader;
