@@ -1,0 +1,11 @@
+@import 'variables.scss';
+
+.light-theme {
+    background-color: $white-color;
+
+    .header {
+        &-bar_container {
+            background-color: $dark-grey-color;
+        }
+    }
+}

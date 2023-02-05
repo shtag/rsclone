@@ -13,7 +13,7 @@ class App {
 
     static async start() {
         HeaderView.renderProducts();
-        HeaderController.dayMode();
+        HeaderController.switchTheme();
         console.log('start');
     }
 }
