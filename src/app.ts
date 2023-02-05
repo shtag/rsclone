@@ -1,16 +1,19 @@
-import {Header} from './pages/home-page/header/view';
 import './scss/styles.scss';
 import './pages/home-page/header/style.scss'
+import PageController from './pages/PageController';
+import HeaderView from './pages/home-page/header/HeaderView';
+import HeaderController from './pages/home-page/header/HeaderController';
 
 class App {
-    header: Header;
+    PageController: PageController;
 
     constructor() {
-        this.header = new Header();
+        this.PageController = new PageController();
     }
 
     static async start() {
-        Header.renderProducts();
+        HeaderView.renderProducts();
+        HeaderController.dayMode();
         console.log('start');
     }
 }
