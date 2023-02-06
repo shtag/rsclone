@@ -1,8 +1,8 @@
 import './scss/styles.scss';
-import './pages/home-page/header/style.scss'
+import './pages/home-page/staticElements/style.scss'
 import PageController from './pages/PageController';
-import HeaderView from './pages/home-page/header/HeaderView';
-import HeaderController from './pages/home-page/header/HeaderController';
+import HeaderView from './pages/home-page/staticElements/HeaderView';
+import HeaderController from './pages/home-page/staticElements/HeaderController';
 
 class App {
     PageController: PageController;
@@ -12,7 +12,7 @@ class App {
     }
 
     static async start() {
-        HeaderView.renderProducts();
+        HeaderView.renderHeader();
         HeaderController.switchTheme();
         console.log('start');
     }

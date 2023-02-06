@@ -30,7 +30,7 @@
 .header-bar_container {
     padding-left: 6px;
     padding-right: 6px;
-    background-color: $light-grey-color;
+    background-color: $dark-grey-color;
     align-items: center;
     width: 275px;
     height: 50px;
@@ -94,4 +94,34 @@ input:checked:before {
     transform: translate(100%);
     transition: all 0.9s;
     background-color: #f7ca33;
+}
+
+.nav-bar_container {
+    position: absolute;
+    top: 50%;
+    margin-left: 3%;
+    transform: translate(0, -50%);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: #1e1e1e;
+    align-items: center;
+    height: 275px;
+    width: 50px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 50px;
+    margin-right: 20px;
+    flex-direction: column;
+
+    button {
+        height: 24px;
+        width: 24px;
+        border: none;
+        background: transparent;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        filter: opacity(50%);
+    }
 }

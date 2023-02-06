@@ -5,7 +5,11 @@
 
     .header {
         &-bar_container {
-            background-color: $dark-grey-color;
+            background-color: $light-grey-color;
         }
+    }
+
+    .nav-bar_container {
+        background-color: $light-grey-color;
     }
 }

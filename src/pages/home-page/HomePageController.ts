@@ -1,5 +1,5 @@
-import HeaderController from './header/HeaderController';
-import HeaderView from './header/HeaderView';
+import HeaderController from './staticElements/HeaderController';
+import HeaderView from './staticElements/HeaderView';
 
 class HomePageController {
     HeaderController: HeaderController;
