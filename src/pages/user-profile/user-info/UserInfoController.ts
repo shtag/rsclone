@@ -5,10 +5,7 @@ class UserPageController {
         const container = document.createElement('div');
         container.classList.add('container');
 
-        const main = document.createElement('main');
-        const body = document.querySelector('body');
-
-        body?.append(main);
+        const main = document.querySelector('main');
         main?.append(container);
 
         container.innerHTML = UserPageView.renderUserInfo();

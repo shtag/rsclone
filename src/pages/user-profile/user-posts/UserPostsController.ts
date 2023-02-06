@@ -7,9 +7,10 @@ class UserPostsController {
         userPosts.classList.add('post__block');
 
         const main = document.querySelector('main');
-
+        
         const container = document.createElement('div');
         container.classList.add('container');
+
         main?.append(container);
         container?.append(userPosts);
     }

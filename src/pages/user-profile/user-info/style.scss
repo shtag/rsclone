@@ -5,6 +5,10 @@
     width: 100%;
     margin: 40px auto 20px;
 
+    &__infoStat {
+        width: 100%;
+    }
+
     &__divider {
         width: 2px;
         height: 45px;
@@ -41,7 +45,7 @@
     &__info {
         margin-top: 10px;
         display: flex;
-        gap: 150px;
+        justify-content: space-between;
     }
 
     &__name {

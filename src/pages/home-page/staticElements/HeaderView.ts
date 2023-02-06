@@ -1,10 +1,8 @@
 export class HeaderView {
     static renderHeader() {
-        const root = document.querySelector('body') as HTMLBodyElement;
+        const header = document.querySelector('header') as HTMLElement;
         let HTMLHeader = '';
         HTMLHeader = `
-        <div class="container">
-            <header class="header">
             <div class="logo-header_container"><img class="logo-header" src="img/logo-mini.png" alt="">
             <p class="text-logo">Kotogram</p>
             </div> 
@@ -20,16 +18,14 @@ export class HeaderView {
         <a class="profile-btn">🐈</a>
         <input class="theme" type="checkbox">
     </div>
-            </header>
-            </div>
             `;
-        root.innerHTML = HTMLHeader;
+        header.innerHTML = HTMLHeader;
         this.renderNavBar();
     }
 
     static renderNavBar() {
-        const container = document.querySelector('.container') as HTMLDivElement;
-        const NavBar = document.createElement('div');
+        const body = document.querySelector('body') as HTMLBodyElement;
+        const NavBar = document.createElement('aside');
         NavBar.className = 'nav-bar_container';
         let HTMLNavBar = '';
         HTMLNavBar = `
@@ -55,7 +51,7 @@ export class HeaderView {
             </header>
         `;
         NavBar.innerHTML = HTMLNavBar;
-        container.append(NavBar);
+        body.append(NavBar);
     }
 }
 
