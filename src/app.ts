@@ -16,10 +16,15 @@ class App {
     }
 
     static async start() {
-        GeneralUserController.setGeneralController();
+        // GeneralUserController.setGeneralController();
         HeaderView.renderHeader();
         HeaderController.switchTheme();
         console.log('start');
+        const btn = document.querySelector('.profile-btn');
+        console.log(btn);
+        btn?.addEventListener('click', () => {
+            GeneralUserController.setGeneralController();
+        });
     }
 }
 

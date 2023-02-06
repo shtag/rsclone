@@ -8,6 +8,8 @@ class GeneralUserController {
         UserPageController.setUserInfo();
         UserPostsController.setUserInfo();
         UserPostsController.getData(apiUrl);
+        const btn = document.querySelector('.profile-btn')
+        console.log(btn)
     }
 }
 

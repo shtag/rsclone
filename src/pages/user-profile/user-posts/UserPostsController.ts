@@ -8,7 +8,10 @@ class UserPostsController {
 
         const main = document.querySelector('main');
 
-        main?.append(userPosts);
+        const container = document.createElement('div');
+        container.classList.add('container');
+        main?.append(container);
+        container?.append(userPosts);
     }
 
     static clearGalleryChilds() {
