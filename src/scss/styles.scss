@@ -1,4 +1,5 @@
 @import 'base/variables.scss';
+@import 'base/light-theme.scss';
 
 * {
     margin: 0;
@@ -15,9 +16,16 @@ body {
     font-weight: 400;
     background-color: $black-color;
     color: $white-color;
+    transition: 0.2s;
 }
 
 .container {
     max-width: 1440px;
     margin: 0 auto;
 }
+
+.day {
+    background-color: $white-color;
+}
+
+

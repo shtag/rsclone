@@ -1,0 +1,15 @@
+@import 'variables.scss';
+
+.light-theme {
+    background-color: $white-color;
+
+    .header {
+        &-bar_container {
+            background-color: $light-grey-color;
+        }
+    }
+
+    .nav-bar_container {
+        background-color: $light-grey-color;
+    }
+}
