@@ -5,6 +5,7 @@ import ModelPosts from './api/Model-components/Model-posts';
 
 import './scss/styles.scss';
 import './pages/home-page/staticElements/style.scss';
+import './pages/home-page/postElements/style.scss'
 import ModelUsers from './api/Model-components/Model-users';
 
 class App {

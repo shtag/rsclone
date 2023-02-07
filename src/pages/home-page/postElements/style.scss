@@ -1,0 +1,74 @@
+@import "/src/scss/base/variables";
+@import url("https://fonts.cdnfonts.com/css/axiforma");
+
+.comments_container {
+    text-align: center;
+}
+
+.post_wrapper {
+    height: 600px;
+    background-color: $dark-grey-color;
+    border-radius: 50px;
+    padding: 50px;
+    margin-bottom: 50px;
+    margin-top: 130px;
+}
+
+.mini-round-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
+    box-shadow: 0 0 0 2px rgb(255, 98, 0);
+}
+
+.post {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post_img {
+    width: 100%;
+}
+
+.post_img_container {
+    height: 600px;
+    width: 600px;
+    border-radius: 35px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_info_cotainer {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.post_info_account {
+    display: flex;
+    align-items: center;
+}
+
+.post_info_account_text {
+    margin-left: 22px;
+}
+
+.post_info_description {
+    margin-top: 25px;
+}
+
+.tools {
+    height: 87px;
+    border-radius: 50px;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    width: inherit;
+    background-color: $dark-grey-color;
+}
+
+.tools_container_item {
+    display: flex;
+    gap: 20px;
+}
