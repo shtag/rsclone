@@ -14,6 +14,7 @@ class HomePageController {
     static setHomePageController() {
         HeaderView.renderHeader();
         HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
     }
 }
 
