@@ -1,5 +1,5 @@
 import URL from '../../types/constants';
-import { UserInfo, UserSettings } from '../../types/types';
+import { UserInfo, UserSettings, UserList } from '../../types/types';
 
 class ModelUsers {
     url = URL;
@@ -146,6 +146,26 @@ class ModelUsers {
         try {
             const response = await fetch(`${URL}/followers/${id}`);
             return response.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    /**
+     * Get userlist
+     * @param {Array} list - array of strings
+     * @returns {Object} - object of users info
+     */
+
+    static async getUserlist(list: UserList) {
+        try {
+            const data = await fetch(`${URL}/userlist`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(list),
+            });
+
+            return data.json();
         } catch (error) {
             throw new Error();
         }
