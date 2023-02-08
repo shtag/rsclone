@@ -41,3 +41,7 @@ export interface Feed {
     limit: number;
     page: number;
 }
+
+export interface Search {
+    query: string;
+}
