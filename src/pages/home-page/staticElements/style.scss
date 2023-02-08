@@ -9,6 +9,44 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    input {
+    -webkit-appearance: none;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
+    background-size: cover;
+    border-radius: 50px;
+    outline: none;
+    transition: background-image 0.9s;
+    box-shadow: 0px 2px 5px 1px gray;
+}
+
+input:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: navy;
+    border-radius: 50px;
+    transition: all 0.9s;
+
+    background-color: #ecf0f3;
+}
+
+input:checked {
+    background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+    transition: background-image 0.9s;
+}
+
+input:checked:before {
+    transform: translate(100%);
+    transition: all 0.9s;
+    background-color: #f7ca33;
+}
+
 }
 
 .text-logo {
@@ -58,43 +96,6 @@
     border-radius: 50%;
 }
 
-input {
-    -webkit-appearance: none;
-    position: relative;
-    width: 40px;
-    height: 20px;
-    background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
-    background-size: cover;
-    border-radius: 50px;
-    outline: none;
-    transition: background-image 0.9s;
-    box-shadow: 0px 2px 5px 1px gray;
-}
-
-input:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: navy;
-    border-radius: 50px;
-    transition: all 0.9s;
-
-    background-color: #ecf0f3;
-}
-
-input:checked {
-    background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
-    transition: background-image 0.9s;
-}
-
-input:checked:before {
-    transform: translate(100%);
-    transition: all 0.9s;
-    background-color: #f7ca33;
-}
 
 .nav-bar_container {
     position: fixed;

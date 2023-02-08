@@ -21,7 +21,7 @@ export class PostElementsController {
     static async renderPosts(id = 1) {
         const PostData = await PostsElementsModel.getPostWithId(id);
         postElemens.renderPostElement(await PostData);
-        // await this.checkPosition(id);
+        await this.checkPosition(id);
     }
 }
 
