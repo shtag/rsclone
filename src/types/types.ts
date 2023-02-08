@@ -11,12 +11,6 @@ export interface UserInfo {
     id?: number;
 }
 
-export interface Comments {
-    sessionId: string;
-    text?: string;
-    commentId?: number;
-}
-
 export interface UserSettings {
     sessionId: string;
     settings: {
@@ -29,4 +23,15 @@ export interface UserSettings {
 
 export interface UserList {
     list: string[];
+}
+
+export interface Comments {
+    sessionId: string;
+    text?: string;
+    commentId?: number;
+}
+
+export interface Auth {
+    username: string;
+    password: string;
 }
