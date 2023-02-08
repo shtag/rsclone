@@ -54,6 +54,27 @@ class ModelPosts {
     }
 
     /**
+     * Delete post
+     * @param {Object} postData - postData object - {sessionId: string}
+     * @param {number} id - post id
+     * @returns {Object} - deleted post
+     */
+
+    static async deletePost(id: number, postData: PostData) {
+        try {
+            const data = await fetch(`${URL}/post/${id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData),
+            });
+
+            return data.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    /**
      * Like/dislike post
      * @param {Object} userInfo - sessionId object - {sessionId: string}
      * @param {number} id - post id

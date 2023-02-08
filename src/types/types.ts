@@ -1,7 +1,7 @@
 export interface PostData {
     sessionId: string;
-    image: string;
-    description: string;
+    image?: string;
+    description?: string;
 }
 
 export interface UserInfo {
