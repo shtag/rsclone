@@ -35,3 +35,9 @@ export interface Auth {
     username: string;
     password: string;
 }
+
+export interface Feed {
+    sessionId: string;
+    limit: number;
+    page: number;
+}

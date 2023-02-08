@@ -1,5 +1,5 @@
 import URL from '../../types/constants';
-import { PostData, UserInfo, Comments } from '../../types/types';
+import { PostData, UserInfo, Comments, Feed } from '../../types/types';
 
 class ModelPosts {
     url = URL;
@@ -129,6 +129,46 @@ class ModelPosts {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(comment),
+            });
+
+            return data.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    /**
+     * Feed
+     * @param {Object} feedData - feedData object - {sessionId: string, limit: number, page: number}
+     * @returns {Array} - feed
+     */
+
+    static async feed(feedData: Feed) {
+        try {
+            const data = await fetch(`${URL}/feed`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(feedData),
+            });
+
+            return data.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+      /**
+     * Recommendation feed
+     * @param {Object} feedData - feedData object - {sessionId: string, limit: number, page: number}
+     * @returns {Array} - feed
+     */
+
+      static async recommendationFeed(feedData: Feed) {
+        try {
+            const data = await fetch(`${URL}/feed`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(feedData),
             });
 
             return data.json();
