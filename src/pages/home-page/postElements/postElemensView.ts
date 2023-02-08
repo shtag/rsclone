@@ -1,15 +1,13 @@
 import { Post } from "../../../types/types";
 
 export class postElemens {
-    static renderPostElements(allPost: Post[]) {
+    static renderPostElement(PostData: Post) {
         const main = document.querySelector('main') as HTMLElement;
         const root = document.createElement('div') as HTMLDivElement;
         root.className = 'comments_container';
-        let HTMLPost = '';
-        main.innerHTML = '';
+        // main.innerHTML = '';
         
-        allPost.forEach((element: Post) => {
-            HTMLPost += 
+           const HTMLPost = 
         `
         <div class="post_wrapper">
             <div class="post">
@@ -19,11 +17,11 @@ export class postElemens {
                             <img class="mini-round-img" src="https://http.cat/207" alt="" />
                         </div>
                         <div class="post_info_account_text">
-                            <p class="nickname">${element.author}</p>
+                            <p class="nickname">${PostData.author}  ID=${PostData.id}</p>
                         </div>
                     </div>
                     <div class="post_info_description">
-                        <p class="post_info_description_text"><b>${element.author}</b> ${element.description}</p>
+                        <p class="post_info_description_text"><b>${PostData.author}</b> ${PostData.description}</p>
                     </div>
                 </div>
                 <div class="post_img_container"><img src="https://http.cat/206" alt="" class="post_img" /></div>
@@ -52,9 +50,8 @@ export class postElemens {
                     <p class="tools_text">Comment</p>
                 </div>
             </div>
-        `
-        }
-        );
+        `;
+        
         root.innerHTML = HTMLPost;
         main.append(root);
     }

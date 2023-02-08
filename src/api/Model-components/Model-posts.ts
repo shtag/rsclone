@@ -9,6 +9,11 @@ class ModelPosts {
         return response.json();
     }
 
+    static async getPostWithId(id: number) {
+        const response = await fetch(`${URL}/post/${id}`);
+        return response.json();
+    }
+
     static async getUserPost(id: number) {
         const response = await fetch(`${URL}/post/${id}`);
         return response.json();
