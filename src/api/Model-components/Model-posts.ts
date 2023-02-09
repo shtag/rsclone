@@ -19,14 +19,29 @@ class ModelPosts {
     }
 
     /**
-     * Get user's post
+     * Get post by id
      * @param {number} id - post id
      * @returns {Object} - user's post
      */
 
-    static async getUserPost(id: number) {
+    static async getPostById(id: number) {
         try {
             const response = await fetch(`${URL}/post/${id}`);
+            return response.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    /**
+     * Get user's post
+     * @param {number} id - user id
+     * @returns {Object} - user's post
+     */
+
+    static async getUserPosts(id: number) {
+        try {
+            const response = await fetch(`${URL}/userposts/${id}`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -178,13 +193,13 @@ class ModelPosts {
         }
     }
 
-      /**
+    /**
      * Recommendation feed
      * @param {Object} feedData - feedData object - {sessionId: string, limit: number, page: number}
      * @returns {Array} - feed
      */
 
-      static async recommendationFeed(feedData: Feed) {
+    static async recommendationFeed(feedData: Feed) {
         try {
             const data = await fetch(`${URL}/feed`, {
                 method: 'POST',

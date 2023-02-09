@@ -45,3 +45,13 @@ export interface Feed {
 export interface Search {
     query: string;
 }
+
+export interface Post {
+    id: number;
+    author: string;
+    image: string;
+    description: string;
+    date: number;
+    likes: string[];
+    comments: string[];
+}

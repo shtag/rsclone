@@ -22,8 +22,8 @@ class App {
         PageController.renderStructure();
         PageController.setControllers();
 
-        const btn = document.querySelector('.profile-btn');
-        btn?.addEventListener('click', () => {
+        const profileBtn = document.querySelector('.profile-btn');
+        profileBtn?.addEventListener('click', () => {
             PageController.setUserProfileController();
         });
     }

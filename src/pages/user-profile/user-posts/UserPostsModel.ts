@@ -1,9 +1,9 @@
+import ModelPosts from '../../../api/Model-components/Model-posts';
+
 class UserPostsModel {
-    static async getUserPosts(url: string) {
-        const res = await fetch(url);
-        const data = await res.json();
-        const { results } = data;
-        return results;
+    static async getPosts(id: number) {
+        const data = await ModelPosts.getUserPosts(id);
+        return data;
     }
 }
 
