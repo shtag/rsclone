@@ -2,7 +2,8 @@
 
 .active {
     background: linear-gradient(270deg, rgb(255, 111, 0), orange, fuchsia);
-    -webkit-background-clip: text;
+    -webkit-background-clip: text; 
+    background-clip: text; 
     -webkit-text-fill-color: transparent;
 
     &_icon {

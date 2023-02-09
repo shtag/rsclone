@@ -14,14 +14,14 @@ class GeneralUserController {
         const saved = document.querySelector('.user__post-item_saved') as HTMLElement;
         const dividerPart = document.querySelector('.divider__part') as HTMLElement;
 
-        const block = document.querySelectorAll('.user__post-item') as NodeListOf<HTMLElement>;
+        const userPostItem = document.querySelectorAll('.user__post-item') as NodeListOf<HTMLElement>;
 
-        block.forEach((el) => {
+        userPostItem.forEach((el) => {
             el.addEventListener('click', () => {
                 const icon = el.children[1] as HTMLButtonElement;
                 const text = el.children[0] as HTMLImageElement;
 
-                block.forEach((item) => {
+                userPostItem.forEach((item) => {
                     item.children[1].classList.remove('active');
                     item.children[0].classList.remove('active_icon');
                 });
