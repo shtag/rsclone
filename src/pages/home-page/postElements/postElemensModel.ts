@@ -1,9 +1,6 @@
 import ModelPosts from "../../../api/Model-components/Model-posts";
 
 class PostsElementsModel {
-    static getLastRenderedId() {
-        throw new Error('Method not implemented.');
-    }
 
     static getAllPosts(){
         const data = ModelPosts.getAllPosts();

@@ -13,7 +13,7 @@ export class postElemens {
                 <div class="post_info_cotainer">
                     <div class="post_info_account">
                         <div class="post_info_account_img">
-                            <img class="mini-round-img" src="https://http.cat/207" alt="" />
+                            <img class="mini-round-img" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg" alt="" />
                         </div>
                         <div class="post_info_account_text">
                             <p class="nickname">${PostData.author}  ID=${PostData.id}</p>
@@ -39,7 +39,7 @@ export class postElemens {
                 </button>
             <form>
                 </div>
-                <div class="post_img_container"><img src="https://http.cat/206" alt="" class="post_img" /></div>
+                <div class="post_img_container"><img src="https://cdn.pixabay.com/photo/2018/07/13/10/20/kittens-3535404_960_720.jpg" alt="" class="post_img" /></div>
             </div>
             
         </div>
@@ -86,7 +86,7 @@ export class postElemens {
                 <div class="post_info_comment">
                 <div class="post_info">
                     <div class="comment_img">
-                        <img src="https://http.cat/208" alt="" class="comment_mini_img" />
+                        <img src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg" alt="" class="comment_mini_img" />
                     </div>
                     <div class="comment_text">
                         <p><b>${comment.author}</b>      ${comment.text}</p>

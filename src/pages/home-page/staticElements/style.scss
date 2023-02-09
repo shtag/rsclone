@@ -84,9 +84,6 @@ input:checked:before {
         transition: 0.2s;
     }
 
-    button:hover {
-        filter: opacity(50%);
-    }
 }
 
 .profile-btn {
@@ -119,9 +116,5 @@ input:checked:before {
         border: none;
         background: transparent;
         transition: 0.2s;
-    }
-
-    button:hover {
-        filter: opacity(50%);
     }
 }

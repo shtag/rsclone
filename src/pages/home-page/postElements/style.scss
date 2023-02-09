@@ -6,19 +6,20 @@
 }
 
 .post_wrapper {
-    height: 600px;
+    height: 480px;
     background-color: $dark-grey-color;
     border-radius: 50px;
-    padding: 50px;
+    padding: 30px;
     margin-bottom: 50px;
     margin-top: 40px;
 }
 
 .mini-round-img {
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     border-radius: 100px;
     box-shadow: 0 0 0 2px rgb(255, 98, 0);
+    object-fit: cover;
 }
 
 .post {
@@ -31,13 +32,19 @@
 }
 
 .post_img_container {
-    height: 600px;
-    width: 600px;
+    height: 480px;
+    width: 480px;
     border-radius: 35px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+        width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
 }
 
 .post_info_cotainer {
@@ -56,11 +63,12 @@
 }
 
 .post_info_description {
-    margin-top: 25px;
+    margin-top: 35px;
+    font-size: 17px;
 }
 
 .tools {
-    height: 87px;
+    height: 70px;
     border-radius: 50px;
     justify-content: space-around;
     align-items: center;
@@ -82,7 +90,7 @@
     margin-top: 10px;
     overflow-y: scroll;
     width: 90%;
-    height: 338px;
+    height: 255px;
     text-align: start;
 
     &::-webkit-scrollbar {
@@ -105,9 +113,10 @@
         background: transparent;
     }
     img {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
         border-radius: 100px;
+        object-fit: cover;
     }
 
     
@@ -116,10 +125,11 @@
 .comment_tools{
         display: flex;
         gap: 10px;
+        color: $light-grey-color;
         button {
             border: 0;
             background: transparent;
-            color: white;
+            color: $light-grey-color;
         }
     }
 }
@@ -137,12 +147,13 @@
     input{
         border: none;
         background-color: $black-color;
-        height: 60px;
+        height: 35px;
         width: 87%;
         border-radius: 50px;
         text-indent: 20px;
         outline:none;
         color: white;
+        font-size: 15px;
     }
     }
 
