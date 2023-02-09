@@ -2,17 +2,12 @@ import './style.scss';
 import UserPostsModel from './UserPostsModel';
 
 class UserPostsController {
-    static setUserInfo() {
+    static setPostsInfo() {
         const userPosts = document.createElement('div');
         userPosts.classList.add('post__block');
 
-        const main = document.querySelector('main');
-        
-        const container = document.createElement('div');
-        container.classList.add('container');
-
-        main?.append(container);
-        container?.append(userPosts);
+        const userBlock = document.querySelector('.user');
+        userBlock?.append(userPosts);
     }
 
     static clearGalleryChilds() {

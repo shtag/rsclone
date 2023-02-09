@@ -2,13 +2,13 @@ import UserPageView from './UserInfoView';
 
 class UserPageController {
     static setUserInfo() {
-        const container = document.createElement('div');
-        container.classList.add('container');
+        const user = document.createElement('div');
+        user.classList.add('user');
 
         const main = document.querySelector('main');
-        main?.append(container);
+        main?.append(user);
 
-        container.innerHTML = UserPageView.renderUserInfo();
+        user.innerHTML = UserPageView.renderUserInfo();
     }
 }
 

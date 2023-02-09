@@ -3,7 +3,7 @@ import './style.scss';
 class UserPageView {
     static renderUserInfo() {
         return ` 
-        <div class="user">
+
         <div class="user__block">
           <div class="user__avatar-block">
             <div class="user__avatar_add"></div>
@@ -42,12 +42,20 @@ class UserPageView {
         </div>
       
         <div class="user__post-block">
-          <div class="user__post-item">
-            <img src='img/posts.svg' alt="posts" />
-            <p>Posts</p>
+          <div class="user__post-item user__post-item_posts">
+            <img class="user__post-item_icon active_icon" src='img/icons/posts-icon.svg' alt="posts" />
+            <button class="user__post-item_text active">Posts</button>
+          </div>
+          <div class="user__post-item user__post-item_favorites">
+            <img class="user__post-item_icon" src='img/icons/favorites-icon.svg' alt="posts" />
+            <button class="user__post-item_text">Favorites</button>
+          </div>
+          <div class="user__post-item user__post-item_saved">
+            <img class="user__post-item_icon" src='img/icons/saved-icon.svg' alt="posts" />
+            <button class="user__post-item_text">Saved</button>
           </div>
         </div>
-      </div>
+    
         `;
     }
 }
