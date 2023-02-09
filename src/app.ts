@@ -2,11 +2,11 @@ import PageController from './pages/PageController';
 import GeneralUserController from './pages/user-profile/UserProfileController';
 import HomePageController from './pages/home-page/HomePageController';
 import ModelPosts from './api/Model-components/Model-posts';
-
 import './scss/styles.scss';
 import './pages/home-page/staticElements/style.scss';
 import './pages/home-page/postElements/style.scss'
 import ModelUsers from './api/Model-components/Model-users';
+
 
 class App {
     userPage: GeneralUserController;
