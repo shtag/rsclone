@@ -37,7 +37,8 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
-        assetModuleFilename: 'img/[name][ext]'
+        assetModuleFilename: 'img/[name][ext]',
+        publicPath: '/',
     },
     plugins: [
         new HtmlWebpackPlugin({
