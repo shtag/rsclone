@@ -1,6 +1,6 @@
 import PostElementsController from "./pages/home-page/postElements/postElementsController";
 import PageController from "./pages/PageController";
-import { IUser } from "./types/types";
+import { User } from "./types/types";
 
 class Router{
 
@@ -16,7 +16,7 @@ class Router{
     static async handleLocation() {
         const path: string[] = window.location.pathname.split('/');
         const res = await fetch('http://localhost:3000/users') // использовать метод из модели
-        const users: IUser[] = await res.json();
+        const users: User[] = await res.json();
         const usersList = users.map((el) => el.username);
         
         const user = users.find((us) => us.username === path[1]);
