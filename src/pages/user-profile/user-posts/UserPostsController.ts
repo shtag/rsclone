@@ -1,8 +1,8 @@
 import './style.scss';
-import UserPostsModel from './UserPostsModel';
 
 import UserPostsView from './UserPostsView';
 import { Post } from '../../../types/types';
+import model from '../../../api/Model';
 
 class UserPostsController {
     static setPostsInfo() {
@@ -24,7 +24,7 @@ class UserPostsController {
         try {
             const userPosts = document.querySelector('.post__block');
 
-            const results = await UserPostsModel.getPosts(1);
+            const results = await model.post.getUserPosts(1);
 
             results.forEach(async (el: Post) => {
                 const img = UserPostsView.renderPostImg(el.image);
