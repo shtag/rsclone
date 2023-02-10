@@ -1,5 +1,5 @@
-import ModelPosts from '../../../api/Model-components/Model-posts';
-import { Post, PostData } from '../../../types/types';
+import model from '../../../api/Model';
+import { Post } from '../../../types/types';
 
 import postElemens from './postElemensView';
 
@@ -31,7 +31,7 @@ class PostElementsController {
             limit: 10,
             page: pg,
         };
-        const posts = await ModelPosts.feed(params);
+        const posts = await model.post.feed(params);
         if (posts.length === 0) return
         await posts.forEach((element: Post) => {
             postElemens.renderPostElement(element);
