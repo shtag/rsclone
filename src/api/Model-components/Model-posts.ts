@@ -201,7 +201,7 @@ class ModelPosts {
 
     static async recommendationFeed(feedData: Feed) {
         try {
-            const data = await fetch(`${URL}/feed`, {
+            const data = await fetch(`${URL}/recomendation`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedData),

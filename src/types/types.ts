@@ -25,6 +25,10 @@ export interface UserList {
     list: string[];
 }
 
+export interface UserListId {
+    list: number[];
+}
+
 export interface Comments {
     sessionId: string;
     text?: string;
@@ -46,22 +50,12 @@ export interface Search {
     query: string;
 }
 
-export interface Post {
-    id: number;
-    author: string;
-    image: string;
-    description: string;
-    date: number;
-    likes: string[];
-    comments: string[];
-}
-
 export interface comment {
     text: string,
     date: number,
-    likes: string[],
+    likes: number[],
     id: number,
-    author: string
+    author: number
 }
 
 export interface Post {
@@ -69,7 +63,7 @@ export interface Post {
     image: string,
     description: string,
     date: number,
-    likes: string[],
+    likes: number[],
     comments: comment[],
-    author: string
+    author: number;
 }

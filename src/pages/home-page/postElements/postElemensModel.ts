@@ -8,7 +8,7 @@ class PostsElementsModel {
     }
 
     static getPostWithId(id: number) {
-        const data = ModelPosts.getPostWithId(id);
+        const data = ModelPosts.getPostById(id);
         return data;
     }
 }
