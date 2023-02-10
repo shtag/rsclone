@@ -1,5 +1,16 @@
 @import '../../../scss/base/_variables';
 
+.active {
+    background: linear-gradient(270deg, rgb(255, 111, 0), orange, fuchsia);
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+
+    &_icon {
+        filter: invert(18%) sepia(100%) saturate(3540%) hue-rotate(293deg) brightness(110%) contrast(128%);
+    }
+}
+
 .user {
     max-width: 950px;
     width: 100%;
@@ -52,8 +63,12 @@
         display: flex;
         flex-direction: column;
 
+        &_title {
+            font-size: 28px;
+        }
+
         &_nickname {
-            font-size: 16px;
+            font-size: 22px;
             color: $light-grey-color;
         }
     }
@@ -64,7 +79,7 @@
         gap: 35px;
 
         &_title {
-            font-size: 16px;
+            font-size: 21px;
             color: $light-grey-color;
         }
 
@@ -79,7 +94,7 @@
 
     &__description {
         margin-top: 20px;
-        font-size: 16px;
+        font-size: 22px;
         color: $light-grey-color;
     }
 
@@ -90,22 +105,24 @@
         }
 
         &-item {
-            margin-left: 8%;
+            cursor: pointer;
+            margin-left: 7%;
             display: flex;
             gap: 6px;
             align-items: center;
 
             & > img {
                 border-radius: 5px;
-                width: 16px;
-                height: 15px;
+                width: 20px;
+                height: 20px;
             }
 
-            & > p {
-                font-size: 16px;
-                background: linear-gradient(270deg, rgb(255, 111, 0), orange, fuchsia);;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
+            &_text {
+                cursor: pointer;
+                border: none;
+                font-size: 22px;
+                color: #c4c4c4;
+                background-color: transparent;
             }
         }
     }
@@ -120,6 +137,9 @@
     border-radius: 10px;
 
     &__part {
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        transition: all 0.5s;
         margin-left: 7%;
         width: 10%;
         border-radius: 10px;

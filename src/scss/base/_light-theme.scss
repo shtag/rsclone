@@ -1,7 +1,8 @@
-@import 'variables.scss';
+@import '_variables.scss';
 
 .light-theme {
     background-color: $white-color;
+    color: $black-color;
 
     .header {
         &-bar_container {
@@ -49,5 +50,25 @@
         .comment_tools_reply{
             color: $light-grey-color ;
         }
+    }
+
+    .user {
+        &__description {
+            color: $medium-grey-color;
+        }
+
+        &__name_nickname {
+            color: $medium-grey-color;
+        }
+
+        &__statistics_title{
+            color: $medium-grey-color;
+
+        }
+    }
+
+    .divider {
+        background-color: $light-grey-color;
+
     }
 }

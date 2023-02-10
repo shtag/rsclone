@@ -2,10 +2,10 @@
 
 .post {
     &__block {
+        margin: 20px auto;
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
-        margin: 0 auto;
         max-width: 950px;
         width: 100%;
     }

@@ -8,38 +8,14 @@ import './pages/home-page/postElements/style.scss'
 import ModelUsers from './api/Model-components/Model-users';
 
 
+
 class App {
-    userPage: GeneralUserController;
-
-    PageController: PageController;
-
-    HomePageController: HomePageController;
-
-    constructor() {
-        this.userPage = new GeneralUserController();
-        this.PageController = new PageController();
-        this.HomePageController = new HomePageController();
-    }
-
     static async start() {
         PageController.renderStructure();
         PageController.setControllers();
 
-        const a = await ModelPosts.getAllPosts();
-        const b = await ModelPosts.getUserPost(1);
-
-        const d = await ModelUsers.getAllUsers();
-
-        // const c = await ModelPosts.createPost('asfasfas', 'www.cat.com', 'This is a cat...');
-        console.log(a);
-        console.log(b);
-        console.log(d)
-        // console.log(c);
-
-        console.log('start');
-
-        const btn = document.querySelector('.profile-btn');
-        btn?.addEventListener('click', () => {
+        const profileBtn = document.querySelector('.profile-btn');
+        profileBtn?.addEventListener('click', () => {
             PageController.setUserProfileController();
         });
     }
