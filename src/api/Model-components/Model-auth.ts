@@ -1,4 +1,4 @@
-import URL from '../../types/constants';
+import { URL } from '../../types/constants';
 import { Auth, UserInfo } from '../../types/types';
 
 class ModelAuth {

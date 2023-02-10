@@ -1,4 +1,4 @@
-import URL from '../../types/constants';
+import { URL } from '../../types/constants';
 import { Search } from '../../types/types';
 
 class ModelSearch {

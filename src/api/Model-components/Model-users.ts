@@ -1,4 +1,4 @@
-import URL from '../../types/constants';
+import { URL } from '../../types/constants';
 import { UserInfo, UserSettings, UserList, UserListId } from '../../types/types';
 
 class ModelUsers {

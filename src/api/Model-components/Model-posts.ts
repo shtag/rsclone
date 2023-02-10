@@ -1,4 +1,4 @@
-import URL from '../../types/constants';
+import { URL } from '../../types/constants';
 import { PostData, UserInfo, Comments, Feed } from '../../types/types';
 
 class ModelPosts {
