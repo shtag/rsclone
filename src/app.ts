@@ -6,18 +6,6 @@ import './scss/styles.scss';
 import './pages/home-page/staticElements/style.scss';
 
 class App {
-    userPage: GeneralUserController;
-
-    PageController: PageController;
-
-    HomePageController: HomePageController;
-
-    constructor() {
-        this.userPage = new GeneralUserController();
-        this.PageController = new PageController();
-        this.HomePageController = new HomePageController();
-    }
-
     static async start() {
         PageController.renderStructure();
         PageController.setControllers();
