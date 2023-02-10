@@ -50,7 +50,7 @@ export interface Search {
     query: string;
 }
 
-export interface comment {
+export interface Comment {
     text: string,
     date: number,
     likes: number[],
@@ -64,6 +64,6 @@ export interface Post {
     description: string,
     date: number,
     likes: number[],
-    comments: comment[],
+    comments: Comment[],
     author: number;
 }

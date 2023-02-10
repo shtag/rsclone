@@ -1,11 +1,14 @@
-import { Post } from '../../../types/types';
-import PostsElementsModel from './postElemensModel';
+import ModelPosts from '../../../api/Model-components/Model-posts';
+import { Post, PostData } from '../../../types/types';
 import postElemens from './postElemensView';
 
-export class PostElementsController {
-    
-    static async checkPosition(id: number) {
-        // const allPosts: Post[] = await PostsElementsModel.getAllPosts();
+// eslint-disable-next-line import/no-mutable-exports
+export let page = 1;
+
+class PostElementsController {
+    static async checkPosition() {
+        
+           
         window.addEventListener('scroll', async () => {
             const height = document.body.offsetHeight;
             const screenHeight = window.innerHeight;
@@ -13,16 +16,26 @@ export class PostElementsController {
             const threshold = height - screenHeight / 4;
             const position = scrolled + screenHeight;
             if (position >= threshold) {
-                await this.renderPosts(id + 1);
+                 page += 1;
+                await this.renderPosts(page);
+                
             }
         });
     }
 
-    static async renderPosts(id = 1) {
-        const PostData = await PostsElementsModel.getPostWithId(id);
-        postElemens.renderPostElement(await PostData);
-        // await this.checkPosition(id);
+    
+    static async renderPosts(pg: number) {
+        const params = {
+            sessionId: '$2b$10$NhL.XLXwthdA4kACTPIJg.',
+            limit: 10,
+            page: pg,
+        };
+        const posts = await ModelPosts.feed(params);
+        if (posts.length === 0) return
+        await posts.forEach((element: Post) => {
+            postElemens.renderPostElement(element);
+        });
     }
 }
 
-export default PostElementsController;
+export {PostElementsController};

@@ -21,6 +21,7 @@ export class postElemens {
                     </div>
                     <div class="post_info_description">
                         <p class="post_info_description_text"><b>${PostData.author}</b> ${PostData.description}</p>
+                        <div class="comment_container"></div>
                     </div>
                     <form class="comment_form_container">
             
@@ -69,13 +70,11 @@ export class postElemens {
 
         root.innerHTML = HTMLPost;
         main.append(root);
-        await this.renderBlockWithComment(PostData);
+        this.renderBlockWithComment(PostData);
     }
 
     static async renderBlockWithComment(PostData: Post) {
-        const root = document.querySelector('.post_info_description') as HTMLDivElement;
-        const allComments = document.createElement('div') as HTMLDivElement;
-        allComments.className = 'comment_container';
+        const rootComments = document.querySelector('.comment_container') as HTMLDivElement;
         let HTMLComment = '';
         PostData.comments.forEach((comment) => {
             const dateInMs = comment.date;
@@ -108,9 +107,11 @@ export class postElemens {
                 </div>
             </div>
             `;
+            console.log(comment);
+            rootComments.innerHTML = HTMLComment;
         });
-        allComments.innerHTML = HTMLComment;
-        root.append(allComments);
+        
+        
     }
 }
 

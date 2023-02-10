@@ -1,5 +1,5 @@
 import URL from '../../types/constants';
-import { PostData, UserInfo, Comments, Feed } from '../../types/types';
+import { PostData, UserInfo, Comments, Feed, Post } from '../../types/types';
 
 class ModelPosts {
     url = URL;
