@@ -9,6 +9,7 @@ class App {
     static async start() {
         PageController.renderStructure();
         PageController.setControllers();
+        PageController.timeControl();
 
         const profileBtn = document.querySelector('.profile-btn');
         profileBtn?.addEventListener('click', () => {
