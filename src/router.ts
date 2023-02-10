@@ -1,13 +1,13 @@
-interface IUser {
-    username: string;
-    id: number;
-} // удалить после мержа всех веток и добавить тип
+import PostElementsController from "./pages/home-page/postElements/postElementsController";
+import PageController from "./pages/PageController";
+import { IUser } from "./types/types";
 
 class Router{
 
     static route(event: Event) {
         const e = event || window.event;
         const target = (e.target as HTMLAnchorElement).closest('.route') as HTMLAnchorElement;
+        if(!target) return
         e.preventDefault();
         window.history.pushState({}, '', (e.target as HTMLAnchorElement).href || target.href);
         Router.handleLocation();
@@ -37,7 +37,7 @@ class Router{
 
     static async openProfile(id: number){
         console.log("open profile")
-
+        PageController.setUserProfileController()
     }
 
     static async openPost(id: number){
@@ -49,14 +49,20 @@ class Router{
     }
 
     static async openFeed(){
-        console.log("open feed")
+        console.log("open feed");
+        const main = document.querySelector('main') as HTMLBodyElement;
+        main.innerHTML = '';
+        main.innerHTML = `
+        <div class="page_404">
+            <h1>Тут будет фид</h1>
+        </div>`
     }
 
     static async open404(){
         console.log("open 404");
-        const body = document.querySelector('body') as HTMLBodyElement;
-        body.innerHTML = '';
-        body.innerHTML = `
+        const main = document.querySelector('main') as HTMLBodyElement;
+        main.innerHTML = '';
+        main.innerHTML = `
         <div class="page_404">
             <h1>This page not exist!</h1>
             <a href="/feed" class="route">Go to home page</a>
@@ -66,11 +72,13 @@ class Router{
     static setEventListeners(){
         const body = document.querySelector('body') as HTMLElement;
         body.addEventListener('click', (e) => {
-            const target = (e.target as HTMLElement).closest('.route');
+            const target = (e.target as HTMLElement).closest('.route') as HTMLAnchorElement;
             if(target) {
-                Router.route(e);
+                console.log(target.href);
             }
+            Router.route(e);
         })
+
         window.addEventListener('load', async () => {
            Router.handleLocation();
         })
