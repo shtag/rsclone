@@ -1,21 +1,29 @@
-import URL from '../../types/constants';
-import { Auth, UserInfo } from '../../types/types';
+import { URL } from '../../types/constants';
+import { Auth, Login, LogoutData } from '../../types/types';
 
 class ModelAuth {
-    url = URL;
+    url: string;
 
+    constructor() {
+        this.url = URL;
+    }
     /**
      * Login
-     * @param {Object} authData - authData object - {username: string, password: string}
+     * @param {string} username
+     * @param {string} password
      * @returns {Object} - object - {username: string, sessionId: string, access: boolean}
      */
 
-    static async login(authData: Auth) {
+    async login(username: string, password: string):  Promise<Login>{
         try {
-            const data = await fetch(`${URL}/login`, {
+            const body = {
+                username,
+                password
+            }
+            const data = await fetch(`${this.url}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(authData),
+                body: JSON.stringify(body),
             });
 
             return data.json();
@@ -30,12 +38,16 @@ class ModelAuth {
      * @returns {Object} - object - {username: string, password: string}
      */
 
-    static async signUp(authData: Auth) {
+    async signUp(username: string, password: string): Promise<Auth> {
         try {
-            const data = await fetch(`${URL}/signup`, {
+            const body = {
+                username,
+                password
+            }
+            const data = await fetch(`${this.url}/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(authData),
+                body: JSON.stringify(body),
             });
 
             return data.json();
@@ -46,13 +58,13 @@ class ModelAuth {
 
     /**
      * Check session
-     * @param {Object} authData - authData object - {username: string, sessionId: string}
+     * @param {Object} authData - authData object - {id: number, sessionId: string}
      * @returns {Object} - object - {sessionActive: boolean}
      */
 
-    static async checkSession(authData: UserInfo) {
+    async checkSession(authData: LogoutData): Promise<{ sessionActive: boolean; }> {
         try {
-            const data = await fetch(`${URL}/user/session`, {
+            const data = await fetch(`${this.url}/user/session`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(authData),
@@ -66,13 +78,13 @@ class ModelAuth {
 
     /**
      * Logout
-     * @param {Object} authData - authData object - {username: string, sessionId: string}
+     * @param {Object} authData - authData object - {id: number, sessionId: string}
      * @returns {string} - string - logout
      */
 
-    static async logout(authData: UserInfo) {
+    async logout(authData: LogoutData): Promise<void> {
         try {
-            const data = await fetch(`${URL}/logout`, {
+            const data = await fetch(`${this.url}/logout`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(authData),

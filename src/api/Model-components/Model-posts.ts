@@ -1,17 +1,21 @@
-import URL from '../../types/constants';
-import { PostData, UserInfo, Comments, Feed, Post } from '../../types/types';
+
+import { URL } from '../../types/constants';
+import { FeedRequest, Post, PostRequest } from '../../types/types';
 
 class ModelPosts {
-    url = URL;
+    url: string;
 
+    constructor() {
+        this.url = URL;
+    }
     /**
      * Get all posts
      * @returns {Array} - array of objects with all posts
      */
 
-    static async getAllPosts() {
+    async getAll(): Promise<Post[]> {
         try {
-            const response = await fetch(`${URL}/post`);
+            const response = await fetch(`${this.url}/post`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -24,9 +28,9 @@ class ModelPosts {
      * @returns {Object} - user's post
      */
 
-    static async getPostById(id: number) {
+    async get(id: number): Promise<Post> {
         try {
-            const response = await fetch(`${URL}/post/${id}`);
+            const response = await fetch(`${this.url}/post/${id}`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -39,9 +43,9 @@ class ModelPosts {
      * @returns {Object} - user's post
      */
 
-    static async getUserPosts(id: number) {
+    async getUserPosts(id: number): Promise<Post[] | []> {
         try {
-            const response = await fetch(`${URL}/userposts/${id}`);
+            const response = await fetch(`${this.url}/userposts/${id}`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -54,9 +58,9 @@ class ModelPosts {
      * @returns {Object} - info of a new user's post
      */
 
-    static async createNewPost(postData: PostData) {
+    async create(postData: PostRequest): Promise<Post> {
         try {
-            const data = await fetch(`${URL}/post`, {
+            const data = await fetch(`${this.url}/post`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(postData),
@@ -75,17 +79,18 @@ class ModelPosts {
      * @returns {Object} - deleted post
      */
 
-    static async deletePost(id: number, postData: PostData) {
+    async delete(id: number, sessionId: string): Promise<boolean> {
         try {
-            const data = await fetch(`${URL}/post/${id}`, {
+            const body = {sessionId}
+            await fetch(`${this.url}/post/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(postData),
+                body: JSON.stringify(body),
             });
 
-            return data.json();
+            return true
         } catch (error) {
-            throw new Error();
+            return false
         }
     }
 
@@ -96,75 +101,13 @@ class ModelPosts {
      * @returns {Object} - liked/disliked post
      */
 
-    static async likeDislikePost(id: number, userInfo: UserInfo) {
+    async like(id: number, sessionId: string): Promise<Post> {
         try {
-            const data = await fetch(`${URL}/like/${id}`, {
+            const body = {sessionId}
+            const data = await fetch(`${this.url}/like/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userInfo),
-            });
-
-            return data.json();
-        } catch (error) {
-            throw new Error();
-        }
-    }
-
-    /**
-     * Add comment
-     * @param {Object} comment - comment object - {sessionId: string, text: string}
-     * @param {number} id - post id
-     * @returns {Object} - user's post
-     */
-
-    static async addComment(id: number, comment: Comments) {
-        try {
-            const data = await fetch(`${URL}/comment/${id}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(comment),
-            });
-
-            return data.json();
-        } catch (error) {
-            throw new Error();
-        }
-    }
-
-    /**
-     * Delete comment
-     * @param {Object} comment - comment object - {sessionId: string, commentId: number}
-     * @param {number} id - post id
-     * @returns {Object} - user's post
-     */
-
-    static async deleteComment(id: number, comment: Comments) {
-        try {
-            const data = await fetch(`${URL}/comment/${id}`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(comment),
-            });
-
-            return data.json();
-        } catch (error) {
-            throw new Error();
-        }
-    }
-
-    /**
-     * Like/dislike comment
-     * @param {Object} comment - comment object - {sessionId: string, commentId: number}
-     * @param {number} id - post id
-     * @returns {Object} - user's post
-     */
-
-    static async likeDislikeComment(id: number, comment: Comments) {
-        try {
-            const data = await fetch(`${URL}/post/${id}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(comment),
+                body: JSON.stringify(body),
             });
 
             return data.json();
@@ -179,9 +122,9 @@ class ModelPosts {
      * @returns {Array} - feed
      */
 
-    static async feed(feedData: Feed) {
+    async feed(feedData: FeedRequest): Promise<Post[]> {
         try {
-            const data = await fetch(`${URL}/feed`, {
+            const data = await fetch(`${this.url}/feed`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedData),
@@ -199,9 +142,9 @@ class ModelPosts {
      * @returns {Array} - feed
      */
 
-    static async recommendationFeed(feedData: Feed) {
+    async recommendationFeed(feedData: FeedRequest): Promise<Post[]> {
         try {
-            const data = await fetch(`${URL}/recomendation`, {
+            const data = await fetch(`${this.url}/recomendation`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedData),

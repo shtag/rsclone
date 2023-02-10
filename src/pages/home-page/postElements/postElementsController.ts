@@ -1,5 +1,6 @@
 import ModelPosts from '../../../api/Model-components/Model-posts';
 import { Post, PostData } from '../../../types/types';
+
 import postElemens from './postElemensView';
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -23,7 +24,7 @@ class PostElementsController {
         });
     }
 
-    
+
     static async renderPosts(pg: number) {
         const params = {
             sessionId: '$2b$10$NhL.XLXwthdA4kACTPIJg.',
@@ -35,6 +36,7 @@ class PostElementsController {
         await posts.forEach((element: Post) => {
             postElemens.renderPostElement(element);
         });
+
     }
 }
 
