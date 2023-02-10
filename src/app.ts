@@ -9,4 +9,3 @@ class App {
 }
 
 App.start();
-

@@ -1,0 +1,74 @@
+@import '_variables.scss';
+
+.light-theme {
+    background-color: $white-color;
+    color: $black-color;
+
+    .header {
+        &-bar_container {
+            background-color: $white-color;
+        }
+        button{
+            filter: invert(1);
+        }
+    }
+
+    .nav-bar_container {
+        background-color: $white-color;
+        button{
+            filter: invert(1);
+        }
+    }
+
+    .comments_container {
+        .post_wrapper {
+            border: 1px solid #c4c4c454;
+        }
+
+        .tools {
+            border: 1px solid #c4c4c454;
+        }
+
+        div {
+            background-color: transparent;
+            color: $black-color;
+        }
+
+        svg {
+            filter: invert(1);
+        }
+
+        input {
+            background-color: #c4c4c454;
+            color: $black-color;
+        }
+
+        .comment_tools {
+            color: $light-grey-color ;
+        }
+
+        .comment_tools_reply{
+            color: $light-grey-color ;
+        }
+    }
+
+    .user {
+        &__description {
+            color: $medium-grey-color;
+        }
+
+        &__name_nickname {
+            color: $medium-grey-color;
+        }
+
+        &__statistics_title{
+            color: $medium-grey-color;
+
+        }
+    }
+
+    .divider {
+        background-color: $light-grey-color;
+
+    }
+}

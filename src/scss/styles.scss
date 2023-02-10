@@ -1,3 +1,4 @@
+@import "base/light-theme.scss";
 @import 'base/_variables.scss';
 
 * {
@@ -10,14 +11,29 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 20px;
     font-weight: 400;
     background-color: $black-color;
     color: $white-color;
+    transition: 0.2s;
+    
+}
+
+.preload {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
 }
 
 .container {
-    max-width: 1440px;
+    max-width: 950px;
     margin: 0 auto;
 }
+
+.day {
+    background-color: $white-color;
+}
+
+
