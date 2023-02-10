@@ -1,5 +1,5 @@
 import { Post } from '../../../types/types';
-import PostsElementsModel from './postElemensModel';
+// import PostsElementsModel from './postElemensModel';
 import postElemens from './postElemensView';
 
 export class PostElementsController {
@@ -19,8 +19,8 @@ export class PostElementsController {
     }
 
     static async renderPosts(id = 1) {
-        const PostData = await PostsElementsModel.getPostWithId(id);
-        postElemens.renderPostElement(await PostData);
+        // const PostData = await PostsElementsModel.getPostWithId(id);
+        // postElemens.renderPostElement(await PostData);
         // await this.checkPosition(id);
     }
 }
