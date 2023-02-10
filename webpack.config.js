@@ -40,6 +40,9 @@ const baseConfig = {
         assetModuleFilename: 'img/[name][ext]',
         publicPath: '/',
     },
+    experiments: {
+        topLevelAwait: true
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
