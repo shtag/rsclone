@@ -11,6 +11,8 @@ class App {
         Router.setEventListeners();
         PageController.renderStructure();
         PageController.setControllers();
+        PageController.timeControl();
+
     }
 }
 

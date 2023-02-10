@@ -38,6 +38,14 @@ class PostElementsController {
         });
 
     }
+
+    // static likeToComment() {
+    //     const btn = document.querySelector('.comment_like-btn');
+    //     const postID = btn.dataset.postid;
+    //     const commentID = btn.dataset.commentid;
+    //     //Добавить по клику
+    //     PostsElementsModel.likeDislikePost(commentID, UserId)
+    // }
 }
 
 export {PostElementsController};
