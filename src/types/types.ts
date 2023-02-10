@@ -67,3 +67,18 @@ export interface Post {
     comments: comment[],
     author: number;
 }
+
+interface IUser{
+    id: number;
+    username: string;
+    password: string;
+    subscriptions: number[];
+    sessions: string[];
+    settings: {
+        photo: string;
+        language: string;
+        name: string;
+        descriptionProfile: string;
+    };
+}
+export { IUser }
