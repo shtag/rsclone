@@ -7,7 +7,7 @@ import ModelUsers from "../api/Model-components/Model-users";
 const URL = 'http://127.0.0.1:3000';
 const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.'
 
-export { URL, sessionId } ;
+export { URL, sessionId };
 
 
 
@@ -56,6 +56,7 @@ export { URL, sessionId } ;
 }
 
 const model = new Model(); */
+
 
 // const search = await model.searchData('shtag');
     
