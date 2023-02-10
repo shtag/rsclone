@@ -1,17 +1,25 @@
-export interface PostData {
-    sessionId: string;
-    image?: string;
-    description?: string;
-}
 
-export interface UserInfo {
+
+interface UserInfo {
     sessionId?: string;
-    username?: string;
     password?: string;
     id?: number;
 }
+interface ChangeUsernamePass {
+    sessionId: string;
+    password: string;
+    username: string;
+}
+interface LogoutData {
+    sessionId?: string;
+    id?: number;
+}
+interface SubscribeRequest {
+    sessionId: string;
+    username: string;
+}
 
-export interface UserSettings {
+interface UserSettingsRequest {
     sessionId: string;
     settings: {
         photo?: string;
@@ -21,54 +29,68 @@ export interface UserSettings {
     };
 }
 
-export interface UserList {
+interface UserList {
     list: string[];
 }
 
-export interface UserListId {
+interface UserListId {
     list: number[];
 }
 
-export interface Comments {
-    sessionId: string;
-    text?: string;
-    commentId?: number;
-}
-
-export interface Auth {
+interface Auth {
     username: string;
     password: string;
 }
 
-export interface Feed {
+interface Login{
+    username: string;
+    sessionId: string;
+    id: number;
+    
+}
+
+interface FeedRequest {
     sessionId: string;
     limit: number;
     page: number;
 }
 
-export interface Search {
-    query: string;
+interface CommentRequest {
+    sessionId: string;
+    text: string;
 }
 
-export interface comment {
-    text: string,
-    date: number,
-    likes: number[],
-    id: number,
-    author: number
+interface CommentsLikeRequest {
+    sessionId: string;
+    text?: string;
+    commentId?: number;
 }
 
-export interface Post {
+interface Comment {
+    text: string;
+    date: number;
+    likes: number[];
     id: number;
-    image: string,
-    description: string,
-    date: number,
-    likes: number[],
-    comments: comment[],
     author: number;
 }
 
-interface IUser{
+interface PostRequest {
+    sessionId: string;
+    image: string;
+    description: string;
+}
+
+interface Post {
+    id: number;
+    image: string;
+    description: string;
+    date: number;
+    likes: number[];
+    comments: Comment[];
+    author: number;
+}
+
+interface User {
     id: number;
     username: string;
     password: string;
@@ -81,4 +103,28 @@ interface IUser{
         descriptionProfile: string;
     };
 }
-export { IUser }
+
+interface Search {
+    users: User[];
+    posts: Post[];
+}
+
+export {
+    Post,
+    PostRequest,
+    CommentRequest,
+    Comment,
+    CommentsLikeRequest,
+    FeedRequest,
+    Auth,
+    UserList,
+    UserListId,
+    UserSettingsRequest,
+    UserInfo,
+    User,
+    Login,
+    LogoutData,
+    ChangeUsernamePass,
+    SubscribeRequest,
+    Search
+}

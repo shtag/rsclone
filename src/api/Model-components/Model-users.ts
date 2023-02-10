@@ -1,17 +1,21 @@
 import { URL } from '../../types/constants';
-import { UserInfo, UserSettings, UserList, UserListId } from '../../types/types';
+import { UserInfo, UserList, UserListId, User, ChangeUsernamePass, UserSettingsRequest } from '../../types/types';
 
 class ModelUsers {
-    url = URL;
+    url: string;
+
+    constructor() {
+        this.url = URL;
+    }
 
     /**
      * Get all users
      * @returns {Object} - object with all users
      */
 
-    static async getAllUsers() {
+    async getAll(): Promise<User[]> {
         try {
-            const response = await fetch(`${URL}/users`);
+            const response = await fetch(`${this.url}/users`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -19,19 +23,18 @@ class ModelUsers {
     }
 
     /**
-     * Get user by id or username
-     * @param {Object} userInfo - userInfo object - {username: string} or {id: number}
+     * Get user by id
      * @returns {Object} - object with id, username, password, subscriptions, sessions, settings
      */
 
-    static async getUser(userInfo: UserInfo) {
+    async get(id: number): Promise<User> {
         try {
-            const data = await fetch(`${URL}/user`, {
+            const body = { id }
+            const data = await fetch(`${this.url}/user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userInfo),
+                body: JSON.stringify(body),
             });
-
             return data.json();
         } catch (error) {
             throw new Error();
@@ -40,19 +43,18 @@ class ModelUsers {
 
     /**
      * Delete user by id
-     * @param {Object} sessionId - sessionId object - {sessionId: string}
      * @param {number} id - user id
      * @returns {status code}
      */
 
-    static async deleteUser(id: number, sessionId: UserInfo) {
+    async delete(id: number, sessionId: string): Promise<void> {
         try {
-            const data = await fetch(`${URL}/user/${id}`, {
+            const body = {sessionId}
+            const data = await fetch(`${this.url}/user/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(sessionId),
+                body: JSON.stringify(body),
             });
-
             return data.json();
         } catch (error) {
             throw new Error();
@@ -66,9 +68,9 @@ class ModelUsers {
      * @returns {Object} - object with username
      */
 
-    static async changeUsernamePassword(id: number, userInfo: UserInfo) {
+    async changeUsernamePassword(id: number, userInfo: ChangeUsernamePass): Promise<{ username: string; }> {
         try {
-            const data = await fetch(`${URL}/user/${id}`, {
+            const data = await fetch(`${this.url}/user/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userInfo),
@@ -87,17 +89,17 @@ class ModelUsers {
      * @returns {status code}
      */
 
-    static async changeUserSettings(id: number, settings: UserSettings) {
+    async changeSettings(id: number, settings: UserSettingsRequest):  Promise<boolean>{
         try {
-            const data = await fetch(`${URL}/user/settings/${id}`, {
+            await fetch(`${this.url}/user/settings/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(settings),
             });
 
-            return data.json();
+            return true;
         } catch (error) {
-            throw new Error();
+            return false;
         }
     }
 
@@ -107,9 +109,9 @@ class ModelUsers {
      * @returns {Object} - object with id, username, password, subscriptions, sessions, settings
      */
 
-    static async subscription(userInfo: UserInfo) {
+    async subscribe(userInfo: UserInfo): Promise<User> {
         try {
-            const data = await fetch(`${URL}/subscribe`, {
+            const data = await fetch(`${this.url}/subscribe`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userInfo),
@@ -127,9 +129,9 @@ class ModelUsers {
      * @returns {Array} - array with subscriptions
      */
 
-    static async getUserSubscriptions(id: number) {
+    async getSubscriptions(id: number): Promise<User[] | []> {
         try {
-            const response = await fetch(`${URL}/subscriptions/${id}`);
+            const response = await fetch(`${this.url}/subscriptions/${id}`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -142,9 +144,9 @@ class ModelUsers {
      * @returns {Array} - array with followers
      */
 
-    static async getUserFollowers(id: number) {
+    async getFollowers(id: number): Promise<User[] | []> {
         try {
-            const response = await fetch(`${URL}/followers/${id}`);
+            const response = await fetch(`${this.url}/followers/${id}`);
             return response.json();
         } catch (error) {
             throw new Error();
@@ -157,9 +159,9 @@ class ModelUsers {
      * @returns {Object} - object of users info
      */
 
-    static async getUserlist(list: UserList) {
+    async getList(list: UserList): Promise<User[] | []> {
         try {
-            const data = await fetch(`${URL}/userlist`, {
+            const data = await fetch(`${this.url}/userlist`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(list),
@@ -177,9 +179,9 @@ class ModelUsers {
      * @returns {Object} - object of users info
      */
 
-     static async getUserlistById(list: UserListId) {
+     async getUserlistById(list: UserListId): Promise<User[] | []> {
         try {
-            const data = await fetch(`${URL}/userlistid`, {
+            const data = await fetch(`${this.url}/userlistid`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(list),
