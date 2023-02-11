@@ -8,8 +8,6 @@ export let page = 1;
 
 class PostElementsController {
     static async checkPosition() {
-        
-           
         window.addEventListener('scroll', async () => {
             const height = document.body.offsetHeight;
             const screenHeight = window.innerHeight;
@@ -17,13 +15,11 @@ class PostElementsController {
             const threshold = height - screenHeight / 4;
             const position = scrolled + screenHeight;
             if (position >= threshold) {
-                 page += 1;
+                page += 1;
                 await this.renderPosts(page);
-                
             }
         });
     }
-
 
     static async renderPosts(pg: number) {
         const params = {
@@ -32,20 +28,29 @@ class PostElementsController {
             page: pg,
         };
         const posts = await model.post.feed(params);
-        if (posts.length === 0) return
+        if (posts.length === 0) return;
         await posts.forEach((element: Post) => {
             postElemens.renderPostElement(element);
         });
-
     }
 
-    // static likeToComment() {
-    //     const btn = document.querySelector('.comment_like-btn');
-    //     const postID = btn.dataset.postid;
-    //     const commentID = btn.dataset.commentid;
-    //     //Добавить по клику
-    //     PostsElementsModel.likeDislikePost(commentID, UserId)
-    // }
+    static likeDislikePost() {
+        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
+const container = document.querySelector('main') as HTMLElement;
+container.addEventListener('click', (element) => {
+  const el = element.target as HTMLElement;
+  const target = el.closest('.tools_container_item') as HTMLElement;
+  if (target) {
+    const id = target.dataset.post_id;
+    if (id) {
+      const postId = Number(id);
+      if (!Number.isNaN(postId)) {
+        model.post.like(postId, sessionId);
+      }
+    }
+  }
+});
+    }
 }
 
-export {PostElementsController};
+export { PostElementsController };
