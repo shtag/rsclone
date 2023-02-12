@@ -1,0 +1,123 @@
+@import '/src/scss/base/variables';
+
+.login_page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100vh;
+    button {
+        
+    }
+    .login_form {
+        transition: 0.3s;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        gap: 20px;
+        &__active {
+            top: -200px;
+        }
+    }
+    .login_btn, .signup_btn {
+        position: relative;
+        text-align: center;
+        outline: none;
+        border: none;
+        padding: 12px 24px;
+        width: 115px;
+        border-radius: 10px;
+        cursor: pointer;
+        background: $medium-grey-color;
+        transition: 0.5s;
+        border: 2px solid transparent;
+        &::after{
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            opacity: 0;
+            content: '';
+            &::content {
+                text-align: center;
+                padding: 20px;
+            }
+            width: 100%;
+            height: 100%;
+            background: $gradient;
+            transition: 0.5s;
+            border-radius: 10px;
+            border: 2px solid transparent;
+        }
+        &:hover::after{
+            opacity: 1;
+            transition: 0.5s;
+            border: 2px solid white;
+        }
+        .text_button {
+            position: relative;
+            z-index: 3;
+        }
+    }
+    input[type="radio"] {
+        display: none;
+    }
+}
+.login_popup__fade{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000054;
+}
+.login_popup, .signup_popup {
+    top: 450px;
+    left: calc(50% - 215px);
+    position: absolute;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: $medium-grey-color;
+    padding: 20px;
+    width: 400px;
+    border-radius: 20px;
+    input{
+        width: 90%;
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: none;
+        transition: 0.3s;
+        &:invalid{
+            background-color: rgba(255, 0, 0, 0.365);
+        }
+        &::placeholder{
+            color: black;
+        }
+        &:focus{
+            outline: none;
+            transform: scale(1.01);
+        }
+    }
+    button {
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: white;
+        border: 2px solid white;
+        transition: 0.3s;
+        &:hover {
+            border: 2px solid black;
+        }
+    }
+}
+
+.hide_popup {
+    transition: 0.5s;
+    left: -2000px;
+    top: 450px;
+}
