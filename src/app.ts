@@ -2,7 +2,7 @@ import './scss/styles.scss';
 import PageController from './pages/PageController';
 
 import './pages/home-page/staticElements/style.scss';
-import './pages/home-page/postElements/style.scss'
+import './pages/home-page/postElements/style.scss';
 import Router from './router';
 
 class App {
@@ -12,7 +12,6 @@ class App {
         PageController.renderStructure();
         PageController.setControllers();
         PageController.timeControl();
-
     }
 }
 

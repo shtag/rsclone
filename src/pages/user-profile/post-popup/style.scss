@@ -1,0 +1,62 @@
+@import '../../../scss/base/_variables';
+
+.post {
+    &__popup {
+        background-color: #35353594;
+        position: fixed;
+        z-index: 1000;
+        width: 950px;
+        left: auto;
+        bottom: auto;
+        right: auto;
+        top: -100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.5s;
+        padding: 15px;
+        border-radius: 20px;
+
+        &-background {
+            visibility: hidden;
+            opacity: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: 0.5s;
+            z-index: 999;
+
+            &_visible {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        &-wrapper {
+            width: 40%;
+            z-index: 9999;
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            max-width: 650px;
+            padding: 25px 45px;
+
+            border-radius: 16px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        &_open {
+            top: 11%;
+            transition: 0.5s;
+        }
+
+        &_cross {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+}

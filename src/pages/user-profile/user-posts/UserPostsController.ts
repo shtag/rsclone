@@ -20,14 +20,14 @@ class UserPostsController {
         });
     }
 
-    static async setPosts() {
+    static async setPosts(id: number) {
         try {
             const userPosts = document.querySelector('.post__block');
 
-            const results = await model.post.getUserPosts(1);
+            const results = await model.post.getUserPosts(id);
 
             results.forEach(async (el: Post) => {
-                const img = UserPostsView.renderPostImg(el.image);
+                const img = UserPostsView.renderPostImg(el.id, el.image);
                 userPosts?.insertAdjacentHTML('beforeend', img);
             });
         } catch (error) {
@@ -40,7 +40,7 @@ class UserPostsController {
         }
     }
 
-    static setTabSwitch() {
+    static setTabSwitch(id: number) {
         const posts = document.querySelector('.user__post-item_posts') as HTMLElement;
         const favorites = document.querySelector('.user__post-item_favorites') as HTMLElement;
         const saved = document.querySelector('.user__post-item_saved') as HTMLElement;
@@ -69,7 +69,7 @@ class UserPostsController {
                 userPosts.innerHTML = '';
             }
 
-            UserPostsController.setPosts();
+            UserPostsController.setPosts(id);
             dividerPart.style.marginLeft = '7%';
         });
 

@@ -34,7 +34,7 @@ class PostElementsController {
         const posts = await model.post.feed(params);
         if (posts.length === 0) return
         await posts.forEach((element: Post) => {
-            postElemens.renderPostElement(element);
+            postElemens.renderPost(element);
         });
 
     }

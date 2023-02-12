@@ -1,12 +1,13 @@
+import PostPopupController from './post-popup/postPopupController';
 import UserPageController from './user-info/UserInfoController';
 import UserPostsController from './user-posts/UserPostsController';
 
 class GeneralUserController {
-    static setGeneralController() {
-        UserPageController.setUserInfo();
+    static async setGeneralController(id: number) {
+        await UserPageController.setUserInfo(id);
         UserPostsController.setPostsInfo();
-        UserPostsController.setPosts();
-        UserPostsController.setTabSwitch();
+        await UserPostsController.setPosts(id);
+        UserPostsController.setTabSwitch(id);
     }
 }
 

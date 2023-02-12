@@ -1,14 +1,14 @@
 import UserPageView from './UserInfoView';
 
 class UserPageController {
-    static setUserInfo() {
+    static async setUserInfo(id: number) {
         const user = document.createElement('div');
         user.classList.add('user');
 
         const main = document.querySelector('main');
         main?.append(user);
 
-        user.innerHTML = UserPageView.renderUserInfo();
+        user.innerHTML = await UserPageView.renderUserInfo(id);
     }
 }
 
