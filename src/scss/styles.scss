@@ -17,7 +17,7 @@ body {
     background-color: $black-color;
     color: $white-color;
     transition: 0.2s;
-    
+    min-height: 100vh;
 }
 
 .preload {
