@@ -27,13 +27,14 @@ export class postElemens {
                     <form class="comment_form_container">
             
                 <input
+                data-post_id="${PostData.id}"
                 autocomplete="off"
                 type="text"
                 id="uname"
                 name="name"
                 placeholder="Add a comment..."
-                size="30" />
-                <button>
+                size="30" required />
+                <button class="imput_comment_btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22 3L9.21802 10.083" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
                     <path d="M11.698 20.334L22 3.001H2L9.218 10.084L11.698 20.334Z" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>

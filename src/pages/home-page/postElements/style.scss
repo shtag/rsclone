@@ -157,11 +157,22 @@
     margin-top: 50px;
     justify-content: space-between;
     width: 90%;
+    align-items: end;
     button {
         border: 0;
         background: transparent;
         color: white;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
     }
+
     input {
         border: none;
         background-color: $black-color;
@@ -172,5 +183,9 @@
         outline: none;
         color: white;
         font-size: 15px;
+        &:required:invalid ~ button.imput_comment_btn {
+            opacity: .65;
+            pointer-events: none;
+          }
     }
 }

@@ -1,5 +1,5 @@
 import model from '../../../api/Model';
-import { Post } from '../../../types/types';
+import { CommentRequest, Post } from '../../../types/types';
 
 import postElemens from './postElemensView';
 
@@ -36,21 +36,44 @@ class PostElementsController {
 
     static likeDislikePost() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-const container = document.querySelector('main') as HTMLElement;
-container.addEventListener('click', (element) => {
-  const el = element.target as HTMLElement;
-  const target = el.closest('.tools_container_item') as HTMLElement;
-  if (target) {
-    const id = target.dataset.post_id;
-    if (id) {
-      const postId = Number(id);
-      if (!Number.isNaN(postId)) {
-        model.post.like(postId, sessionId);
-      }
+        const container = document.querySelector('main') as HTMLElement;
+        container.addEventListener('click', (element) => {
+            const el = element.target as HTMLElement;
+            const target = el.closest('.tools_container_item') as HTMLElement;
+            if (target) {
+                const id = target.dataset.post_id;
+                if (id) {
+                    const postId = Number(id);
+                    if (!Number.isNaN(postId)) {
+                        model.post.like(postId, sessionId);
+                    }
+                }
+            }
+        });
     }
-  }
-});
+
+    static comment() {
+        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
+        const container = document.querySelector('main') as HTMLElement;
+        container.addEventListener('click', (event) => {
+            const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
+            if (!target) {
+                return;
+            }
+            const input = (target.previousSibling?.previousSibling as HTMLInputElement);
+            if (!input || !input.dataset.post_id) {
+                return;
+            }
+            const postId = Number(input.dataset.post_id);
+            const text = input.value as string;
+            const commentRequest: CommentRequest = { sessionId, text };
+            if (Number.isNaN(postId)) {
+                return;
+            }
+            model.comment.add(postId, commentRequest);
+        });
     }
+    
 }
 
 export { PostElementsController };
