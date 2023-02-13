@@ -49,12 +49,10 @@ class Router{
 
     static async openFeed(){
         console.log("open feed");
+        PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
-        main.innerHTML = `
-        <div class="page_404">
-            <h1>Тут будет фид</h1>
-        </div>`
+        await PageController.setControllers();
     }
 
     static async open404(){

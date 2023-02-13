@@ -1,6 +1,6 @@
 import {PostElementsController, page} from './postElements/postElementsController';
-import HeaderController from './staticElements/HeaderController';
-import HeaderView from './staticElements/HeaderView';
+import HeaderController from '../staticElements/HeaderController';
+import HeaderView from '../staticElements/HeaderView';
 
 class HomePageController {
     HeaderController: HeaderController;
@@ -22,7 +22,8 @@ class HomePageController {
         HeaderController.loaderControlAnimation();
         PostElementsController.renderPosts(page);
         PostElementsController.checkPosition();
-        
+        PostElementsController.likeDislikePost();
+        PostElementsController.comment();
     }
 }
 

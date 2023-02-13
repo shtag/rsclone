@@ -14,6 +14,10 @@
     margin-top: 40px;
 }
 
+.post_likes {
+    color: $light-grey-color;
+}
+
 .mini-round-img {
     width: 70px;
     height: 70px;
@@ -42,8 +46,8 @@
 
     img {
         width: 100%;
-    height: 100%;
-    object-fit: cover;
+        height: 100%;
+        object-fit: cover;
     }
 }
 
@@ -63,7 +67,7 @@
 }
 
 .post_info_description {
-    margin-top: 35px;
+    margin-top: 15px;
     font-size: 17px;
 }
 
@@ -80,6 +84,25 @@
 .tools_container_item {
     display: flex;
     gap: 20px;
+    transition: 0.2s;
+    p {
+        cursor: default;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    &:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
+    &:active {
+        filter: opacity(0.5);
+    }
 }
 
 .comment {
@@ -97,32 +120,27 @@
         width: 0;
     }
 
-    .post_info
-    {
+    .post_info {
         display: flex;
         gap: 15px;
         align-items: center;
-        
     }
     .post_info_comment {
         display: flex;
         justify-content: space-between;
 
-    button {
-        border: 0;
-        background: transparent;
+        button {
+            border: 0;
+            background: transparent;
+        }
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 100px;
+            object-fit: cover;
+        }
     }
-    img {
-        width: 30px;
-        height: 30px;
-        border-radius: 100px;
-        object-fit: cover;
-    }
-
-    
-    
-}
-.comment_tools{
+    .comment_tools {
         display: flex;
         gap: 10px;
         color: $light-grey-color;
@@ -139,23 +157,35 @@
     margin-top: 50px;
     justify-content: space-between;
     width: 90%;
+    align-items: end;
     button {
         border: 0;
         background: transparent;
         color: white;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
     }
-    input{
+
+    input {
         border: none;
         background-color: $black-color;
         height: 35px;
         width: 87%;
         border-radius: 50px;
         text-indent: 20px;
-        outline:none;
+        outline: none;
         color: white;
         font-size: 15px;
+        &:required:invalid ~ button.imput_comment_btn {
+            opacity: .65;
+            pointer-events: none;
+          }
     }
-    }
-
-
-
+}
