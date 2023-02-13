@@ -1,5 +1,5 @@
 import { URL } from '../../types/constants';
-import { Post } from '../../types/types';
+import { CommentRequest, Post } from '../../types/types';
 
 class ModelComment {
     url: string;
@@ -15,7 +15,7 @@ class ModelComment {
      * @returns {Object} - user's post
      */
 
-    async add(id: number, comment: Comment): Promise<Post> {
+    async add(id: number, comment: CommentRequest): Promise<Post> {
         try {
             const data = await fetch(`${this.url}/comment/${id}`, {
                 method: 'POST',

@@ -1,14 +1,19 @@
+
 import model from "./api/Model";
 import HeaderView from "./pages/home-page/staticElements/HeaderView";
 import LoginPageController from "./pages/login-page/LoginPageController";
 import PageController from "./pages/PageController";
 
-class Router {
+import HeaderController from './pages/staticElements/HeaderController';
+import UserPostsController from './pages/user-profile/user-posts/UserPostsController';
+import { User } from './types/types';
 
+
+class Router {
     static route(event: Event) {
         const e = event || window.event;
         const target = (e.target as HTMLAnchorElement).closest('.route') as HTMLAnchorElement;
-        if (!target) return
+        if (!target) return;
         e.preventDefault();
         window.history.pushState({}, '', (e.target as HTMLAnchorElement).href || target.href);
         Router.handleLocation();
@@ -26,9 +31,13 @@ class Router {
         } else if (path[1] === 'login' && path.length === 2) {
             Router.openLogin();
         } else if (path[1] === '' && path.length === 2) {
-            console.log('main page')
+            console.log('main page');
         } else if (path[1] === 'p' && path.length === 3) {
-            Router.openPost(+path[2])
+            Router.openPost(+path[2]);
+        } else if (user && path[2] === 'favorites' && path.length === 3) {
+            Router.openFavorites();
+        } else if (user && path[2] === 'posts' && path.length === 3) {
+            Router.openPosts(user.id);
         } else {
             Router.open404();
         }
@@ -36,11 +45,29 @@ class Router {
 
     static async openProfile(id: number) {
         console.log("open profile")
-        PageController.setUserProfileController()
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+        await PageController.setUserProfileController(id);
     }
 
     static async openPost(id: number) {
-        console.log("open post")
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+        
+        await PageController.postPopup(id);
+    }
+
+    static async openPosts(id: number) {
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+
+        await UserPostsController.setPosts(id);
     }
 
     static async openLogin() {
@@ -49,15 +76,20 @@ class Router {
         LoginPageController.renderLoginPage()
     }
 
+    static openFavorites() {
+        console.log('favorites');
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+    }
+
     static async openFeed() {
         console.log("open feed");
-        HeaderView.renderHeader();
+        PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
-        main.innerHTML = `
-        <div class="page_404">
-            <h1>Тут будет фид</h1>
-        </div>`
+        await PageController.setControllers();
     }
 
     static async open404() {
@@ -68,7 +100,7 @@ class Router {
         <div class="page_404">
             <h1>This page not exist!</h1>
             <a href="/feed" class="route">Go to home page</a>
-        </div>`
+        </div>`;
     }
 
     static setEventListeners() {
@@ -79,7 +111,7 @@ class Router {
                 console.log(target.href);
             }
             Router.route(e);
-        })
+        });
 
         window.addEventListener('load', async () => {
             await Router.handleLocation();
@@ -89,6 +121,5 @@ class Router {
         })
     }
 }
-
 
 export default Router;

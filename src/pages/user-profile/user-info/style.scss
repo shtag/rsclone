@@ -102,11 +102,12 @@
         &-block {
             margin-top: 15px;
             display: flex;
+            gap: 65px;
+            margin-left: 7%;
         }
 
         &-item {
             cursor: pointer;
-            margin-left: 7%;
             display: flex;
             gap: 6px;
             align-items: center;
