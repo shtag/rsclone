@@ -79,6 +79,8 @@ class Router {
     static async openLogin() {
         console.log("open login");
         document.title = 'Login'
+        const body = document.querySelector('body') as HTMLBodyElement;
+        body.innerHTML = '';
         PageController.renderStructure();
         LoginPageController.renderLoginPage()
     }

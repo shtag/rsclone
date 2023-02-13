@@ -42,11 +42,11 @@ interface Auth {
     password: string;
 }
 
-interface Login{
+interface Login {
     username: string;
     sessionId: string;
     id: number;
-    
+
 }
 
 interface FeedRequest {
@@ -96,6 +96,7 @@ interface User {
     password: string;
     subscriptions: number[];
     sessions: string[];
+    favorites: number[];
     settings: {
         photo: string;
         language: string;

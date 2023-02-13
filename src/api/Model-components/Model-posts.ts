@@ -81,7 +81,7 @@ class ModelPosts {
 
     async delete(id: number, sessionId: string): Promise<boolean> {
         try {
-            const body = {sessionId}
+            const body = { sessionId }
             await fetch(`${this.url}/post/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -103,7 +103,7 @@ class ModelPosts {
 
     async like(id: number, sessionId: string): Promise<Post> {
         try {
-            const body = {sessionId}
+            const body = { sessionId }
             const data = await fetch(`${this.url}/like/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -148,6 +148,33 @@ class ModelPosts {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedData),
+            });
+
+            return data.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    async addFavorites(postId: number, sessionId: string): Promise<number[]> {
+        const body = { sessionId, postId };
+        try {
+            const data = await fetch(`${this.url}/favorites/add`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+
+            return data.json();
+        } catch (error) {
+            throw new Error();
+        }
+    }
+
+    async getFavorites(userId: number): Promise<Post[]> {
+        try {
+            const data = await fetch(`${this.url}/favorites/${userId}`, {
+                method: 'GET'
             });
 
             return data.json();
