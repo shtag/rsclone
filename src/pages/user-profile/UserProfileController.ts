@@ -8,6 +8,7 @@ class GeneralUserController {
         UserPostsController.setPostsInfo();
         await UserPostsController.setPosts(id);
         // UserPostsController.setTabSwitch(id);
+        console.log('setGeneralController')
     }
 }
 

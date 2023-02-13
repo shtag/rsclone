@@ -10,14 +10,19 @@ class PageController {
     }
 
     static renderStructure() {
-        const body = document.querySelector('body');
-        if (body) {
-            body.innerHTML = `
-                <header class="container header"></header>
-                <main class="container"></main>
-                <footer class="container"></footer>
-            `;
+        const body = document.querySelector('body') as HTMLBodyElement;
+        const header = document.querySelector('header');
+        const main = document.querySelector('main');
+        const footer = document.querySelector('footer');
+
+        if (header && main && footer) {
+            return;
         }
+        body.innerHTML = `
+            <header class="container header"></header>
+            <main class="container"></main>
+            <footer class="container"></footer>
+        `;
     }
 
     static setControllers() {

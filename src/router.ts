@@ -1,4 +1,6 @@
 import PageController from './pages/PageController';
+import HeaderController from './pages/staticElements/HeaderController';
+import HeaderView from './pages/staticElements/HeaderView';
 import UserPostsController from './pages/user-profile/user-posts/UserPostsController';
 import { User } from './types/types';
 
@@ -39,14 +41,29 @@ class Router {
     }
 
     static async openProfile(id: number) {
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+        console.log('open profile')
         await PageController.setUserProfileController(id);
     }
 
     static async openPost(id: number) {
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+        
         await PageController.postPopup(id);
     }
 
     static async openPosts(id: number) {
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+
         await UserPostsController.setPosts(id);
     }
 
@@ -56,6 +73,10 @@ class Router {
 
     static openFavorites() {
         console.log('favorites');
+        PageController.renderStructure();
+        HeaderView.renderHeader();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
     }
 
     static async openFeed(){
