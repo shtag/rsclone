@@ -1,9 +1,9 @@
 import './style.scss';
 
 class UserPostsView {
-    static renderPostImg(src: string) {
+    static renderPostImg(id: number, src: string) {
         return `
-        <img class="post__img" src=${src} alt="image"/>
+        <a class="route" href="/p/${id}"><img class="post__img" src=${src} alt="image"/></a>
         `;
     }
 }

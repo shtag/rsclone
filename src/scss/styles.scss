@@ -1,4 +1,4 @@
-@import "base/light-theme.scss";
+@import 'base/light-theme.scss';
 @import 'base/_variables.scss';
 
 * {
@@ -11,13 +11,12 @@ html {
 }
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: 400;
     background-color: $black-color;
     color: $white-color;
     transition: 0.2s;
-    
 }
 
 .preload {
@@ -35,7 +34,6 @@ body {
 .day {
     background-color: $white-color;
 }
-
 
 a {
     text-decoration: none;
