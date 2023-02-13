@@ -36,10 +36,6 @@ class PageController {
         await PostPopupController.setPostPopup(postId);
     }
 
-    static async closePopup(postId: number) {
-        await PostPopupController.closePostPopup(postId);
-    }
-
     static timeControl() {
         const datetoday = new Date();
         const timenow = datetoday.getTime();

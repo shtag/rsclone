@@ -45,20 +45,26 @@ class UserPageView {
         <div class="divider">
           <div class="divider__part"></div>
         </div>
-      
+        
         <div class="user__post-block">
-          <div class="user__post-item user__post-item_posts">
-            <img class="user__post-item_icon active_icon" src='img/icons/posts-icon.svg' alt="posts" />
-            <button class="user__post-item_text active">Posts</button>
-          </div>
-          <div class="user__post-item user__post-item_favorites">
-            <img class="user__post-item_icon" src='img/icons/favorites-icon.svg' alt="posts" />
-            <button class="user__post-item_text">Favorites</button>
-          </div>
-          <div class="user__post-item user__post-item_saved">
-            <img class="user__post-item_icon" src='img/icons/saved-icon.svg' alt="posts" />
-            <button class="user__post-item_text">Saved</button>
-          </div>
+          <a class="route" href="/${user.username}/posts">
+            <div class="user__post-item user__post-item_posts">
+              <img class="user__post-item_icon active_icon" src='img/icons/posts-icon.svg' alt="posts" />
+              <button class="user__post-item_text active">Posts</button>
+            </div>
+          </a>
+          <a class="route" href="/${user.username}/favorites">
+            <div class="user__post-item user__post-item_favorites">
+              <img class="user__post-item_icon" src='img/icons/favorites-icon.svg' alt="posts" />
+              <button class="user__post-item_text">Favorites</button>
+            </div>
+          </a>
+          <a class="route" href="/${user.username}/saved">
+            <div class="user__post-item user__post-item_saved">
+              <img class="user__post-item_icon" src='img/icons/saved-icon.svg' alt="posts" />
+              <button class="user__post-item_text">Saved</button>
+            </div>
+          </a>
         </div>
     
         `;

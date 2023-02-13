@@ -7,7 +7,7 @@ class GeneralUserController {
         await UserPageController.setUserInfo(id);
         UserPostsController.setPostsInfo();
         await UserPostsController.setPosts(id);
-        UserPostsController.setTabSwitch(id);
+        // UserPostsController.setTabSwitch(id);
     }
 }
 

@@ -1,4 +1,5 @@
 import PageController from './pages/PageController';
+import UserPostsController from './pages/user-profile/user-posts/UserPostsController';
 import { User } from './types/types';
 
 class Router {
@@ -28,6 +29,10 @@ class Router {
             console.log('main page');
         } else if (path[1] === 'p' && path.length === 3) {
             Router.openPost(+path[2]);
+        } else if (user && path[2] === 'favorites' && path.length === 3) {
+            Router.openFavorites();
+        } else if (user && path[2] === 'posts' && path.length === 3) {
+            Router.openPosts(user.id);
         } else {
             Router.open404();
         }
@@ -39,12 +44,18 @@ class Router {
 
     static async openPost(id: number) {
         await PageController.postPopup(id);
+    }
 
-        await PageController.closePopup(id);
+    static async openPosts(id: number) {
+        await UserPostsController.setPosts(id);
     }
 
     static async openLogin() {
         console.log('open login');
+    }
+
+    static openFavorites() {
+        console.log('favorites');
     }
 
     static async openFeed() {

@@ -30,6 +30,7 @@ class UserPostsController {
                 const img = UserPostsView.renderPostImg(el.id, el.image);
                 userPosts?.insertAdjacentHTML('beforeend', img);
             });
+            UserPostsController.setTabSwitch()
         } catch (error) {
             UserPostsController.clearGalleryChilds();
 
@@ -40,7 +41,7 @@ class UserPostsController {
         }
     }
 
-    static setTabSwitch(id: number) {
+    static setTabSwitch() {
         const posts = document.querySelector('.user__post-item_posts') as HTMLElement;
         const favorites = document.querySelector('.user__post-item_favorites') as HTMLElement;
         const saved = document.querySelector('.user__post-item_saved') as HTMLElement;
@@ -69,7 +70,6 @@ class UserPostsController {
                 userPosts.innerHTML = '';
             }
 
-            UserPostsController.setPosts(id);
             dividerPart.style.marginLeft = '7%';
         });
 
