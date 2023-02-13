@@ -1,12 +1,14 @@
+import model from "./api/Model";
+import HeaderView from "./pages/home-page/staticElements/HeaderView";
+import LoginPageController from "./pages/login-page/LoginPageController";
 import PageController from "./pages/PageController";
-import { User } from "./types/types";
 
-class Router{
+class Router {
 
     static route(event: Event) {
         const e = event || window.event;
         const target = (e.target as HTMLAnchorElement).closest('.route') as HTMLAnchorElement;
-        if(!target) return
+        if (!target) return
         e.preventDefault();
         window.history.pushState({}, '', (e.target as HTMLAnchorElement).href || target.href);
         Router.handleLocation();
@@ -14,10 +16,8 @@ class Router{
 
     static async handleLocation() {
         const path: string[] = window.location.pathname.split('/');
-        const res = await fetch('http://localhost:3000/users') // использовать метод из модели
-        const users: User[] = await res.json();
-        const usersList = users.map((el) => el.username);
-        
+        const users = await model.user.getAll();
+
         const user = users.find((us) => us.username === path[1]);
         if (user && path.length === 2) {
             Router.openProfile(user.id);
@@ -34,21 +34,24 @@ class Router{
         }
     }
 
-    static async openProfile(id: number){
+    static async openProfile(id: number) {
         console.log("open profile")
         PageController.setUserProfileController()
     }
 
-    static async openPost(id: number){
+    static async openPost(id: number) {
         console.log("open post")
     }
 
-    static async openLogin(){
-        console.log("open login")
+    static async openLogin() {
+        console.log("open login");
+        PageController.renderStructure();
+        LoginPageController.renderLoginPage()
     }
 
-    static async openFeed(){
+    static async openFeed() {
         console.log("open feed");
+        HeaderView.renderHeader();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
         main.innerHTML = `
@@ -57,7 +60,7 @@ class Router{
         </div>`
     }
 
-    static async open404(){
+    static async open404() {
         console.log("open 404");
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
@@ -68,18 +71,21 @@ class Router{
         </div>`
     }
 
-    static setEventListeners(){
+    static setEventListeners() {
         const body = document.querySelector('body') as HTMLElement;
         body.addEventListener('click', (e) => {
             const target = (e.target as HTMLElement).closest('.route') as HTMLAnchorElement;
-            if(target) {
+            if (target) {
                 console.log(target.href);
             }
             Router.route(e);
         })
 
         window.addEventListener('load', async () => {
-           Router.handleLocation();
+            await Router.handleLocation();
+        })
+        window.addEventListener('popstate', async () => {
+            await Router.handleLocation();
         })
     }
 }
