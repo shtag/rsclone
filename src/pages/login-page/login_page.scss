@@ -1,0 +1,163 @@
+@import '/src/scss/base/variables';
+
+.login_page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100vh;
+    overflow: hidden;
+    .login_form {
+        transition: 0.3s;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        gap: 20px;
+        &__active {
+            justify-content: space-around;
+        }
+    }
+    .login_btn, .signup_btn {
+        position: relative;
+        text-align: center;
+        outline: none;
+        border: none;
+        padding: 12px 24px;
+        width: 115px;
+        border-radius: 10px;
+        cursor: pointer;
+        background: $medium-grey-color;
+        transition: 0.5s;
+        border: 2px solid transparent;
+        &::after{
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            opacity: 0;
+            content: '';
+            &::content {
+                text-align: center;
+                padding: 20px;
+            }
+            width: 100%;
+            height: 100%;
+            background: $gradient;
+            transition: 0.5s;
+            border-radius: 10px;
+            border: 2px solid transparent;
+        }
+        &:hover::after{
+            opacity: 1;
+            transition: 0.5s;
+            border: 2px solid white;
+        }
+        .text_button {
+            position: relative;
+            z-index: 3;
+        }
+    }
+    input[type="radio"] {
+        display: none;
+    }
+}
+.login_popup__fade{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000054;
+}
+.popups {
+    display: flex;
+    gap: 1500px;
+    position: relative;
+    left: 0px;
+    transition: 0.3s;
+}
+.login_active {
+    left: -975px;
+}
+.signup_active {
+    left: 975px;
+}
+.login_popup, .signup_popup {
+    .popup_wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        background-color: $medium-grey-color;
+        padding: 20px;
+        width: 400px;
+        border-radius: 20px;
+        height: fit-content;
+        z-index: 3;
+    }
+    height: fit-content;
+    position: relative;
+    transition: 0.5s;
+    
+    input{
+        width: 90%;
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: none;
+        transition: 0.3s;
+        &:invalid{
+            box-shadow: inset 0px 0px 10px red;
+            border: 3px solid red;
+            transition: 0.2s;
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            25% {
+                transform: translateX(4px);
+            }
+            50% {
+                transform: translateX(-4px);
+            }
+            75% {
+                transform: translateX(4px);
+            }
+        }
+        &::placeholder{
+            color: black;
+        }
+        &:focus{
+            outline: none;
+            transform: scale(1.01);
+        }
+    }
+    .validate_error {
+        position: absolute;
+        top: calc(100% - 20px);
+        transition: 0.4s;
+        background-color: red;
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+        padding: 30px 10px 10px 10px;
+        box-sizing: border-box;
+        text-align: center;
+        z-index: 1;
+    }
+    .hide_error {
+        top: 30px;
+    }
+    button {
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: white;
+        border: 2px solid white;
+        transition: 0.3s;
+        &:hover {
+            border: 2px solid black;
+        }
+    }
+}

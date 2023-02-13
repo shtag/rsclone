@@ -1,8 +1,13 @@
-import PageController from './pages/PageController';
+
+import model from "./api/Model";
+import HeaderView from "./pages/home-page/staticElements/HeaderView";
+import LoginPageController from "./pages/login-page/LoginPageController";
+import PageController from "./pages/PageController";
+
 import HeaderController from './pages/staticElements/HeaderController';
-import HeaderView from './pages/staticElements/HeaderView';
 import UserPostsController from './pages/user-profile/user-posts/UserPostsController';
 import { User } from './types/types';
+
 
 class Router {
     static route(event: Event) {
@@ -16,9 +21,7 @@ class Router {
 
     static async handleLocation() {
         const path: string[] = window.location.pathname.split('/');
-        const res = await fetch('http://localhost:3000/users'); // использовать метод из модели
-        const users: User[] = await res.json();
-        const usersList = users.map((el) => el.username);
+        const users = await model.user.getAll();
 
         const user = users.find((us) => us.username === path[1]);
         if (user && path.length === 2) {
@@ -41,11 +44,11 @@ class Router {
     }
 
     static async openProfile(id: number) {
+        console.log("open profile")
         PageController.renderStructure();
         HeaderView.renderHeader();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
-        console.log('open profile')
         await PageController.setUserProfileController(id);
     }
 
@@ -68,7 +71,9 @@ class Router {
     }
 
     static async openLogin() {
-        console.log('open login');
+        console.log("open login");
+        PageController.renderStructure();
+        LoginPageController.renderLoginPage()
     }
 
     static openFavorites() {
@@ -79,7 +84,7 @@ class Router {
         HeaderController.loaderControlAnimation();
     }
 
-    static async openFeed(){
+    static async openFeed() {
         console.log("open feed");
         PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
@@ -88,7 +93,7 @@ class Router {
     }
 
     static async open404() {
-        console.log('open 404');
+        console.log("open 404");
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
         main.innerHTML = `
@@ -109,8 +114,11 @@ class Router {
         });
 
         window.addEventListener('load', async () => {
-            Router.handleLocation();
-        });
+            await Router.handleLocation();
+        })
+        window.addEventListener('popstate', async () => {
+            await Router.handleLocation();
+        })
     }
 }
 
