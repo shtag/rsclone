@@ -49,6 +49,7 @@ class Router{
 
     static async openFeed(){
         console.log("open feed");
+        PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
         await PageController.setControllers();

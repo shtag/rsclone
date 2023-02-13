@@ -55,7 +55,7 @@ class PostElementsController {
     static comment() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
-        container.addEventListener('click', (event) => {
+        container.addEventListener('click', async (event) => {
             const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
             if (!target) {
                 return;
@@ -70,7 +70,10 @@ class PostElementsController {
             if (Number.isNaN(postId)) {
                 return;
             }
-            model.comment.add(postId, commentRequest);
+            const post = await model.comment.add(postId, commentRequest);
+            const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
+            const block = parrent.querySelector('.comment_container') as HTMLElement;
+            block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
         });
     }
 }

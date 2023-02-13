@@ -1,5 +1,4 @@
 import './scss/styles.scss';
-import PageController from './pages/PageController';
 
 import './pages/staticElements/style.scss';
 import './pages/home-page/postElements/style.scss'
@@ -12,9 +11,6 @@ class App {
         localStorage.setItem('sessionId', sessionId);
         localStorage.setItem('userId', '1');
         Router.setEventListeners();
-        PageController.renderStructure();
-        // await PageController.timeControl();
-
     }
 }
 
