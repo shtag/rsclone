@@ -1,13 +1,30 @@
-import { Post } from '../../../types/types';
+import model from '../../../api/Model';
+import { Post} from '../../../types/types';
 
 export class postElemens {
-    static async renderPostElement(PostData: Post) {
+    static async renderPost(PostData: Post) {
         const main = document.querySelector('main') as HTMLElement;
         const root = document.createElement('div') as HTMLDivElement;
         root.className = 'comments_container';
         // main.innerHTML = '';
 
-        const HTMLPost = `
+        const HTMLPost = await postElemens.renderPostElement(PostData);
+        root.innerHTML = HTMLPost;
+
+        main.append(root);
+        this.renderBlockWithComment(PostData);
+    }
+
+    static async renderPostElement(PostData: Post) {
+        // const main = document.querySelector('main') as HTMLElement;
+        // const root = document.createElement('div') as HTMLDivElement;
+        // root.className = 'comments_container';
+        // // main.innerHTML = '';
+        // this.renderBlockWithComment(PostData);
+     const userName = await model.user.get(PostData.author)
+
+        // const HTMLPost =
+        return `
         <div class="post_wrapper">
             <div class="post">
                 <div class="post_info_cotainer">
@@ -16,11 +33,11 @@ export class postElemens {
                             <img class="mini-round-img" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg" alt="" />
                         </div>
                         <div class="post_info_account_text">
-                            <p class="nickname">${PostData.author}</p>
+                            <p class="nickname">${userName.username}</p>
                         </div>
                     </div>
                     <div class="post_info_description">
-                        <p class="post_info_description_text"><b>${PostData.author}</b> ${PostData.description}</p>
+                        <p class="post_info_description_text"><b>${userName.username}</b> ${PostData.description}</p>
                         <p class="post_likes">Likes ${PostData.likes.length}</p>
                         <div class="comment_container"></div>
                     </div>
@@ -42,7 +59,7 @@ export class postElemens {
                 </button>
             <form>
                 </div>
-                <div class="post_img_container"><img src="https://cdn.pixabay.com/photo/2018/07/13/10/20/kittens-3535404_960_720.jpg" alt="" class="post_img" /></div>
+                <div class="post_img_container"><img src=${PostData.image} alt="" class="post_img" /></div>
             </div>
             
         </div>
@@ -70,9 +87,10 @@ export class postElemens {
             </div>
         `;
 
-        root.innerHTML = HTMLPost;
-        main.append(root);
-        this.renderBlockWithComment(PostData);
+        // root.innerHTML = HTMLPost;
+
+        // main.append(root);
+        // this.renderBlockWithComment(PostData);
     }
 
     static async renderBlockWithComment(PostData: Post) {
@@ -111,8 +129,6 @@ export class postElemens {
             `;
             rootComments.innerHTML = HTMLComment;
         });
-        
-        
     }
 }
 

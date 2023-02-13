@@ -1,5 +1,5 @@
 import model from '../../../api/Model';
-import { CommentRequest, Post } from '../../../types/types';
+import { Post } from '../../../types/types';
 
 import postElemens from './postElemensView';
 
@@ -30,7 +30,7 @@ class PostElementsController {
         const posts = await model.post.feed(params);
         if (posts.length === 0) return;
         await posts.forEach((element: Post) => {
-            postElemens.renderPostElement(element);
+            postElemens.renderPost(element);
         });
     }
 
@@ -60,20 +60,19 @@ class PostElementsController {
             if (!target) {
                 return;
             }
-            const input = (target.previousSibling?.previousSibling as HTMLInputElement);
+            const input = target.previousSibling?.previousSibling as HTMLInputElement;
             if (!input || !input.dataset.post_id) {
                 return;
             }
             const postId = Number(input.dataset.post_id);
             const text = input.value as string;
-            const commentRequest: CommentRequest = { sessionId, text };
+            const commentRequest = { sessionId, text };
             if (Number.isNaN(postId)) {
                 return;
             }
             model.comment.add(postId, commentRequest);
         });
     }
-    
 }
 
 export { PostElementsController };
