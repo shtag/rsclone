@@ -69,7 +69,7 @@ class Router {
 
     static async openPosts(id: number) {
         PageController.renderStructure();
-        HeaderView.renderHeader();
+        // HeaderView.renderHeader();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
 
@@ -88,7 +88,7 @@ class Router {
     static openFavorites() {
         console.log('favorites');
         PageController.renderStructure();
-        HeaderView.renderHeader();
+        // HeaderView.renderHeader();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
     }

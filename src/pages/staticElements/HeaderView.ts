@@ -3,7 +3,7 @@ export class HeaderView {
         const header = document.querySelector('header') as HTMLElement;
         let HTMLHeader = '';
         HTMLHeader = `
-            <a class="logo-header_container route" href="/feed"><img class="logo-header" src="img/logo-mini.png" alt="">
+            <a class="logo-header_container route" href="/feed"><img class="logo-header" src="/img/logo-mini.png" alt="">
             <p class="text-logo">Kotogram</p>
             </a> 
     <div class="header-bar_container">

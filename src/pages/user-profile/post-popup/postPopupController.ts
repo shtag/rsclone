@@ -23,8 +23,8 @@ class PostPopupController {
         crossBlock.classList.add('cross__block');
 
         route.href = `/${userName.username}`;
-        cross.src = '../../../img/icons/close-icon.svg';
-        favorites.src = '../../../img/icons/favorite-popup-add.svg';
+        cross.src = '/img/icons/close-icon.svg';
+        favorites.src = '/img/icons/favorite-popup-add.svg';
 
         userPosts.innerHTML = await postElemens.renderPostElement(post);
         route.append(cross);
@@ -51,7 +51,7 @@ class PostPopupController {
         const popupFavorites = document.querySelector('.post__popup_favorites') as HTMLImageElement;
 
         popupFavorites?.addEventListener('click', () => {
-            popupFavorites.src = '../../../img/icons/favorite-popup.svg';
+            popupFavorites.src = '/img/icons/favorite-popup.svg';
         });
 
         popupCross?.addEventListener('click', () => {
