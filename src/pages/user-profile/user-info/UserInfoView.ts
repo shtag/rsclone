@@ -2,13 +2,13 @@ import model from '../../../api/Model';
 import './style.scss';
 
 class UserPageView {
-    static async renderUserInfo(id: number) {
-        const user = await model.user.get(id);
-        const followers = await model.user.getFollowers(id);
-        const following = await model.user.getSubscriptions(id);
-        const postQuantity = await model.post.getUserPosts(id);
+  static async renderUserInfo(id: number) {
+    const user = await model.user.get(id);
+    const followers = await model.user.getFollowers(id);
+    const following = await model.user.getSubscriptions(id);
+    const postQuantity = await model.post.getUserPosts(id);
 
-        return ` 
+    return ` 
         <div class="user__block">
           <div class="user__avatar-block">
             <div class="user__avatar_add"></div>
@@ -47,7 +47,7 @@ class UserPageView {
         </div>
         
         <div class="user__post-block">
-          <a class="route" href="/${user.username}/posts">
+          <a class="route" href="/${user.username}">
             <div class="user__post-item user__post-item_posts">
               <img class="user__post-item_icon active_icon" src='img/icons/posts-icon.svg' alt="posts" />
               <button class="user__post-item_text active">Posts</button>
@@ -68,7 +68,7 @@ class UserPageView {
         </div>
     
         `;
-    }
+  }
 }
 
 export default UserPageView;
