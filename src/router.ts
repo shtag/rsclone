@@ -1,6 +1,6 @@
 
 import model from "./api/Model";
-import HeaderView from "./pages/home-page/staticElements/HeaderView";
+import HeaderView from "./pages/staticElements/HeaderView";
 import LoginPageController from "./pages/login-page/LoginPageController";
 import PageController from "./pages/PageController";
 
@@ -32,6 +32,8 @@ class Router {
             Router.openLogin();
         } else if (path[1] === '' && path.length === 2) {
             console.log('main page');
+            window.history.pushState({}, '', '/feed');
+            Router.openFeed();
         } else if (path[1] === 'p' && path.length === 3) {
             Router.openPost(+path[2]);
         } else if (user && path[2] === 'favorites' && path.length === 3) {
@@ -49,15 +51,19 @@ class Router {
         HeaderView.renderHeader();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
+        document.title = `${(await model.user.get(id)).username}'s profile`;
         await PageController.setUserProfileController(id);
     }
 
     static async openPost(id: number) {
-        PageController.renderStructure();
+        /* PageController.renderStructure();
         HeaderView.renderHeader();
         HeaderController.switchTheme();
-        HeaderController.loaderControlAnimation();
-        
+        HeaderController.loaderControlAnimation(); */
+        console.log(window.location.pathname.split('/'))
+        if (window.location.pathname.split('/').length === 3) {
+            await Router.openProfile((await model.post.get(id)).author)
+        }
         await PageController.postPopup(id);
     }
 
@@ -72,6 +78,7 @@ class Router {
 
     static async openLogin() {
         console.log("open login");
+        document.title = 'Login'
         PageController.renderStructure();
         LoginPageController.renderLoginPage()
     }
@@ -88,6 +95,7 @@ class Router {
         console.log("open feed");
         PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
+        document.title = 'Feed';
         main.innerHTML = '';
         await PageController.setControllers();
     }
