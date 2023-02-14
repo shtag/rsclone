@@ -110,6 +110,19 @@ interface Search {
     posts: Post[];
 }
 
+interface PhotoAPI {
+    data: {
+        link: string;
+        datetime: number;
+        height: number;
+        width: number;
+        type: string;
+        size: number;
+    };
+    status: number;
+    success: boolean;
+}
+
 export {
     Post,
     PostRequest,
@@ -127,5 +140,6 @@ export {
     LogoutData,
     ChangeUsernamePass,
     SubscribeRequest,
-    Search
+    Search,
+    PhotoAPI
 }
