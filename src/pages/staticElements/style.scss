@@ -117,4 +117,13 @@ input:checked:before {
         background: transparent;
         transition: 0.2s;
     }
+
+    
 }
+
+.mini_img {
+        width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    object-fit: cover;
+    }

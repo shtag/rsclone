@@ -4,7 +4,7 @@ import HeaderView from '../staticElements/HeaderView';
 
 
 class HomePageController {
-    static async setHomePageController() {
+    static setHomePageController() {
         HeaderView.renderHeader();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
