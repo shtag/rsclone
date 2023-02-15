@@ -1,4 +1,4 @@
-import PostPopupController from './post-popup/postPopupController';
+import UserFavController from './user-favorite/UserFavController';
 import UserPageController from './user-info/UserInfoController';
 import UserPostsController from './user-posts/UserPostsController';
 
@@ -7,8 +7,32 @@ class GeneralUserController {
         await UserPageController.setUserInfo(id);
         UserPostsController.setPostsInfo();
         await UserPostsController.setPosts(id);
-        // UserPostsController.setTabSwitch(id);
-        console.log('setGeneralController')
+    }
+
+    static async setFavController(id: number) {
+        const user = document.querySelector('.user');
+        const openPost = document.querySelector('.open__post-block') as HTMLDivElement;
+
+        if (openPost) {
+            openPost.style.display = 'none';
+        }
+
+        if (!user) {
+            await UserPageController.setUserInfo(id);
+        }
+
+        UserPostsController.setPostsInfo();
+        await UserFavController.setFavPosts(id);
+    }
+
+    static async setPosts(id: number) {
+        const user = document.querySelector('.user');
+
+        if (!user) {
+            await UserPageController.setUserInfo(id);
+        }
+        UserPostsController.setPostsInfo();
+        await UserPostsController.setPosts(id);
     }
 }
 
