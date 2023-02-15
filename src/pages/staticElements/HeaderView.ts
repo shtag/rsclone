@@ -1,5 +1,4 @@
 import model from "../../api/Model";
-import { User } from "../../types/types";
 
 export class HeaderView {
     static async renderHeader() {
