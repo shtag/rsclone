@@ -1,4 +1,5 @@
 import HomePageController from './home-page/HomePageController';
+import { PostElementsController } from './home-page/postElements/postElementsController';
 import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
 
@@ -73,6 +74,16 @@ class PageController {
             togler.checked = false;
             root.classList.remove('light-theme');
         }
+    }
+
+    static setEventListener(){
+        const body = document.querySelector('body') as HTMLBodyElement;
+        body.addEventListener('click', async (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.closest('.imput_comment_btn')) {
+                await PostElementsController.comment(event);
+            }
+        })
     }
 }
 

@@ -29,7 +29,6 @@ class OpenPostController {
         const postBlock = document.querySelector('.open__post') as HTMLDivElement;
         postBlock.innerHTML = await postElemens.renderPostElement(post);
         PostElementsController.likeDislikePost();
-        PostElementsController.comment();
         OpenPostController.setFav(postId);
 
         const user = localStorage.getItem('userId') as string;

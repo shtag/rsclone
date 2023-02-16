@@ -54,12 +54,11 @@ class PostElementsController {
         });
     }
 
-    static comment() {
+    static async comment(event: Event) {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-        const container = document.querySelector('main') as HTMLElement;
         let isRequestInProgress = false;
     
-        container.addEventListener('click', async (event) => {
+        
             const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
             if (!target || isRequestInProgress) {
                 return;
@@ -88,7 +87,7 @@ class PostElementsController {
             } finally {
                 isRequestInProgress = false;
             }
-        });
+        
     }
     
 
