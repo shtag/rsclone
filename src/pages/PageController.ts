@@ -1,5 +1,5 @@
 import HomePageController from './home-page/HomePageController';
-import OpenPostController from './user-profile/post-popup/OpenPostController';
+import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
 
 class PageController {
