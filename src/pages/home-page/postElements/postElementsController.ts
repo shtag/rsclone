@@ -9,14 +9,16 @@ export let page = 1;
 class PostElementsController {
     static async checkPosition() {
         window.addEventListener('scroll', async () => {
-            const height = document.body.offsetHeight;
-            const screenHeight = window.innerHeight;
-            const scrolled = window.scrollY;
-            const threshold = height - screenHeight / 4;
-            const position = scrolled + screenHeight;
-            if (position >= threshold) {
-                page += 1;
-                await this.renderPosts(page);
+            if (window.location.href.indexOf('/feed') !== -1) {
+                const height = document.body.offsetHeight;
+                const screenHeight = window.innerHeight;
+                const scrolled = window.scrollY;
+                const threshold = height - screenHeight / 4;
+                const position = scrolled + screenHeight;
+                if (position >= threshold) {
+                    page += 1;
+                    await this.renderPosts(page);
+                }
             }
         });
     }
