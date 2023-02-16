@@ -12,6 +12,7 @@ class HomePageController {
         PostElementsController.checkPosition();
         PostElementsController.likeDislikePost();
         PostElementsController.comment();
+        PostElementsController.likesToComment();
 
     }
 }

@@ -1,5 +1,5 @@
 import { URL } from '../../types/constants';
-import { CommentRequest, Post } from '../../types/types';
+import { CommentRequest, CommentsLikeRequest, Post } from '../../types/types';
 
 class ModelComment {
     url: string;
@@ -57,7 +57,7 @@ class ModelComment {
      * @returns {Object} - user's post
      */
 
-    async like(id: number, comment: Comment): Promise<Post> {
+    async like(id: number, comment: CommentsLikeRequest): Promise<Post> {
         try {
             const data = await fetch(`${this.url}/post/${id}`, {
                 method: 'PATCH',
