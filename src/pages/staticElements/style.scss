@@ -84,7 +84,7 @@ input:checked:before {
         transition: 0.2s;
     }
 
-    a.profile-btn {
+    a.profile-btnBefore {
         text-align: center;
         width: 108px;
         height: 35px;
@@ -99,13 +99,13 @@ input:checked:before {
         
     }
 
-    a.profile-btn:hover{
+    a.profile-btnBefore:hover{
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
             transform: scale(1.1);
             transition: 0.2s;
         }
-    a.profile-btn:active {
+    a.profile-btnBefore:active {
             filter: opacity(0.5);
         }
 
