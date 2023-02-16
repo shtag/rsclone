@@ -104,6 +104,7 @@ class Router {
 
     static async open404() {
         console.log("open 404");
+        PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
         main.innerHTML = `
