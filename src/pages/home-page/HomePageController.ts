@@ -5,7 +5,7 @@ import HeaderView from '../staticElements/HeaderView';
 
 class HomePageController {
     static setHomePageController() {
-        HeaderView.renderHeader();
+        HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         PostElementsController.renderPosts(page);
