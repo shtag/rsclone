@@ -25,6 +25,7 @@ body {
     transition: 0.2s;
     min-height: 100vh;
     box-sizing: border-box;
+    user-select: none;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -64,4 +65,8 @@ body {
 
 a {
     text-decoration: none;
+}
+
+img {
+    pointer-events: none;
 }

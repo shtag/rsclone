@@ -1,5 +1,5 @@
 class HeaderController {
-    static switchTheme() {
+    static async switchTheme() {
         const togler = document.querySelector('.theme') as HTMLInputElement;
         const root = document.querySelector('body') as HTMLBodyElement;
         togler.addEventListener('click', () => {
