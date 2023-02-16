@@ -30,7 +30,7 @@ export class postElemens {
                         <p class="post_likes">Likes ${PostData.likes.length}</p>
                         <div class="comment_container" data-post_id="${PostData.id}">${await postElemens.renderBlockWithComment(PostData)}</div>
                     </div>
-                    <form data-post_id="${PostData.id}" class="comment_form_container">
+                    <form onsubmit="event.preventDefault();" data-post_id="${PostData.id}" class="comment_form_container">
                 <input
                 data-post_id="${PostData.id}"
                 autocomplete="off"
