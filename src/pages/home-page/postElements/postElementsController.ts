@@ -57,28 +57,40 @@ class PostElementsController {
     static comment() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
+        let isRequestInProgress = false; // добавляем флаг
+    
         container.addEventListener('click', async (event) => {
             const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
-            if (!target) {
+            if (!target || isRequestInProgress) { // проверяем флаг
                 return;
             }
+            isRequestInProgress = true; // устанавливаем флаг в true
             const input = target.previousSibling?.previousSibling as HTMLInputElement;
             if (!input || !input.dataset.post_id) {
+                isRequestInProgress = false; // сбрасываем флаг
                 return;
             }
             const postId = Number(input.dataset.post_id);
             const text = input.value as string;
             const commentRequest = { sessionId, text };
             if (Number.isNaN(postId)) {
+                isRequestInProgress = false; // сбрасываем флаг
                 return;
             }
-            const post = await model.comment.add(postId, commentRequest);
-            const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
-            const block = parrent.querySelector('.comment_container') as HTMLElement;
-            block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
-            input.value = '';
+            try {
+                const post = await model.comment.add(postId, commentRequest);
+                const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
+                const block = parrent.querySelector('.comment_container') as HTMLElement;
+                block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
+                input.value = '';
+            } catch (error) {
+                console.error(error);
+            } finally {
+                isRequestInProgress = false; // сбрасываем флаг
+            }
         });
     }
+    
 
     static likesToComment() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
