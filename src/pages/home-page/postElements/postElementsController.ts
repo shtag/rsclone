@@ -57,24 +57,24 @@ class PostElementsController {
     static comment() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
-        let isRequestInProgress = false; // добавляем флаг
+        let isRequestInProgress = false;
     
         container.addEventListener('click', async (event) => {
             const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
-            if (!target || isRequestInProgress) { // проверяем флаг
+            if (!target || isRequestInProgress) {
                 return;
             }
-            isRequestInProgress = true; // устанавливаем флаг в true
+            isRequestInProgress = true;
             const input = target.previousSibling?.previousSibling as HTMLInputElement;
             if (!input || !input.dataset.post_id) {
-                isRequestInProgress = false; // сбрасываем флаг
+                isRequestInProgress = false;
                 return;
             }
             const postId = Number(input.dataset.post_id);
             const text = input.value as string;
             const commentRequest = { sessionId, text };
             if (Number.isNaN(postId)) {
-                isRequestInProgress = false; // сбрасываем флаг
+                isRequestInProgress = false;
                 return;
             }
             try {
@@ -86,7 +86,7 @@ class PostElementsController {
             } catch (error) {
                 console.error(error);
             } finally {
-                isRequestInProgress = false; // сбрасываем флаг
+                isRequestInProgress = false;
             }
         });
     }
