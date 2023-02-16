@@ -47,7 +47,7 @@ export class HeaderView {
         const headerBarContainer = document.querySelector('.header-bar_container') as HTMLElement;
         let HTMLHeaderBarContainer = '';
         HTMLHeaderBarContainer = `
-        <button class="profile-btn route" href="/login">Login</button>
+        <a class="profile-btn route" href="/login">Login</a>
         <input class="theme" type="checkbox">
             `;
         headerBarContainer.innerHTML = HTMLHeaderBarContainer;

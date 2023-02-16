@@ -11,6 +11,9 @@
         button{
             filter: invert(1);
         }
+        a.profile-btn {
+            background-color: $light-grey-color;
+        }
     }
 
     .nav-bar_container {

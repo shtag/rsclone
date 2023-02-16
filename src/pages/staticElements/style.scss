@@ -84,24 +84,28 @@ input:checked:before {
         transition: 0.2s;
     }
 
-    button.profile-btn {
+    a.profile-btn {
+        text-align: center;
         width: 108px;
         height: 35px;
         border: none;
-        background: $black-color;
+        background: #121212;
         border-radius: 25px;
-        color: $white-color;
-        transition: background 0.2s
+        color: #f9fdfe;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
     }
 
-    button.profile-btn:hover{
+    a.profile-btn:hover{
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
             transform: scale(1.1);
             transition: 0.2s;
         }
-    button.profile-btn:active {
+    a.profile-btn:active {
             filter: opacity(0.5);
         }
 
