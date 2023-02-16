@@ -47,7 +47,7 @@
         cursor: pointer;
         width: 40px;
         height: 40px;
-        filter: invert(18%) sepia(100%) saturate(3540%) hue-rotate(293deg) brightness(110%) contrast(128%);
+        filter: invert(35%) sepia(13%) saturate(18%) hue-rotate(351deg) brightness(98%) contrast(86%);
     }
 
     &-settings {
@@ -56,4 +56,8 @@
         align-items: center;
         justify-content: space-between;
     }
+}
+
+.filter {
+    filter: invert(72%) sepia(53%) saturate(6619%) hue-rotate(1deg) brightness(103%) contrast(105%);
 }

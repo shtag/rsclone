@@ -25,18 +25,29 @@ class OpenPostController {
             route.href = `/${userName.username}`;
         }
 
+
         const postBlock = document.querySelector('.open__post') as HTMLDivElement;
         postBlock.innerHTML = await postElemens.renderPostElement(post);
         PostElementsController.likeDislikePost();
         PostElementsController.comment();
-        OpenPostController.setFav(postId)
+        OpenPostController.setFav(postId);
+
+        const user = localStorage.getItem('userId') as string;
+        const favIcon = document.querySelector('.open__post-fav') as HTMLImageElement;
+
+        const fav = (await model.user.get(+user)).favorites;
+        fav.forEach((el) => {
+            if (el === postId) {
+                favIcon.classList.add('filter');
+            }
+        });
     }
 
     static setFav(postId: number) {
         const favIcon = document.querySelector('.open__post-fav') as HTMLImageElement;
 
         favIcon.addEventListener('click', async () => {
-            favIcon.src = '/img/icons/favorite-post-icon-add.svg';
+            favIcon.classList.toggle('filter');
             await model.post.addFavorites(postId, sessionId);
         });
     }
