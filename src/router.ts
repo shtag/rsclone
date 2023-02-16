@@ -48,7 +48,7 @@ class Router {
     static async openProfile(id: number) {
         console.log("open profile")
         PageController.renderStructure();
-        HeaderView.renderHeader();
+        HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         document.title = `${(await model.user.get(id)).username}'s profile`;
