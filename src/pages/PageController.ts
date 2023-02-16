@@ -1,5 +1,6 @@
 import HomePageController from './home-page/HomePageController';
-import PostPopupController from './user-profile/post-popup/postPopupController';
+import { PostElementsController } from './home-page/postElements/postElementsController';
+import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
 
 class PageController {
@@ -37,8 +38,25 @@ class PageController {
         await GeneralUserController.setGeneralController(id);
     }
 
-    static async postPopup(postId: number) {
-        await PostPopupController.setPostPopup(postId);
+    static async userFavorite(id: number) {
+        const main = document.querySelector('.post__block');
+        if (main) {
+            main.innerHTML = '';
+        }
+        await GeneralUserController.setFavController(id);
+    }
+
+    static async userPosts(id: number) {
+        const main = document.querySelector('.post__block');
+        if (main) {
+            main.innerHTML = '';
+        }
+
+        GeneralUserController.setPosts(id);
+    }
+
+    static async setPost(postId: number) {
+        await OpenPostController.setPost(postId);
     }
 
     static timeControl() {
@@ -56,6 +74,16 @@ class PageController {
             togler.checked = false;
             root.classList.remove('light-theme');
         }
+    }
+
+    static setEventListener(){
+        const body = document.querySelector('body') as HTMLBodyElement;
+        body.addEventListener('click', async (event) => {
+            const target = event.target as HTMLButtonElement;
+            if (target.closest('.imput_comment_btn')) {
+                await PostElementsController.comment(event);
+            }
+        })
     }
 }
 

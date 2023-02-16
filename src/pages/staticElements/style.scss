@@ -84,6 +84,31 @@ input:checked:before {
         transition: 0.2s;
     }
 
+    a.profile-btnBefore {
+        text-align: center;
+        width: 108px;
+        height: 35px;
+        border: none;
+        background: #121212;
+        border-radius: 25px;
+        color: #f9fdfe;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+
+    a.profile-btnBefore:hover{
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+    a.profile-btnBefore:active {
+            filter: opacity(0.5);
+        }
+
 }
 
 .profile-btn {
@@ -117,4 +142,13 @@ input:checked:before {
         background: transparent;
         transition: 0.2s;
     }
+
+    
 }
+
+.mini_img {
+        width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    object-fit: cover;
+    }

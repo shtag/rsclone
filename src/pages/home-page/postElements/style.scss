@@ -29,6 +29,9 @@
 .post {
     display: flex;
     justify-content: space-between;
+    img {
+        pointer-events: none;
+    }
 }
 
 .post_img {
@@ -118,6 +121,13 @@
 
     &::-webkit-scrollbar {
         width: 0;
+    }
+
+    .comment_like-btn {
+        
+        &:active {
+            filter: opacity(0.5);
+        }
     }
 
     .post_info {

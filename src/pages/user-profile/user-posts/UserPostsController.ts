@@ -23,14 +23,13 @@ class UserPostsController {
     static async setPosts(id: number) {
         try {
             const userPosts = document.querySelector('.post__block');
-
             const results = await model.post.getUserPosts(id);
 
             results.forEach(async (el: Post) => {
                 const img = UserPostsView.renderPostImg(el.id, el.image);
                 userPosts?.insertAdjacentHTML('beforeend', img);
             });
-            UserPostsController.setTabSwitch()
+            UserPostsController.setTabSwitch();
         } catch (error) {
             UserPostsController.clearGalleryChilds();
 
@@ -43,51 +42,16 @@ class UserPostsController {
 
     static setTabSwitch() {
         const posts = document.querySelector('.user__post-item_posts') as HTMLElement;
-        const favorites = document.querySelector('.user__post-item_favorites') as HTMLElement;
-        const saved = document.querySelector('.user__post-item_saved') as HTMLElement;
         const dividerPart = document.querySelector('.divider__part') as HTMLElement;
-        const userPostItem = document.querySelectorAll('.user__post-item') as NodeListOf<HTMLElement>;
-        const userPosts = document.querySelector('.post__block');
 
-        userPostItem.forEach((el) => {
-            el.addEventListener('click', () => {
-                const icon = el.children[1] as HTMLButtonElement;
-                const text = el.children[0] as HTMLImageElement;
+        const icon = posts.children[1] as HTMLButtonElement;
+        const text = posts.children[0] as HTMLImageElement;
 
-                userPostItem.forEach((item) => {
-                    item.children[1].classList.remove('active');
-                    item.children[0].classList.remove('active_icon');
-                });
+        icon.classList.add('active');
 
-                icon.classList.add('active');
+        text.classList.add('active_icon');
 
-                text.classList.add('active_icon');
-            });
-        });
-
-        posts?.addEventListener('click', () => {
-            if (userPosts) {
-                userPosts.innerHTML = '';
-            }
-
-            dividerPart.style.marginLeft = '7%';
-        });
-
-        favorites?.addEventListener('click', () => {
-            if (userPosts) {
-                userPosts.innerHTML = '';
-            }
-
-            dividerPart.style.marginLeft = '24.5%';
-        });
-
-        saved?.addEventListener('click', () => {
-            if (userPosts) {
-                userPosts.innerHTML = '';
-            }
-
-            dividerPart.style.marginLeft = '41.5%';
-        });
+        dividerPart.style.marginLeft = '7%';
     }
 }
 

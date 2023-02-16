@@ -1,5 +1,5 @@
 import model from '../../../api/Model';
-import { Post } from '../../../types/types';
+import { CommentRequest, CommentsLikeRequest, Post } from '../../../types/types';
 
 import postElemens from './postElemensView';
 
@@ -9,14 +9,16 @@ export let page = 1;
 class PostElementsController {
     static async checkPosition() {
         window.addEventListener('scroll', async () => {
-            const height = document.body.offsetHeight;
-            const screenHeight = window.innerHeight;
-            const scrolled = window.scrollY;
-            const threshold = height - screenHeight / 4;
-            const position = scrolled + screenHeight;
-            if (position >= threshold) {
-                page += 1;
-                await this.renderPosts(page);
+            if (window.location.href.indexOf('/feed') !== -1) {
+                const height = document.body.offsetHeight;
+                const screenHeight = window.innerHeight;
+                const scrolled = window.scrollY;
+                const threshold = height - screenHeight / 4;
+                const position = scrolled + screenHeight;
+                if (position >= threshold) {
+                    page += 1;
+                    await this.renderPosts(page);
+                }
             }
         });
     }
@@ -52,30 +54,82 @@ class PostElementsController {
         });
     }
 
-    static comment() {
+    static async comment(event: Event) {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-        const container = document.querySelector('main') as HTMLElement;
-        container.addEventListener('click', async (event) => {
+        let isRequestInProgress = false;
+    
+        
             const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
-            if (!target) {
+            if (!target || isRequestInProgress) {
                 return;
             }
+            isRequestInProgress = true;
             const input = target.previousSibling?.previousSibling as HTMLInputElement;
             if (!input || !input.dataset.post_id) {
+                isRequestInProgress = false;
                 return;
             }
             const postId = Number(input.dataset.post_id);
             const text = input.value as string;
             const commentRequest = { sessionId, text };
             if (Number.isNaN(postId)) {
+                isRequestInProgress = false;
                 return;
             }
-            const post = await model.comment.add(postId, commentRequest);
-            const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
-            const block = parrent.querySelector('.comment_container') as HTMLElement;
-            block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
-        });
+            try {
+                const post = await model.comment.add(postId, commentRequest);
+                const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
+                const block = parrent.querySelector('.comment_container') as HTMLElement;
+                block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
+                input.value = '';
+            } catch (error) {
+                console.error(error);
+            } finally {
+                isRequestInProgress = false;
+            }
+        
     }
+    
+
+    static likesToComment() {
+        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
+        const container = document.querySelector('main') as HTMLElement;
+        container.addEventListener('click', async (event) => {
+          const target = (event.target as HTMLElement).closest('.comment_like-btn') as HTMLElement;
+          if (!target) {
+            return;
+          }
+
+          const postIDString = target.dataset.postid;
+          if (!postIDString) {
+            return;
+          }
+      
+          const postId = Number(postIDString);
+          if (Number.isNaN(postId)) {
+            return;
+          }
+      
+          const commentIDString = target.dataset.commentid;
+          const commentId = Number(commentIDString);
+          if (Number.isNaN(commentId)) {
+            return;
+          }
+      
+          const likeRequest: CommentsLikeRequest = { sessionId, commentId };
+          const likeData = await model.comment.like(postId, likeRequest);
+          const parent = target.closest('.comment') as HTMLElement;
+          const text = parent.querySelector('.comment_tools_like') as HTMLElement;
+          const comment = likeData.comments.find(el => el.id === commentId);
+          if (!comment) {
+            return;
+          }
+      
+          const { length } = comment.likes;
+          text.innerHTML = `${length} Likes`;
+        });
+      }
+      
 }
 
 export { PostElementsController };
