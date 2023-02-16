@@ -2,12 +2,12 @@
 
 .active {
     background: linear-gradient(270deg, rgb(255, 111, 0), orange, fuchsia);
-    -webkit-background-clip: text; 
-    background-clip: text; 
+    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 
     &_icon {
-        filter: invert(18%) sepia(100%) saturate(3540%) hue-rotate(293deg) brightness(110%) contrast(128%);
+        filter: invert(72%) sepia(53%) saturate(6619%) hue-rotate(18deg) brightness(103%) contrast(105%);
     }
 }
 
@@ -111,6 +111,10 @@
             display: flex;
             gap: 6px;
             align-items: center;
+
+            &_view {
+                margin-left: auto;
+            }
 
             & > img {
                 border-radius: 5px;

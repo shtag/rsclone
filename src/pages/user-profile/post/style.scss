@@ -1,0 +1,63 @@
+@import '../../../scss/base/_variables';
+
+.open__post {
+    &-btn {
+        position: relative;
+        text-align: center;
+        outline: none;
+        border: none;
+        padding: 10px;
+        width: 115px;
+        border-radius: 10px;
+        cursor: pointer;
+        background: $medium-grey-color;
+        transition: 0.5s;
+        border: 2px solid transparent;
+        color: $white-color;
+
+        &::after {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            opacity: 0;
+            content: '';
+            &::content {
+                text-align: center;
+                padding: 20px;
+            }
+            width: 100%;
+            height: 100%;
+            background: $gradient;
+            transition: 0.5s;
+            border-radius: 10px;
+            border: 2px solid transparent;
+        }
+        &:hover::after {
+            opacity: 1;
+            transition: 0.5s;
+            border: 2px solid white;
+        }
+        .text_button {
+            position: relative;
+            z-index: 3;
+        }
+    }
+
+    &-fav {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        filter: invert(35%) sepia(13%) saturate(18%) hue-rotate(351deg) brightness(98%) contrast(86%);
+    }
+
+    &-settings {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.filter {
+    filter: invert(72%) sepia(53%) saturate(6619%) hue-rotate(1deg) brightness(103%) contrast(105%);
+}

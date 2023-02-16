@@ -1,5 +1,5 @@
 import HomePageController from './home-page/HomePageController';
-import PostPopupController from './user-profile/post-popup/postPopupController';
+import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
 
 class PageController {
@@ -37,8 +37,25 @@ class PageController {
         await GeneralUserController.setGeneralController(id);
     }
 
-    static async postPopup(postId: number) {
-        await PostPopupController.setPostPopup(postId);
+    static async userFavorite(id: number) {
+        const main = document.querySelector('.post__block');
+        if (main) {
+            main.innerHTML = '';
+        }
+        await GeneralUserController.setFavController(id);
+    }
+
+    static async userPosts(id: number) {
+        const main = document.querySelector('.post__block');
+        if (main) {
+            main.innerHTML = '';
+        }
+
+        GeneralUserController.setPosts(id);
+    }
+
+    static async setPost(postId: number) {
+        await OpenPostController.setPost(postId);
     }
 
     static timeControl() {

@@ -2,13 +2,13 @@ import model from '../../../api/Model';
 import './style.scss';
 
 class UserPageView {
-  static async renderUserInfo(id: number) {
-    const user = await model.user.get(id);
-    const followers = await model.user.getFollowers(id);
-    const following = await model.user.getSubscriptions(id);
-    const postQuantity = await model.post.getUserPosts(id);
+    static async renderUserInfo(id: number) {
+        const user = await model.user.get(id);
+        const followers = await model.user.getFollowers(id);
+        const following = await model.user.getSubscriptions(id);
+        const postQuantity = await model.post.getUserPosts(id);
 
-    return ` 
+        return ` 
         <div class="user__block">
           <div class="user__avatar-block">
             <div class="user__avatar_add"></div>
@@ -55,20 +55,17 @@ class UserPageView {
           </a>
           <a class="route" href="/${user.username}/favorites">
             <div class="user__post-item user__post-item_favorites">
-              <img class="user__post-item_icon" src='/img/icons/favorites-icon.svg' alt="posts" />
+              <img class="user__post-item_icon" src='/img/icons/favorites-icon.svg' alt="favorites" />
               <button class="user__post-item_text">Favorites</button>
             </div>
           </a>
-          <a class="route" href="/${user.username}/saved">
-            <div class="user__post-item user__post-item_saved">
-              <img class="user__post-item_icon" src='/img/icons/saved-icon.svg' alt="posts" />
-              <button class="user__post-item_text">Saved</button>
-            </div>
-          </a>
+          <div class="user__post-item user__post-item_view">
+              <img class="user__post-item_icon view" src='/img/icons/change-view.svg' alt="view" />
+          </div>
         </div>
     
         `;
-  }
+    }
 }
 
 export default UserPageView;
