@@ -57,7 +57,7 @@ class Router {
     static async openPost(id: number) {
         console.log('open post');
         PageController.renderStructure();
-        HeaderView.renderHeader();
+        HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
 
@@ -72,7 +72,7 @@ class Router {
         console.log('posts tab');
         document.title = `${(await model.user.get(id)).username}'s posts`;
         PageController.renderStructure();
-        HeaderView.renderHeader();
+        HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
 
@@ -92,7 +92,7 @@ class Router {
         console.log('favorites');
         document.title = `${(await model.user.get(id)).username}'s favorites`;
         PageController.renderStructure();
-        HeaderView.renderHeader();
+        HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         PageController.userFavorite(id);
