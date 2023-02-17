@@ -39,7 +39,7 @@ class PostElementsController {
     static likeDislikePost() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
-        container.addEventListener('click', (element) => {
+        container.addEventListener('click', async (element) => {
             const el = element.target as HTMLElement;
             const target = el.closest('.tools_container_item') as HTMLElement;
             if (target) {
@@ -47,7 +47,10 @@ class PostElementsController {
                 if (id) {
                     const postId = Number(id);
                     if (!Number.isNaN(postId)) {
-                        model.post.like(postId, sessionId);
+                        const like = model.post.like(postId, sessionId);
+                        const likesText = target.querySelector('.tools_text_likes') as HTMLElement;
+                        likesText.innerHTML = String((await like).likes.length);
+
                     }
                 }
             }
@@ -80,7 +83,10 @@ class PostElementsController {
                 const post = await model.comment.add(postId, commentRequest);
                 const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
                 const block = parrent.querySelector('.comment_container') as HTMLElement;
+                const postContainer = (event.target as HTMLElement).closest('.comments_container') as HTMLElement;
+                const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
                 block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
+                toolsComment.innerHTML = String(post.comments.length);
                 input.value = '';
             } catch (error) {
                 console.error(error);

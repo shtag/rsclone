@@ -27,7 +27,6 @@ export class postElemens {
                     </div>
                     <div class="post_info_description">
                         <p class="post_info_description_text"><b>${userName.username}</b> ${PostData.description}</p>
-                        <p class="post_likes">Likes ${PostData.likes.length}</p>
                         <div class="comment_container" data-post_id="${PostData.id}">${await postElemens.renderBlockWithComment(PostData)}</div>
                     </div>
                     <form onsubmit="event.preventDefault();" data-post_id="${PostData.id}" class="comment_form_container">
@@ -59,7 +58,7 @@ export class postElemens {
                             fill="#f9fdfe"
                         />
                     </svg>
-                    <p class="tools_text">Like</p>
+                    <p class="tools_text_likes">${PostData.likes.length}</p>
                 </div>
                 <div class="tools_container_item" data-post_id = "${PostData.id}">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +69,7 @@ export class postElemens {
                             stroke-linejoin="round"
                         />
                     </svg>
-                    <p class="tools_text">Comment</p>
+                    <p class="tools_text_comment">${PostData.comments.length}</p>
                 </div>
             </div>
         `;
