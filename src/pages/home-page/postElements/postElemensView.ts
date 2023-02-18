@@ -12,14 +12,23 @@ export class postElemens {
     }
 
     static async renderPostElement(PostData: Post) {
-     const userName = await model.user.get(PostData.author)
+     const userName = await model.user.get(PostData.author);
+     let img;
+     
+     if (userName.settings.photo === '') {
+        img = '../../../img/base.jpg';
+     }
+     else {
+        img = userName.settings.photo
+     }
+
         return `
         <div class="post_wrapper">
             <div class="post">
                 <div class="post_info_cotainer">
                     <div class="post_info_account">
                         <a class="post_info_account_img route" href="/${userName.username}">
-                            <img class="mini-round-img" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg" alt="" />
+                            <img class="mini-round-img" src="${img}" alt="" />
                         </a>
                         <a class="post_info_account_text route" href="/${userName.username}">
                             <p class="nickname">${userName.username}</p>

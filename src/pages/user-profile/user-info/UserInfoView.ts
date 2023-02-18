@@ -7,12 +7,20 @@ class UserPageView {
         const followers = await model.user.getFollowers(id);
         const following = await model.user.getSubscriptions(id);
         const postQuantity = await model.post.getUserPosts(id);
+        let img;
+     
+        if (user.settings.photo === '') {
+        img = '../../../img/base.jpg';
+        }
+        else {
+        img = user.settings.photo
+        }
 
         return ` 
         <div class="user__block">
           <div class="user__avatar-block">
             <div class="user__avatar_add"></div>
-            <img class="user__avatar_img" src="${user.settings.photo}" alt="avatar" />
+            <img class="user__avatar_img" src="${img}" alt="avatar" />
           </div>
           <div class="user__infoStat">
             <div class="user__info">
