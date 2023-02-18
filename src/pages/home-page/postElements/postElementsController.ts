@@ -1,5 +1,5 @@
 import model from '../../../api/Model';
-import { CommentRequest, CommentsLikeRequest, Post } from '../../../types/types';
+import { CommentsLikeRequest, Post } from '../../../types/types';
 
 import postElemens from './postElemensView';
 
