@@ -41,7 +41,7 @@ class PostElementsController {
         const container = document.querySelector('main') as HTMLElement;
         container.addEventListener('click', async (element) => {
             const el = element.target as HTMLElement;
-            const target = el.closest('.tools_container_item') as HTMLElement;
+            const target = el.closest('.like_btn') as HTMLElement;
             if (target) {
                 const id = target.dataset.post_id;
                 if (id) {
@@ -49,7 +49,7 @@ class PostElementsController {
                     if (!Number.isNaN(postId)) {
                         const like = model.post.like(postId, sessionId);
                         const likesText = target.querySelector('.tools_text_likes') as HTMLElement;
-                        likesText.innerHTML = String((await like).likes.length);
+                        likesText.innerText = String((await like).likes.length);
 
                     }
                 }
@@ -95,6 +95,26 @@ class PostElementsController {
             }
         
     }
+
+    static activeInput(){
+        const container = document.querySelector('main') as HTMLElement;
+        container.addEventListener('click', (element) => {
+            const el = element.target as HTMLElement;
+            const target = el.closest('.comment_btn') as HTMLElement;
+            if (target) {
+                    const parent = target.parentNode;
+                    if(parent) {
+                        const sibling = parent.previousSibling?.previousSibling as HTMLElement;
+                        if (sibling) {
+                            const input = sibling.querySelector('input') as HTMLInputElement;
+                            input.focus();
+                          }
+                    }
+                    }
+                })
+        }
+    
+
     
 
     static likesToComment() {
