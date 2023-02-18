@@ -85,25 +85,36 @@ export class postElemens {
     }
 
     static async renderBlockWithComment(PostData: Post) {
-        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id)
+        const userName = await model.user.get(PostData.author);
+        const user: string = await userName.username;
+        let img: string;
+     
+        if (userName.settings.photo === '') {
+        img = '../../../img/base.jpg';
+        }
+        else {
+        img = userName.settings.photo
+        }
+        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user, img)
         
         )
         return HTMLComment.join('');
     }
 
-    static renderComment(comment: Comment, postId: number) {
+    static renderComment(comment: Comment, postId: number, user?: string, img?: string) {
             const dateInMs = comment.date;
             const date = new Date(dateInMs);
+            console.log(user ,img);
             const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
         return `
             <div class="comment">
                 <div class="post_info_comment">
                 <div class="post_info">
-                    <a class="comment_img route" href="/${comment.author}">
-                        <img src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg" alt="" class="comment_mini_img" />
+                    <a class="comment_img route" href="/${user}">
+                        <img src="${img}" alt="" class="comment_mini_img" />
                     </a>
                     <div class="comment_text">
-                        <p><b>${comment.author}</b>      ${comment.text}</p>
+                        <p><b>${user}</b>      ${comment.text}</p>
                     </div>
                 </div>
                     <button class="comment_like-btn" data-postID="${postId}" data-commentID="${comment.id}">
