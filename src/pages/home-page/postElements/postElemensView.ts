@@ -18,12 +18,12 @@ export class postElemens {
             <div class="post">
                 <div class="post_info_cotainer">
                     <div class="post_info_account">
-                        <div class="post_info_account_img">
+                        <a class="post_info_account_img route" href="/${userName.username}">
                             <img class="mini-round-img" src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_960_720.jpg" alt="" />
-                        </div>
-                        <div class="post_info_account_text">
+                        </a>
+                        <a class="post_info_account_text route" href="/${userName.username}">
                             <p class="nickname">${userName.username}</p>
-                        </div>
+                        </a>
                     </div>
                     <div class="post_info_description">
                         <p class="post_info_description_text"><b>${userName.username}</b> ${PostData.description}</p>
@@ -90,9 +90,9 @@ export class postElemens {
             <div class="comment">
                 <div class="post_info_comment">
                 <div class="post_info">
-                    <div class="comment_img">
+                    <a class="comment_img route" href="/${comment.author}">
                         <img src="https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg" alt="" class="comment_mini_img" />
-                    </div>
+                    </a>
                     <div class="comment_text">
                         <p><b>${comment.author}</b>      ${comment.text}</p>
                     </div>
