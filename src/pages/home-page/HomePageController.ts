@@ -13,7 +13,7 @@ class HomePageController {
         PostElementsController.likeDislikePost();
         PostElementsController.likesToComment();
         PostElementsController.activeInput();
-
+        PostElementsController.reply();
     }
 }
 
