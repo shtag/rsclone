@@ -87,13 +87,11 @@ class PostElementsController {
             block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
             toolsComment.innerHTML = String(post.comments.length);
             input.value = '';
-            
         } catch (error) {
             console.error(error);
         } finally {
             isRequestInProgress = false;
         }
-        
     }
 
     static activeInput() {

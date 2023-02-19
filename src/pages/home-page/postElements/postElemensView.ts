@@ -1,5 +1,5 @@
 import model from '../../../api/Model';
-import { Post, Comment} from '../../../types/types';
+import { Post, Comment } from '../../../types/types';
 
 export class postElemens {
     static async renderPost(PostData: Post) {
@@ -11,20 +11,19 @@ export class postElemens {
         main.append(root);
         const tools = document.querySelector('.tools') as HTMLDivElement;
         if (localStorage.sessionId === undefined) {
-            tools.remove(); 
+            tools.remove();
         }
     }
 
     static async renderPostElement(PostData: Post) {
-     const userName = await model.user.get(PostData.author);
-     let img;
-     
-     if (userName.settings.photo === '') {
-        img = '../../../img/base.jpg';
-     }
-     else {
-        img = userName.settings.photo
-     }
+        const userName = await model.user.get(PostData.author);
+        let img;
+
+        if (userName.settings.photo === '') {
+            img = '../../../img/base.jpg';
+        } else {
+            img = userName.settings.photo;
+        }
 
         return `
         <div class="post_wrapper">
@@ -40,7 +39,9 @@ export class postElemens {
                     </div>
                     <div class="post_info_description">
                         <p class="post_info_description_text"><b>${userName.username}</b> ${PostData.description}</p>
-                        <div class="comment_container" data-post_id="${PostData.id}">${await postElemens.renderBlockWithComment(PostData)}</div>
+                        <div class="comment_container" data-post_id="${PostData.id}">${await postElemens.renderBlockWithComment(
+            PostData
+        )}</div>
                     </div>
                     <form onsubmit="event.preventDefault();" data-post_id="${PostData.id}" class="comment_form_container">
                 <input
@@ -92,24 +93,21 @@ export class postElemens {
         const userName = await model.user.get(PostData.author);
         const user: string = await userName.username;
         let img: string;
-     
+
         if (userName.settings.photo === '') {
-        img = '../../../img/base.jpg';
+            img = '../../../img/base.jpg';
+        } else {
+            img = userName.settings.photo;
         }
-        else {
-        img = userName.settings.photo
-        }
-        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user, img)
-        
-        )
+        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user, img));
         return HTMLComment.join('');
     }
 
     static renderComment(comment: Comment, postId: number, user?: string, img?: string) {
-            const dateInMs = comment.date;
-            const date = new Date(dateInMs);
-            console.log(user ,img);
-            const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const dateInMs = comment.date;
+        const date = new Date(dateInMs);
+        console.log(user, img);
+        const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
         return `
             <div class="comment">
                 <div class="post_info_comment">
@@ -136,7 +134,7 @@ export class postElemens {
                     <button class="comment_tools_reply">reply</button>
                 </div>
             </div>
-            `
+            `;
     }
 }
 
