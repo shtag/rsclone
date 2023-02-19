@@ -9,6 +9,10 @@ export class postElemens {
         const HTMLPost = await postElemens.renderPostElement(PostData);
         root.innerHTML = HTMLPost;
         main.append(root);
+        const tools = document.querySelector('.tools') as HTMLDivElement;
+        if (localStorage.sessionId === undefined) {
+            tools.remove(); 
+        }
     }
 
     static async renderPostElement(PostData: Post) {

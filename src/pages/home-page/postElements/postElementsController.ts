@@ -78,6 +78,7 @@ class PostElementsController {
             return;
         }
         try {
+            if (localStorage.sessionId === undefined) return;
             const post = await model.comment.add(postId, commentRequest);
             const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
             const block = parrent.querySelector('.comment_container') as HTMLElement;
@@ -86,11 +87,13 @@ class PostElementsController {
             block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
             toolsComment.innerHTML = String(post.comments.length);
             input.value = '';
+            
         } catch (error) {
             console.error(error);
         } finally {
             isRequestInProgress = false;
         }
+        
     }
 
     static activeInput() {
@@ -133,7 +136,7 @@ class PostElementsController {
     static likesToComment() {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
-        container.addEventListener('click', async (event) => {
+        const click = container.addEventListener('click', async (event) => {
             const target = (event.target as HTMLElement).closest('.comment_like-btn') as HTMLElement;
             if (!target) {
                 return;
