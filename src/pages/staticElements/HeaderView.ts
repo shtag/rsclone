@@ -42,7 +42,7 @@ export class HeaderView {
         img.innerHTML = `<img src="${(await user).settings.photo}" alt="" class="mini_img">`;
         const NavBar = document.querySelector('aside');
         NavBar?.remove();
-        this.renderNavBar()
+        this.renderNavBar();
     }
 
     static async renderHeaderBeforeLogin() {
@@ -93,6 +93,27 @@ export class HeaderView {
             search.disabled = true;
             setting.disabled = true;
         }
+        this.renderSettingPopup();
+        this.openSetting();
+    }
+
+    static renderSettingPopup() {
+        const body = document.querySelector('body') as HTMLElement;
+        const popup = document.createElement('div');
+        popup.className = 'setting_popup';
+        body.append(popup);
+    }
+
+    static openSetting() {
+        const popup = document.querySelector('.setting_popup') as HTMLDivElement;
+        const btn = document.querySelector('.setting-btn') as HTMLButtonElement;
+        btn.onclick = () => {
+            if (popup.classList.contains('open')) {
+                popup.classList.remove('open');
+            } else {
+                popup.classList.add('open');
+            }
+        };
     }
 }
 

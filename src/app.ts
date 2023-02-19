@@ -14,7 +14,7 @@ class App {
         localStorage.setItem('userId', '1');
         Router.setEventListeners();
         PageController.setEventListener();
-        HeaderView.renderNavBar()
+        HeaderView.renderNavBar();
     }
 }
 

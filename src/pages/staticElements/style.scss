@@ -200,3 +200,26 @@ input:checked:before {
     border-radius: 100px;
     object-fit: cover;
     }
+
+.setting_popup{
+    position: fixed;
+    top: 50%;
+    left: -100%;
+    transform: translate(0, -50%);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: #1e1e1e;
+    align-items: center;
+    height: 275px;
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 50px;
+    margin-right: 20px;
+    flex-direction: column;
+    transition: 0.2s;
+}
+
+.open {
+    left: 10%;
+}
