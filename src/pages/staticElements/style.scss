@@ -186,6 +186,9 @@ input:checked:before {
         &:active {
             filter: opacity(0.5);
         }
+        &:disabled {
+            filter: opacity(0.5);
+        }
     }
 
     
