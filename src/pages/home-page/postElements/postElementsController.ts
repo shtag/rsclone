@@ -137,6 +137,7 @@ class PostElementsController {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
         const click = container.addEventListener('click', async (event) => {
+            if (localStorage.sessionId === undefined) return;
             const target = (event.target as HTMLElement).closest('.comment_like-btn') as HTMLElement;
             if (!target) {
                 return;
