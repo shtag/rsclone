@@ -76,13 +76,36 @@ input:checked:before {
     justify-content: space-around;
     border-radius: 50px;
 
+    a{
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
+    }
+
     button {
         height: 24px;
         width: 24px;
         border: none;
         background: transparent;
         transition: 0.2s;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
     }
+
+
 
     a.profile-btnBefore {
         text-align: center;
@@ -96,6 +119,7 @@ input:checked:before {
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: 0.2s;
         
     }
 
@@ -135,12 +159,33 @@ input:checked:before {
     margin-right: 20px;
     flex-direction: column;
 
+    a{
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
+    }
+
     button {
         height: 24px;
         width: 24px;
         border: none;
         background: transparent;
         transition: 0.2s;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
     }
 
     

@@ -5,6 +5,7 @@ import './pages/home-page/postElements/style.scss'
 import Router from './router';
 import { sessionId } from './types/constants';
 import PageController from './pages/PageController';
+import HeaderView from './pages/staticElements/HeaderView';
 
 class App {
     static async start() {
@@ -13,6 +14,7 @@ class App {
         localStorage.setItem('userId', '1');
         Router.setEventListeners();
         PageController.setEventListener();
+        HeaderView.renderNavBar()
     }
 }
 
