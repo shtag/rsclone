@@ -74,13 +74,13 @@
     }
 }
 
-[type='file'] {
+.add__img {
     height: 0;
     overflow: hidden;
     width: 0;
 }
 
-[type='file'] + label {
+.add__img + label {
     height: 25px;
     background: $gradient;
     border: none;
@@ -94,7 +94,7 @@
     transition: all 0.3s;
     vertical-align: middle;
 
-    &.btn-3 {
+    &.add__label {
         background-color: #ee6d9e;
         border-radius: 0;
         overflow: hidden;

@@ -59,6 +59,7 @@ class AddPostController {
         });
 
         AddPostController.dropzone();
+        AddPostController.reloadPageAlert();
     }
 
     static async handleDrop(event: DragEvent) {
@@ -66,6 +67,7 @@ class AddPostController {
         const uploadBlock = document.querySelector('.drop-zone__text-block') as HTMLDivElement;
         const deleteBtn = document.querySelector('.add__delete') as HTMLButtonElement;
         const addBtn = document.querySelector('.add__post') as HTMLButtonElement;
+        const form = document.querySelector('.add__form') as HTMLFormElement;
 
         event.preventDefault();
         dropZone.classList.remove('dragover');
@@ -83,6 +85,7 @@ class AddPostController {
                 addBtn.disabled = false;
                 uploadBlock.style.display = 'none';
                 deleteBtn.style.display = 'block';
+                form.setAttribute('data-dirty', 'true');
             }
         }
     }
@@ -99,6 +102,24 @@ class AddPostController {
 
         dropZone.addEventListener('dragover', AddPostController.handleDragOver);
         dropZone.addEventListener('drop', AddPostController.handleDrop);
+    }
+
+    static reloadPageAlert() {
+        const form = document.querySelector('.add__form') as HTMLFormElement;
+        form.addEventListener('input', () => {
+            form.setAttribute('data-dirty', 'true');
+        });
+
+        form.addEventListener('submit', () => {
+            form.removeAttribute('data-dirty');
+        });
+
+        window.addEventListener('beforeunload', (e) => {
+            if (form && form.hasAttribute('data-dirty')) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
     }
 }
 
