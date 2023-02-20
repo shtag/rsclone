@@ -73,11 +73,13 @@ class AddPostController {
         dropZone.classList.remove('dragover');
         if (event.dataTransfer?.files?.length) {
             const file = event.dataTransfer.files[0];
+            if (
+                file.type.startsWith('image/') &&
+                (file.name.endsWith('.jpeg') || file.name.endsWith('.jpg') || file.name.endsWith('.png') || file.name.endsWith('.gif'))
+            ) {
+                const dropzoneImg = await model.uploadPhoto(event.dataTransfer.files as FileList);
+                AddPostController.image = dropzoneImg.data.link;
 
-            const dropzoneImg = await model.uploadPhoto(event.dataTransfer.files as FileList);
-            AddPostController.image = dropzoneImg.data.link;
-
-            if (file.type.startsWith('image/')) {
                 const img = document.createElement('img');
                 img.classList.add('add__preview');
                 img.src = URL.createObjectURL(file);

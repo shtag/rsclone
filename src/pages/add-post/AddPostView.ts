@@ -11,7 +11,7 @@ class AddPostView {
                  <div class="drop-zone__text-block">
                     <p class="drop-zone__text">Drop image here</p>
                     <p class="drop-zone__text">or</p>
-                    <input class="add__img" type="file" id="file" />
+                    <input class="add__img" type="file" id="file" accept=".jpg,.jpeg,.png,.gif"/>
                     <label for="file" class="add__label">
                     <span>Upload your image</span>
                     </label>
