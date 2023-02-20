@@ -1,10 +1,12 @@
-@import '_variables.scss';
+@import "_variables.scss";
 
 .light-theme {
     background-color: $white-color;
     color: $black-color;
-
     .header {
+        .header-bar_container {
+            background-color: $white-color;
+        }
         &-bar_container {
             background-color: $white-color;
         }
@@ -19,6 +21,10 @@
     .nav-bar_container {
         background-color: $white-color;
         button {
+            filter: invert(1);
+        }
+
+        a {
             filter: invert(1);
         }
     }
@@ -73,6 +79,7 @@
         background-color: $light-grey-color;
     }
 
+
     .add__description {
         color: $medium-grey-color;
         font-weight: 400;
@@ -80,5 +87,18 @@
 
     .create_post-btn {
         filter: invert(1);
+
+    .post_info_cotainer {
+        a {
+            color: $black-color;
+        }
+    }
+
+    .setting_popup {
+        background-color: #f9fdfea3;
+        border: 1px solid #c4c4c454;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+
     }
 }

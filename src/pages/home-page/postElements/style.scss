@@ -58,6 +58,10 @@
     flex-grow: 1;
     text-align: left;
     position: relative;
+
+    a {
+        color: $white-color;
+    }
 }
 
 .post_info_account {

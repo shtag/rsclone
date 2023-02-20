@@ -60,6 +60,7 @@ class PageController {
         await OpenPostController.setPost(postId);
     }
 
+
     static async addPost() {
         const main = document.querySelector('.post__block');
         if (main) {
@@ -68,24 +69,7 @@ class PageController {
         AddPostController.setAddPost();
     }
 
-    static timeControl() {
-        const datetoday = new Date();
-        const timenow = datetoday.getTime();
-        const togler = document.querySelector('.theme') as HTMLInputElement;
-        datetoday.setTime(timenow);
-        const thehour = datetoday.getHours();
-        const root = document.querySelector('body') as HTMLBodyElement;
-
-        if (thehour >= 6 && thehour <= 18) {
-            togler.checked = true;
-            root.classList.add('light-theme');
-        } else {
-            togler.checked = false;
-            root.classList.remove('light-theme');
-        }
-    }
-
-    static setEventListener() {
+    static setEventListener(){
         const body = document.querySelector('body') as HTMLBodyElement;
         body.addEventListener('click', async (event) => {
             const target = event.target as HTMLButtonElement;
