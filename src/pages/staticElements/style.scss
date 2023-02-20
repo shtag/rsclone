@@ -1,52 +1,51 @@
-@import "/src/scss/base/variables";
-@import url("https://fonts.cdnfonts.com/css/axiforma");
+@import '/src/scss/base/variables';
+@import url('https://fonts.cdnfonts.com/css/axiforma');
 
 .header {
     width: 100%;
     margin: 0 auto;
-    font-family: "Axiforma", sans-serif;
+    font-family: 'Axiforma', sans-serif;
     padding-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     input {
-    -webkit-appearance: none;
-    position: relative;
-    width: 40px;
-    height: 20px;
-    background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
-    background-size: cover;
-    border-radius: 50px;
-    outline: none;
-    transition: background-image 0.9s;
-    box-shadow: 0px 2px 5px 1px gray;
-}
+        -webkit-appearance: none;
+        position: relative;
+        width: 40px;
+        height: 20px;
+        background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
+        background-size: cover;
+        border-radius: 50px;
+        outline: none;
+        transition: background-image 0.9s;
+        box-shadow: 0px 2px 5px 1px gray;
+    }
 
-input:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: navy;
-    border-radius: 50px;
-    transition: all 0.9s;
+    input:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: navy;
+        border-radius: 50px;
+        transition: all 0.9s;
 
-    background-color: #ecf0f3;
-}
+        background-color: #ecf0f3;
+    }
 
-input:checked {
-    background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
-    transition: background-image 0.9s;
-}
+    input:checked {
+        background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+        transition: background-image 0.9s;
+    }
 
-input:checked:before {
-    transform: translate(100%);
-    transition: all 0.9s;
-    background-color: #f7ca33;
-}
-
+    input:checked:before {
+        transform: translate(100%);
+        transition: all 0.9s;
+        background-color: #f7ca33;
+    }
 }
 
 .text-logo {
@@ -96,19 +95,17 @@ input:checked:before {
         display: flex;
         align-items: center;
         justify-content: center;
-        
     }
 
-    a.profile-btnBefore:hover{
-            -webkit-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            transform: scale(1.1);
-            transition: 0.2s;
-        }
+    a.profile-btnBefore:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
     a.profile-btnBefore:active {
-            filter: opacity(0.5);
-        }
-
+        filter: opacity(0.5);
+    }
 }
 
 .profile-btn {
@@ -116,7 +113,6 @@ input:checked:before {
     width: 24px;
     border-radius: 50%;
 }
-
 
 .nav-bar_container {
     position: fixed;
@@ -134,7 +130,7 @@ input:checked:before {
     border-radius: 50px;
     margin-right: 20px;
     flex-direction: column;
-
+    z-index: 3;
     button {
         height: 24px;
         width: 24px;
@@ -142,13 +138,11 @@ input:checked:before {
         background: transparent;
         transition: 0.2s;
     }
-
-    
 }
 
 .mini_img {
-        width: 25px;
+    width: 25px;
     height: 25px;
     border-radius: 100px;
     object-fit: cover;
-    }
+}

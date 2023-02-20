@@ -5,6 +5,7 @@ import PageController from './pages/PageController';
 import HeaderController from './pages/staticElements/HeaderController';
 import OpenPostView from './pages/user-profile/post/OpenPostView';
 import OpenPostController from './pages/user-profile/post/OpenPostController';
+import search from './pages/staticElements/search/searchPopupController';
 
 class Router {
     static route(event: Event) {
@@ -131,6 +132,7 @@ class Router {
 
         window.addEventListener('load', async () => {
             await Router.handleLocation();
+            search.renderPopup();
         });
         window.addEventListener('popstate', async () => {
             await Router.handleLocation();

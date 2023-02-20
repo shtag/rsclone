@@ -7,7 +7,7 @@ class SearchController {
     isPopupActive: boolean;
 
     constructor() {
-        this.isPopupActive = true;
+        this.isPopupActive = false;
     }
 
     async renderPopup() {
