@@ -8,7 +8,7 @@
         &-bar_container {
             background-color: $white-color;
         }
-        button{
+        button {
             filter: invert(1);
         }
         a.profile-btn {
@@ -18,7 +18,7 @@
 
     .nav-bar_container {
         background-color: $white-color;
-        button{
+        button {
             filter: invert(1);
         }
     }
@@ -47,11 +47,11 @@
         }
 
         .comment_tools {
-            color: $light-grey-color ;
+            color: $light-grey-color;
         }
 
-        .comment_tools_reply{
-            color: $light-grey-color ;
+        .comment_tools_reply {
+            color: $light-grey-color;
         }
     }
 
@@ -64,14 +64,17 @@
             color: $medium-grey-color;
         }
 
-        &__statistics_title{
+        &__statistics_title {
             color: $medium-grey-color;
-
         }
     }
 
     .divider {
         background-color: $light-grey-color;
+    }
 
+    .add__description {
+        color: $medium-grey-color;
+        font-weight: 400;
     }
 }
