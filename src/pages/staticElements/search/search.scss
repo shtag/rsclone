@@ -1,0 +1,37 @@
+.search_popup_block {
+    height: calc(100vh - 110px);
+    width: 50%;
+    min-width: 450px;
+    max-width: 650px;
+    background: black;
+    position: fixed;
+    left: -3000px;
+    top: 110px;
+    transition: 0.2s;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .search_results {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .search_post {
+            display: flex;
+            text-decoration: none;
+            gap: 10px;
+            color: white;
+            &_image {
+                height: 70px;
+                width: 70px;
+                border-radius: 10px;
+            }
+        }
+    }
+}
+
+.search_active {
+    left: 0;
+}
