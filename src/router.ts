@@ -39,9 +39,20 @@ class Router {
             localStorage.setItem('favorites', 'true');
         } else if (user && path[2] === 'posts' && path.length === 3) {
             Router.openPosts(user.id);
-        } else {
+        } else if(path[1] === 'add') {
+            Router.openAddPost()
+        }else {
             Router.open404();
         }
+    }
+
+    static async openAddPost() {
+        console.log('open add post');
+        PageController.renderStructure();
+        HeaderView.renderHeaderContainer();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+        await PageController.addPost();
     }
 
     static async openProfile(id: number) {
