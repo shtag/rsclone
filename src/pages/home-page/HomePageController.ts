@@ -9,7 +9,6 @@ class HomePageController {
         HeaderController.loaderControlAnimation();
         PostElementsController.renderPosts(page);
         PostElementsController.checkPosition();
-        PostElementsController.likeDislikePost();
         PostElementsController.likesToComment();
         PostElementsController.activeInput();
         PostElementsController.reply();

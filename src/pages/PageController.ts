@@ -76,6 +76,9 @@ class PageController {
             if (target.closest('.imput_comment_btn')) {
                 await PostElementsController.comment(event);
             }
+            if (target.closest('.like_btn')) {
+                await PostElementsController.likeDislikePost(event);
+            }
         });
     }
 }

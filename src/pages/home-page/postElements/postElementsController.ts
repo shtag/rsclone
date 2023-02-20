@@ -36,24 +36,23 @@ class PostElementsController {
         });
     }
 
-    static likeDislikePost() {
+    static async likeDislikePost(element: Event) {
         const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
         const container = document.querySelector('main') as HTMLElement;
-        container.addEventListener('click', async (element) => {
-            const el = element.target as HTMLElement;
-            const target = el.closest('.like_btn') as HTMLElement;
-            if (target) {
-                const id = target.dataset.post_id;
-                if (id) {
-                    const postId = Number(id);
-                    if (!Number.isNaN(postId)) {
-                        const like = model.post.like(postId, sessionId);
-                        const likesText = target.querySelector('.tools_text_likes') as HTMLElement;
-                        likesText.innerText = String((await like).likes.length);
-                    }
+
+        const el = element.target as HTMLElement;
+        const target = el.closest('.like_btn') as HTMLElement;
+        if (target) {
+            const id = target.dataset.post_id;
+            if (id) {
+                const postId = Number(id);
+                if (!Number.isNaN(postId)) {
+                    const like = model.post.like(postId, sessionId);
+                    const likesText = target.querySelector('.tools_text_likes') as HTMLElement;
+                    likesText.innerText = String((await like).likes.length);
                 }
             }
-        });
+        }
     }
 
     static async comment(event: Event) {
@@ -88,10 +87,10 @@ class PostElementsController {
             let img: string;
 
             if (user.settings.photo === '') {
-            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
-        } else {
-            img = user.settings.photo;
-        }
+                img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
+            } else {
+                img = user.settings.photo;
+            }
             const aaa = postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
             block.innerHTML += aaa;
             toolsComment.innerHTML = String(post.comments.length);
