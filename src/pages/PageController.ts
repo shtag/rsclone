@@ -1,3 +1,4 @@
+import AddPostController from './add-post/AddPostController';
 import HomePageController from './home-page/HomePageController';
 import { PostElementsController } from './home-page/postElements/postElementsController';
 import OpenPostController from './user-profile/post/OpenPostController';
@@ -59,21 +60,13 @@ class PageController {
         await OpenPostController.setPost(postId);
     }
 
-    static timeControl() {
-        const datetoday = new Date();
-        const timenow = datetoday.getTime();
-        const togler = document.querySelector('.theme') as HTMLInputElement;
-        datetoday.setTime(timenow);
-        const thehour = datetoday.getHours();
-        const root = document.querySelector('body') as HTMLBodyElement;
 
-        if (thehour >= 6 && thehour <= 18) {
-            togler.checked = true;
-            root.classList.add('light-theme');
-        } else {
-            togler.checked = false;
-            root.classList.remove('light-theme');
+    static async addPost() {
+        const main = document.querySelector('.post__block');
+        if (main) {
+            main.innerHTML = '';
         }
+        AddPostController.setAddPost();
     }
 
     static setEventListener(){
@@ -83,7 +76,10 @@ class PageController {
             if (target.closest('.imput_comment_btn')) {
                 await PostElementsController.comment(event);
             }
-        })
+            if (target.closest('.like_btn')) {
+                await PostElementsController.likeDislikePost(event);
+            }
+        });
     }
 }
 

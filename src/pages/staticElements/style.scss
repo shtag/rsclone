@@ -1,9 +1,12 @@
 @import '/src/scss/base/variables';
 @import url('https://fonts.cdnfonts.com/css/axiforma');
+@import '/src/scss/base/variables';
+@import url('https://fonts.cdnfonts.com/css/axiforma');
 
 .header {
     width: 100%;
     margin: 0 auto;
+    font-family: 'Axiforma', sans-serif;
     font-family: 'Axiforma', sans-serif;
     padding-top: 20px;
     display: flex;
@@ -32,7 +35,19 @@
         background-color: navy;
         border-radius: 50px;
         transition: all 0.9s;
+    input:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: navy;
+        border-radius: 50px;
+        transition: all 0.9s;
 
+        background-color: #ecf0f3;
+    }
         background-color: #ecf0f3;
     }
 
@@ -40,7 +55,16 @@
         background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
         transition: background-image 0.9s;
     }
+    input:checked {
+        background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+        transition: background-image 0.9s;
+    }
 
+    input:checked:before {
+        transform: translate(100%);
+        transition: all 0.9s;
+        background-color: #f7ca33;
+    }
     input:checked:before {
         transform: translate(100%);
         transition: all 0.9s;
@@ -75,13 +99,36 @@
     justify-content: space-around;
     border-radius: 50px;
 
+    a{
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
+    }
+
     button {
         height: 24px;
         width: 24px;
         border: none;
         background: transparent;
         transition: 0.2s;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
     }
+
+
 
     a.profile-btnBefore {
         text-align: center;
@@ -95,6 +142,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: 0.2s;
     }
 
     a.profile-btnBefore:hover {
@@ -103,7 +151,15 @@
         transform: scale(1.1);
         transition: 0.2s;
     }
+    a.profile-btnBefore:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
     a.profile-btnBefore:active {
+        filter: opacity(0.5);
+    }
         filter: opacity(0.5);
     }
 }
@@ -114,10 +170,15 @@
     border-radius: 50%;
 }
 
+.create_post-btn {
+    height: 24px;
+    width: 24px;
+}
+
 .nav-bar_container {
     position: fixed;
     top: 50%;
-    margin-left: 3%;
+    left: 3%;
     transform: translate(0, -50%);
     padding-top: 6px;
     padding-bottom: 6px;
@@ -130,13 +191,37 @@
     border-radius: 50px;
     margin-right: 20px;
     flex-direction: column;
-    z-index: 3;
+
+    a{
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
+    }
+
     button {
         height: 24px;
         width: 24px;
         border: none;
         background: transparent;
         transition: 0.2s;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: 0.2s;
+        }
+        &:active {
+            filter: opacity(0.5);
+        }
+        &:disabled {
+            filter: opacity(0.5);
+        }
     }
 }
 
@@ -146,3 +231,29 @@
     border-radius: 100px;
     object-fit: cover;
 }
+
+.setting_popup{
+    position: fixed;
+    top: 50%;
+    left: -100%;
+    transform: translate(0, -50%);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-color: #1e1e1e8b;
+    align-items: center;
+    height: 275px;
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 50px;
+    margin-right: 20px;
+    flex-direction: column;
+    transition: all 0.6s ease-in-out;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.open {
+    left: 10%;
+}
+
