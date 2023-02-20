@@ -77,4 +77,8 @@
         color: $medium-grey-color;
         font-weight: 400;
     }
+
+    .create_post-btn {
+        filter: invert(1);
+    }
 }
