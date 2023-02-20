@@ -55,7 +55,7 @@ class UserPageView {
         </div>
         
         <div class="user__post-block">
-          <a class="route" href="/${user.username}">
+          <a class="route" href="/${user.username}/posts">
             <div class="user__post-item user__post-item_posts">
               <img class="user__post-item_icon active_icon" src='/img/icons/posts-icon.svg' alt="posts" />
               <button class="user__post-item_text active">Posts</button>

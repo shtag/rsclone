@@ -43,13 +43,17 @@ class UserPostsController {
     static setTabSwitch() {
         const posts = document.querySelector('.user__post-item_posts') as HTMLElement;
         const dividerPart = document.querySelector('.divider__part') as HTMLElement;
+        const favorites = document.querySelector('.user__post-item_favorites') as HTMLDivElement;
 
         const icon = posts.children[1] as HTMLButtonElement;
         const text = posts.children[0] as HTMLImageElement;
+        const iconFav = favorites.children[1] as HTMLButtonElement;
+        const textFav = favorites.children[0] as HTMLImageElement;
 
         icon.classList.add('active');
-
         text.classList.add('active_icon');
+        iconFav.classList.remove('active');
+        textFav.classList.remove('active_icon');
 
         dividerPart.style.marginLeft = '7%';
     }
