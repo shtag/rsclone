@@ -1,3 +1,4 @@
+import AddPostController from './add-post/AddPostController';
 import HomePageController from './home-page/HomePageController';
 import { PostElementsController } from './home-page/postElements/postElementsController';
 import OpenPostController from './user-profile/post/OpenPostController';
@@ -59,6 +60,14 @@ class PageController {
         await OpenPostController.setPost(postId);
     }
 
+    static async addPost() {
+        const main = document.querySelector('.post__block');
+        if (main) {
+            main.innerHTML = '';
+        }
+        AddPostController.setAddPost();
+    }
+
     static timeControl() {
         const datetoday = new Date();
         const timenow = datetoday.getTime();
@@ -76,14 +85,14 @@ class PageController {
         }
     }
 
-    static setEventListener(){
+    static setEventListener() {
         const body = document.querySelector('body') as HTMLBodyElement;
         body.addEventListener('click', async (event) => {
             const target = event.target as HTMLButtonElement;
             if (target.closest('.imput_comment_btn')) {
                 await PostElementsController.comment(event);
             }
-        })
+        });
     }
 }
 
