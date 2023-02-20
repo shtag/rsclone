@@ -42,7 +42,7 @@ class SearchController {
         const body = document.querySelector('body') as HTMLBodyElement;
         body.addEventListener('click', (e) => {
             const popup = (e.target as HTMLElement).closest('.search_popup_block') as HTMLElement;
-            const searchBtn = (e.target as HTMLElement).closest('.search_btn') as HTMLElement;
+            const searchBtn = (e.target as HTMLElement).closest('.search-btn') as HTMLElement;
             if (this.isPopupActive && !popup) {
                 this.openPopUp();
             } else if (searchBtn) {
