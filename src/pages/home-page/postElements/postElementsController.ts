@@ -84,7 +84,16 @@ class PostElementsController {
             const block = parrent.querySelector('.comment_container') as HTMLElement;
             const postContainer = (event.target as HTMLElement).closest('.comments_container') as HTMLElement;
             const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
-            block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId);
+            const user = await model.user.get(Number(localStorage.userId));
+            let img: string;
+
+            if (user.settings.photo === '') {
+            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
+        } else {
+            img = user.settings.photo;
+        }
+            const aaa = postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
+            block.innerHTML += aaa;
             toolsComment.innerHTML = String(post.comments.length);
             input.value = '';
         } catch (error) {

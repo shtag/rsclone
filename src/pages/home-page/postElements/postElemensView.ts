@@ -95,7 +95,7 @@ export class postElemens {
         let img: string;
 
         if (userName.settings.photo === '') {
-            img = '../../../img/base.jpg';
+            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
         } else {
             img = userName.settings.photo;
         }
@@ -103,7 +103,7 @@ export class postElemens {
         return HTMLComment.join('');
     }
 
-    static renderComment(comment: Comment, postId: number, user?: string, img?: string) {
+    static renderComment(comment: Comment, postId: number, user: string, img: string) {
         const dateInMs = comment.date;
         const date = new Date(dateInMs);
         console.log(user, img);
