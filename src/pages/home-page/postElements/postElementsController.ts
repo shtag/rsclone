@@ -8,8 +8,10 @@ export let page = 1;
 
 class PostElementsController {
     static async checkPosition() {
+        const main = document.querySelector('main') as HTMLBodyElement;
+        main.innerHTML = '';
         window.addEventListener('scroll', async () => {
-            if (window.location.href.indexOf('/feed') !== -1) {
+            if (window.location.href.indexOf('/feed') !== -1 || window.location.href.indexOf('/recommendation')) {
                 const height = document.body.offsetHeight;
                 const screenHeight = window.innerHeight;
                 const scrolled = window.scrollY;
@@ -17,24 +19,30 @@ class PostElementsController {
                 const position = scrolled + screenHeight;
                 if (position >= threshold) {
                     page += 1;
-                    await this.renderPosts(page);
+                    await this.renderFeeds(page);
                 }
             }
         });
     }
 
-    static renderFeeds() {
-        // проверяем строку. Если фид, то вид, если рекомендации, то рекомендации
-        // вызываем рендерпостс и передаем в функцию то шо надо
-    }
-
-    static async renderPosts(pg: number) {
+    static async renderFeeds(pg: number) {
         const params = {
             sessionId: localStorage.getItem('sessionId') as string,
             limit: 10,
             page: pg,
         };
-        const posts = await model.post.feed(params); // здесь меняем feed na feedrecomendation, то есть posts мы должны передавать в renderPosts;
+        if (window.location.href.indexOf('/feed') !== -1) {
+            const posts = await model.post.feed(params);
+            this.renderPosts(posts);
+        }
+
+        if (window.location.href.indexOf('/recommendation') !== -1) {
+            const posts = await model.post.recommendationFeed(params);
+            this.renderPosts(posts);
+        }
+    }
+
+    static async renderPosts(posts: Post[]) {
         if (posts.length === 0) return;
         await posts.forEach((element: Post) => {
             postElemens.renderPost(element);

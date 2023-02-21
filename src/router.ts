@@ -112,20 +112,18 @@ class Router {
 
     static async openFeed() {
         console.log('open feed');
-        PageController.renderStructure();
-        const main = document.querySelector('main') as HTMLBodyElement;
         document.title = 'Feed';
-        main.innerHTML = '';
-        await PageController.setControllers();
+        HeaderController.loaderControlAnimation();
+        await PageController.renderStructure();
+        await PageController.setHomePageController();
     }
 
     static async openRecommendation() {
         console.log('open recommendation feed');
-        PageController.renderStructure();
-        HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
+        document.title = 'Recommendation';
         HeaderController.loaderControlAnimation();
-        // await PageController.recommendationFeed();
+        await PageController.renderStructure();
+        await PageController.setHomePageController();
     }
 
     static async open404() {
