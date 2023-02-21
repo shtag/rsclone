@@ -142,7 +142,7 @@ class PostElementsController {
     }
 
     static likesToComment() {
-        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
+        const sessionId = localStorage.getItem('sessionId') as string;
         const container = document.querySelector('main') as HTMLElement;
         const click = container.addEventListener('click', async (event) => {
             if (localStorage.sessionId === undefined) return;
@@ -179,6 +179,21 @@ class PostElementsController {
             const { length } = comment.likes;
             text.innerHTML = `${length} Likes`;
         });
+    }
+
+    static async favorite(element: Event) {
+        const sessionId = localStorage.getItem('sessionId') as string;
+        const el = element.target as HTMLElement;
+        const target = el.closest('.favorite_btn') as HTMLElement;
+        if (target) {
+            const id = target.dataset.post_id;
+            if (id) {
+                const postId = Number(id);
+                if (!Number.isNaN(postId)) {
+                    await model.post.addFavorites(postId, sessionId);
+                }
+            }
+        }
     }
 }
 

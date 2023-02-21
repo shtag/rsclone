@@ -80,6 +80,11 @@ export class postElemens {
                     </svg>
                     <p class="tools_text_likes">${PostData.likes.length}</p>
                 </div>
+                <div class="tools_container_item favorite_btn" data-post_id = "${PostData.id}">
+                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 19L9 11.44L1 19V1H17V19Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
                 <div class="tools_container_item comment_btn" data-post_id = "${PostData.id}">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
