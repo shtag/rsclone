@@ -24,6 +24,9 @@ export class postElemens {
         } else {
             img = userName.settings.photo;
         }
+        const dateInMs = PostData.date;
+        const date = new Date(dateInMs);
+        const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
         return `
         <div class="post_wrapper">
@@ -60,7 +63,10 @@ export class postElemens {
                 </button>
             <form>
                 </div>
-                <div class="post_img_container"><img src=${PostData.image} alt="" class="post_img" /></div>
+                <div class="post_img_container">
+                <img src=${PostData.image} alt="" class="post_img" />
+                <p class="post_date">${dateToPost}</p>
+                </div>
             </div>
             
         </div>
