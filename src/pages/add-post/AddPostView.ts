@@ -1,8 +1,8 @@
 import './style.scss';
 
 class AddPostView {
-    static renderAddPost() {
-        return `
+   static renderAddPost() {
+      return `
         <div class="add__block">
         <div class="add__gradient">
            <form class="add__form">
@@ -18,7 +18,7 @@ class AddPostView {
                     <p class="add__note">Note: Please use jpg/png/gif formats.</p>
                  </div>
               </div>
-              <button class="add__delete open__post-btn">
+              <button class="add__delete open__post-btn" type="button">
                  <div class="text_button">Delete image</div>
               </button>
               <p class="add__text">Step 2: Add your description</p>
@@ -26,14 +26,14 @@ class AddPostView {
                  <textarea  class="add__description" name="myText" id="myTextarea" rows="1" placeholder="Type here..." maxlength="150"></textarea>
               </div>
               <p class="add__text">Step 3: Click the button below to create a post</p>
-              <button class="add__post open__post-btn" disabled>
+              <button type="button" class="add__post open__post-btn" disabled>
                  <div class="text_button">Create post</div>
               </button>
            </form>
         </div>
      </div> 
         `;
-    }
+   }
 }
 
 export default AddPostView;
