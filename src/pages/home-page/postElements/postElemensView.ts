@@ -91,12 +91,12 @@ export class postElemens {
 
     static async renderBlockWithComment(PostData: Post) {
         const user = await model.user.get(Number(localStorage.userId));
-            let img: string;
-            if (user.settings.photo === '') {
-                img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
-            } else {
-                img = user.settings.photo;
-            }
+        let img: string;
+        if (user.settings.photo === '') {
+            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
+        } else {
+            img = user.settings.photo;
+        }
         const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user.username, img));
         return HTMLComment.join('');
     }

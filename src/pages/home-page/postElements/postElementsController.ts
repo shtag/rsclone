@@ -23,13 +23,18 @@ class PostElementsController {
         });
     }
 
+    static renderFeeds() {
+        // проверяем строку. Если фид, то вид, если рекомендации, то рекомендации
+        // вызываем рендерпостс и передаем в функцию то шо надо
+    }
+
     static async renderPosts(pg: number) {
         const params = {
             sessionId: localStorage.getItem('sessionId') as string,
             limit: 10,
             page: pg,
         };
-        const posts = await model.post.feed(params);
+        const posts = await model.post.feed(params); // здесь меняем feed na feedrecomendation, то есть posts мы должны передавать в renderPosts;
         if (posts.length === 0) return;
         await posts.forEach((element: Post) => {
             postElemens.renderPost(element);

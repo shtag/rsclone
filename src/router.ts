@@ -29,19 +29,20 @@ class Router {
         } else if (path[1] === 'login' && path.length === 2) {
             Router.openLogin();
         } else if (path[1] === '' && path.length === 2) {
-            console.log('main page');
             window.history.pushState({}, '', '/feed');
             Router.openFeed();
         } else if (path[1] === 'p' && path.length === 3) {
             Router.openPost(+path[2]);
+        } else if (path[1] === 'recommendation') {
+            Router.openRecommendation();
         } else if (user && path[2] === 'favorites' && path.length === 3) {
             Router.openFavorites(user.id);
             localStorage.setItem('favorites', 'true');
         } else if (user && path[2] === 'posts' && path.length === 3) {
             Router.openPosts(user.id);
-        } else if(path[1] === 'add') {
-            Router.openAddPost()
-        }else {
+        } else if (path[1] === 'add') {
+            Router.openAddPost();
+        } else {
             Router.open404();
         }
     }
@@ -118,8 +119,17 @@ class Router {
         await PageController.setControllers();
     }
 
+    static async openRecommendation() {
+        console.log('open recommendation feed');
+        PageController.renderStructure();
+        HeaderView.renderHeaderContainer();
+        HeaderController.switchTheme();
+        HeaderController.loaderControlAnimation();
+        // await PageController.recommendationFeed();
+    }
+
     static async open404() {
-        console.log("open 404");
+        console.log('open 404');
         PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
