@@ -37,9 +37,7 @@ class PostElementsController {
     }
 
     static async likeDislikePost(element: Event) {
-        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-        const container = document.querySelector('main') as HTMLElement;
-
+        const sessionId = localStorage.getItem('sessionId') as string;
         const el = element.target as HTMLElement;
         const target = el.closest('.like_btn') as HTMLElement;
         if (target) {
@@ -56,24 +54,19 @@ class PostElementsController {
     }
 
     static async comment(event: Event) {
-        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-        let isRequestInProgress = false;
-
+        const sessionId = localStorage.getItem('sessionId') as string;
         const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
-        if (!target || isRequestInProgress) {
+        if (!target) {
             return;
         }
-        isRequestInProgress = true;
         const input = target.previousSibling?.previousSibling as HTMLInputElement;
         if (!input || !input.dataset.post_id) {
-            isRequestInProgress = false;
             return;
         }
         const postId = Number(input.dataset.post_id);
         const text = input.value as string;
         const commentRequest = { sessionId, text };
         if (Number.isNaN(postId)) {
-            isRequestInProgress = false;
             return;
         }
         try {
@@ -85,20 +78,16 @@ class PostElementsController {
             const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
             const user = await model.user.get(Number(localStorage.userId));
             let img: string;
-
             if (user.settings.photo === '') {
                 img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
             } else {
                 img = user.settings.photo;
             }
-            const aaa = postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
-            block.innerHTML += aaa;
+            block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
             toolsComment.innerHTML = String(post.comments.length);
             input.value = '';
         } catch (error) {
             console.error(error);
-        } finally {
-            isRequestInProgress = false;
         }
     }
 
