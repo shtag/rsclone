@@ -1,5 +1,3 @@
-import PageController from '../PageController';
-
 class HeaderController {
     static async switchTheme() {
         const togler = document.querySelector('.theme') as HTMLInputElement;
