@@ -191,6 +191,12 @@ class PostElementsController {
                 const postId = Number(id);
                 if (!Number.isNaN(postId)) {
                     await model.post.addFavorites(postId, sessionId);
+                    const svg = target.querySelector('path') as SVGPathElement;
+                    if (svg.getAttribute('stroke') === 'darkorange') {
+                        svg.setAttribute('stroke', 'white');
+                    } else {
+                        svg.setAttribute('stroke', 'darkorange');
+                    }
                 }
             }
         }

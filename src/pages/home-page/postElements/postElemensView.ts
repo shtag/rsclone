@@ -28,6 +28,13 @@ export class postElemens {
         const date = new Date(dateInMs);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
+        const user = model.user.get(Number(localStorage.getItem('userId')));
+
+        let color ='';
+        if ((await user).favorites.includes(PostData.id)) {
+            color = "darkorange"
+        } else {color = "#f9fdfe"}
+
         return `
         <div class="post_wrapper">
             <div class="post">
@@ -82,7 +89,7 @@ export class postElemens {
                 </div>
                 <div class="tools_container_item favorite_btn" data-post_id = "${PostData.id}">
                     <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17 19L9 11.44L1 19V1H17V19Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17 19L9 11.44L1 19V1H17V19Z" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="tools_container_item comment_btn" data-post_id = "${PostData.id}">
