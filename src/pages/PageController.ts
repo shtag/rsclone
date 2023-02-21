@@ -24,13 +24,12 @@ class PageController {
 
     static setHomePageController() {
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme(); // вынести от сюда в сетлиснеры
+        HeaderController.switchTheme();
         PostElementsController.renderFeeds(page);
         PostElementsController.checkPosition();
         PostElementsController.likesToComment();
         PostElementsController.activeInput();
         PostElementsController.reply();
-        console.log(page);
     }
 
     static async setUserProfileController(id: number) {

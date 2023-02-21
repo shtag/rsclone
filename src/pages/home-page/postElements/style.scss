@@ -76,6 +76,35 @@
 .post_info_description {
     margin-top: 15px;
     font-size: 17px;
+
+    
+}
+
+.post_info_description_text {
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    width: 300px;
+    height: 50px;
+    padding-right: 89px;
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: auto;
+    }
+    &::-webkit-scrollbar-button {
+        width: 0px;
+        height: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.202);
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+    
 }
 
 .tools {
@@ -122,13 +151,28 @@
     width: 90%;
     height: 255px;
     text-align: start;
+    padding-right: 20px;
 
     &::-webkit-scrollbar {
-        width: 0;
+        width: 5px;
+        height: auto;
+    }
+    &::-webkit-scrollbar-button {
+        width: 0px;
+        height: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.202);
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-corner {
+        background: transparent;
     }
 
     .comment_like-btn {
-        
         &:active {
             filter: opacity(0.5);
         }
@@ -198,8 +242,8 @@
         color: white;
         font-size: 15px;
         &:required:invalid ~ button.imput_comment_btn {
-            opacity: .65;
+            opacity: 0.65;
             pointer-events: none;
-          }
+        }
     }
 }
