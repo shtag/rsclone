@@ -30,6 +30,7 @@ class PageController {
         PostElementsController.likesToComment();
         PostElementsController.activeInput();
         PostElementsController.reply();
+        console.log(page);
     }
 
     static async setUserProfileController(id: number) {

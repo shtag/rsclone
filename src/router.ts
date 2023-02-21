@@ -3,8 +3,6 @@ import HeaderView from './pages/staticElements/HeaderView';
 import LoginPageController from './pages/login-page/LoginPageController';
 import PageController from './pages/PageController';
 import HeaderController from './pages/staticElements/HeaderController';
-import OpenPostView from './pages/user-profile/post/OpenPostView';
-import OpenPostController from './pages/user-profile/post/OpenPostController';
 
 class Router {
     static route(event: Event) {
