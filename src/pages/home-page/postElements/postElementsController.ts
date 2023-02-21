@@ -25,7 +25,7 @@ class PostElementsController {
 
     static async renderPosts(pg: number) {
         const params = {
-            sessionId: '$2b$10$NhL.XLXwthdA4kACTPIJg.',
+            sessionId: localStorage.getItem('sessionId') as string,
             limit: 10,
             page: pg,
         };
