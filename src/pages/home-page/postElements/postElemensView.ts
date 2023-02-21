@@ -20,7 +20,7 @@ export class postElemens {
         let img;
 
         if (userName.settings.photo === '') {
-            img = '../../../img/base.jpg';
+            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
         } else {
             img = userName.settings.photo;
         }
@@ -90,23 +90,20 @@ export class postElemens {
     }
 
     static async renderBlockWithComment(PostData: Post) {
-        const userName = await model.user.get(PostData.author);
-        const user: string = await userName.username;
-        let img: string;
-
-        if (userName.settings.photo === '') {
-            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
-        } else {
-            img = userName.settings.photo;
-        }
-        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user, img));
+        const user = await model.user.get(Number(localStorage.userId));
+            let img: string;
+            if (user.settings.photo === '') {
+                img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
+            } else {
+                img = user.settings.photo;
+            }
+        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user.username, img));
         return HTMLComment.join('');
     }
 
     static renderComment(comment: Comment, postId: number, user: string, img: string) {
         const dateInMs = comment.date;
         const date = new Date(dateInMs);
-        console.log(user, img);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
         return `
             <div class="comment">
