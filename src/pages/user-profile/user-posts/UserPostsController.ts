@@ -27,7 +27,7 @@ class UserPostsController {
 
             results.forEach(async (el: Post) => {
                 const img = UserPostsView.renderPostImg(el.id, el.image);
-                userPosts?.insertAdjacentHTML('beforeend', img);
+                userPosts?.insertAdjacentHTML('afterbegin', img);
             });
             UserPostsController.setTabSwitch();
         } catch (error) {
