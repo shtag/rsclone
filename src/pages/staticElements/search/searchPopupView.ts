@@ -1,7 +1,7 @@
 import { Post, User } from "../../../types/types";
 
 class SearchView {
-    static html() {
+    static structure() {
         return `
             <div class="search_popup_block">
                 <input type="search" class="search_input">
@@ -14,7 +14,7 @@ class SearchView {
                     <div class="search_results_posts"></div>
                 </div>
             </div>
-            `
+        `
     }
 
     static searchUserItem(user: User) {

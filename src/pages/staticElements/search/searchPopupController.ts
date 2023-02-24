@@ -12,30 +12,22 @@ class SearchController {
 
     async renderPopup() {
         const body = document.querySelector('body') as HTMLBodyElement;
-        body.innerHTML += SearchView.html()
+        body.innerHTML += SearchView.structure();
         this.setListeners();
     }
 
     openPopUp() {
         const popup = document.querySelector('.search_popup_block') as HTMLElement;
         popup.classList.toggle('search_active');
-        console.log('open');
         this.isPopupActive = !this.isPopupActive;
     }
 
-    static closePopUp() {
-        const popup = document.querySelector('.search_popup_block') as HTMLElement;
-        popup.classList.remove('search_active');
-    }
-
     renderResult(searchResult: { posts: Post[]; users: User[] }) {
-        console.log(this.isPopupActive);
+        if (!this.isPopupActive) return
         const searchUsers = searchResult.users.map(user => SearchView.searchUserItem(user));
         const searchPosts = searchResult.posts.map(post => SearchView.searchPostItem(post));
-        console.log(searchUsers.join(''))
         const resultUsers = document.querySelector('.search_results_users') as HTMLElement;
         const resultPosts = document.querySelector('.search_results_posts') as HTMLElement;
-        // resultBlock.innerHTML = searchUsers.join('');
         resultPosts.innerHTML = searchPosts.join('');
         resultUsers.innerHTML = searchUsers.join('');
     }
@@ -52,10 +44,11 @@ class SearchController {
             const resultsContsiner = document.querySelector('.search_results') as HTMLElement;
 
             if (this.isPopupActive && !popup) {
-                this.openPopUp();
                 html.classList.remove('overflow_hidden')
                 searchInput.value = '';
                 this.renderResult({ posts: [], users: [] });
+                resultsContsiner.classList.remove('posts_active');
+                this.openPopUp();
             } else if (searchBtn) {
                 this.openPopUp();
                 html.classList.add('overflow_hidden')
@@ -72,7 +65,6 @@ class SearchController {
                 return;
             }
             this.renderResult(searchResult);
-            console.log(searchResult);
         })
 
     }
