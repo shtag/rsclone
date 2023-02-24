@@ -1,3 +1,5 @@
+import confetti from 'canvas-confetti';
+
 import model from '../../../api/Model';
 
 class CredentialsController {
@@ -89,15 +91,13 @@ class CredentialsController {
         });
     }
 
-    static async changeUserCredentials() {
+    static async changeUserCredentials(sessionId: string, userId: string) {
         CredentialsController.validateNewLogin();
         CredentialsController.validateNewPassword();
 
         const submitBtn = document.querySelector('.settings__submitCredentials') as HTMLButtonElement;
         const form = document.querySelector('.settings__form-credentials') as HTMLFormElement;
-
-        const userId = localStorage.getItem('userId') as string;
-        const sessionId = localStorage.getItem('sessionId') as string;
+        const errorMessage = document.querySelector('.settings__error_submit') as HTMLSpanElement;
 
         submitBtn.addEventListener('click', (e: Event) => {
             e.preventDefault();
@@ -122,9 +122,15 @@ class CredentialsController {
                     });
                     window.history.pushState({}, '', `/${CredentialsController.oldLogin}`);
                 }
+                confetti({
+                    particleCount: 400,
+                    startVelocity: 90,
+                    spread: 360,
+                });
                 form.reset();
                 submitBtn.disabled = true;
             } catch (error) {
+                errorMessage.textContent = 'Error occured';
                 throw new Error();
             }
         });
