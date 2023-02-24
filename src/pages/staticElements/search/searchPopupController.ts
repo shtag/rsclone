@@ -43,6 +43,7 @@ class SearchController {
     setListeners() {
         const body = document.querySelector('body') as HTMLBodyElement;
         const html = document.querySelector('html') as HTMLElement;
+        const searchInput = document.querySelector('.search_input') as HTMLInputElement;
         body.addEventListener('click', (e) => {
             const popup = (e.target as HTMLElement).closest('.search_popup_block') as HTMLElement;
             const searchBtn = (e.target as HTMLElement).closest('.search-btn') as HTMLElement;
@@ -53,6 +54,8 @@ class SearchController {
             if (this.isPopupActive && !popup) {
                 this.openPopUp();
                 html.classList.remove('overflow_hidden')
+                searchInput.value = '';
+                this.renderResult({ posts: [], users: [] });
             } else if (searchBtn) {
                 this.openPopUp();
                 html.classList.add('overflow_hidden')
@@ -62,7 +65,6 @@ class SearchController {
                 resultsContsiner.classList.add('posts_active');
             }
         })
-        const searchInput = document.querySelector('.search_input') as HTMLInputElement;
         searchInput.addEventListener('input', async () => {
             const searchResult = await model.search(searchInput.value);
             if (searchInput.value === '') {
