@@ -46,6 +46,32 @@
         display: none;
     }
 
+    &__name-block {
+        margin-bottom: 10px;
+    }
+
+    &__hint {
+      display: none;
+        position: absolute;
+        width: 200px;
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 20px;
+        right: 55px;
+        top: -75px;
+        background: $gradient;
+
+        &_icon {
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+        }
+
+        &_open {
+            display: block;
+        }
+    }
+
     &__input {
         border-radius: 10px;
         padding: 5px 10px;
@@ -92,6 +118,7 @@
     &__lang-block {
         display: flex;
         gap: 20px;
+        position: relative;
     }
 
     &__theme {
