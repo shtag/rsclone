@@ -113,11 +113,21 @@ export class HeaderView {
     static openSetting() {
         const popup = document.querySelector('.setting_popup') as HTMLDivElement;
         const btn = document.querySelector('.setting-btn') as HTMLButtonElement;
+        const body = document.querySelector('body') as HTMLBodyElement;
+
         btn.onclick = () => {
             if (popup.classList.contains('open')) {
                 popup.classList.remove('open');
+                body.style.overflow = 'auto';
             } else {
                 popup.classList.add('open');
+                body.style.overflow = 'hidden';
+            }
+        };
+
+        body.onclick = (event) => {
+            if (!popup.contains(event.target as Node) && !btn.contains(event.target as Node)) {
+                popup.classList.remove('open');
             }
         };
     }
