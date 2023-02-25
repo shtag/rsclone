@@ -45,8 +45,11 @@ class UserPageView {
                 </div>
               </div>
             </div>
+            <div class="user__description-block">
             <div class="user__description">
-              ${user.settings.descriptionProfile}
+            ${user.settings.descriptionProfile}
+          </div>
+          <button class="subscribe__btn open__post-btn"><div class="text_button">Subscribe</div></button>
             </div>
           </div>
         </div>
@@ -55,7 +58,7 @@ class UserPageView {
         </div>
         
         <div class="user__post-block">
-          <a class="route" href="/${user.username}">
+          <a class="route" href="/${user.username}/posts">
             <div class="user__post-item user__post-item_posts">
               <img class="user__post-item_icon active_icon" src='/img/icons/posts-icon.svg' alt="posts" />
               <button class="user__post-item_text active">Posts</button>

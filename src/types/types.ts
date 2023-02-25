@@ -7,8 +7,8 @@ interface UserInfo {
 }
 interface ChangeUsernamePass {
     sessionId: string;
-    password: string;
-    username: string;
+    password?: string;
+    username?: string;
 }
 interface LogoutData {
     sessionId?: string;

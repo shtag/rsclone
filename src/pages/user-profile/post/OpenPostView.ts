@@ -10,7 +10,6 @@ class OpenPostView {
         return `
         <div class="open__post-settings">
         <a class="route" href="/${userName.username}"><button class="open__post-btn"><div class="text_button">Go back</div></button></a>
-        <img class="open__post-fav" src="/img/icons/favorite-post-icon.svg"/>
         </div>
         <div class="open__post"></div>
         `;

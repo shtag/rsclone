@@ -46,12 +46,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+    .post_date {
+        font-size: 12px;
+        color: $light-grey-color;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.comment_text {
+    overflow-wrap: break-word;
+    width: 231px;
 }
 
 .post_info_cotainer {
@@ -78,6 +90,32 @@
     font-size: 17px;
 }
 
+.post_info_description_text {
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    width: 300px;
+    height: 50px;
+    padding-right: 89px;
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: auto;
+    }
+    &::-webkit-scrollbar-button {
+        width: 0px;
+        height: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.202);
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+}
+
 .tools {
     height: 70px;
     border-radius: 50px;
@@ -101,12 +139,14 @@
         -ms-user-select: none;
         user-select: none;
     }
+
     &:hover {
         -webkit-transform: scale(1.1);
         -ms-transform: scale(1.1);
         transform: scale(1.1);
         transition: 0.2s;
     }
+
     &:active {
         filter: opacity(0.5);
     }
@@ -122,13 +162,28 @@
     width: 90%;
     height: 255px;
     text-align: start;
+    padding-right: 20px;
 
     &::-webkit-scrollbar {
-        width: 0;
+        width: 5px;
+        height: auto;
+    }
+    &::-webkit-scrollbar-button {
+        width: 0px;
+        height: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.202);
+        border-radius: 50px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-corner {
+        background: transparent;
     }
 
     .comment_like-btn {
-        
         &:active {
             filter: opacity(0.5);
         }
@@ -198,8 +253,23 @@
         color: white;
         font-size: 15px;
         &:required:invalid ~ button.imput_comment_btn {
-            opacity: .65;
+            opacity: 0.65;
             pointer-events: none;
-          }
+        }
+    }
+}
+
+@media (max-width: 1190px) {
+    .nav-bar_container {
+        width: 70%;
+        height: 40px;
+        flex-direction: initial;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(100vh - 70px);
+        margin: 0 auto;
+        box-shadow: 0px 2px 5px 1px grey;
+        z-index: 9999;
     }
 }

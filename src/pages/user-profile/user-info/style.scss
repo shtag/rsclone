@@ -93,9 +93,15 @@
     }
 
     &__description {
-        margin-top: 20px;
         font-size: 22px;
         color: $light-grey-color;
+    }
+
+    &__description-block {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     &__post {
