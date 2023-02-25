@@ -81,7 +81,6 @@ class AddPostController {
         });
 
         AddPostController.dropzone();
-        AddPostController.reloadPageAlert();
     }
 
     static async handleDrop(event: DragEvent) {
@@ -149,24 +148,6 @@ class AddPostController {
             image.addEventListener('dragstart', (event) => {
                 event.preventDefault();
             });
-        });
-    }
-
-    static reloadPageAlert() {
-        const form = document.querySelector('.add__form') as HTMLFormElement;
-        form.addEventListener('input', () => {
-            form.setAttribute('data-dirty', 'true');
-        });
-
-        form.addEventListener('submit', () => {
-            form.removeAttribute('data-dirty');
-        });
-
-        window.addEventListener('beforeunload', (e) => {
-            if (form && form.hasAttribute('data-dirty')) {
-                e.preventDefault();
-                e.returnValue = '';
-            }
         });
     }
 }
