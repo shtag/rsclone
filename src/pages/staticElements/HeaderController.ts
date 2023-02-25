@@ -1,3 +1,6 @@
+import postElemens from "../home-page/postElements/postElemensView";
+import HeaderView from "./HeaderView";
+
 class HeaderController {
     static switchTheme() {
         const toggle = document.querySelector('.theme') as HTMLInputElement;
@@ -48,6 +51,21 @@ class HeaderController {
             body.classList.remove('preload');
         };
     }
+
+
+    static openLikedPosts(){
+      const btn = document.querySelector('.likes-btn') as HTMLElement;      
+      btn.addEventListener('click', () => {
+        const container = document.querySelector('.liked_container') as HTMLElement;
+        if (container) {
+          container.remove();
+        } else {
+          HeaderView.renderLikedPostsContainer();
+        }
+      })
+    }
+
+    
 }
 
 export default HeaderController;

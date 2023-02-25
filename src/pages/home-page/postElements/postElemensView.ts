@@ -151,6 +151,7 @@ export class postElemens {
             </div>
             `;
     }
+
 }
 
 export default postElemens;

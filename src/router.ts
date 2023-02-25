@@ -3,6 +3,7 @@ import HeaderView from './pages/staticElements/HeaderView';
 import LoginPageController from './pages/login-page/LoginPageController';
 import PageController from './pages/PageController';
 import HeaderController from './pages/staticElements/HeaderController';
+import { PostElementsController } from './pages/home-page/postElements/postElementsController';
 
 class Router {
     static route(event: Event) {
@@ -70,7 +71,7 @@ class Router {
         HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
-
+        PostElementsController.checkPosition();
         const main = document.querySelector('main') as HTMLBodyElement;
         document.title = 'Post';
         main.innerHTML = '';

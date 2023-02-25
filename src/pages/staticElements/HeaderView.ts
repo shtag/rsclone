@@ -1,4 +1,7 @@
 import model from '../../api/Model';
+import Router from '../../router';
+import { Post } from '../../types/types';
+import HeaderController from './HeaderController';
 
 export class HeaderView {
     static renderHeaderContainer() {
@@ -102,6 +105,7 @@ export class HeaderView {
         }
         this.renderSettingPopup();
         this.openSetting();
+        HeaderController.openLikedPosts();
     }
 
     static renderSettingPopup() {
@@ -122,6 +126,44 @@ export class HeaderView {
             }
         };
     }
+
+
+    static renderLikedPostsContainer(){
+        const body = document.querySelector('body') as HTMLBodyElement;
+        const container = document.createElement('div') as HTMLElement;
+        container.className = 'liked_container';
+        body.append(container);
+        this.renderLikedImg();
+    }
+
+    static async renderLikedImg() {
+        const container = document.querySelector('.liked_container') as HTMLElement;
+        const userID = Number(localStorage.getItem('userId'));
+        const posts: Post[] = await model.post.getUserPosts(userID);
+        const likedPosts: Post[] = await posts.filter(post => post.likes.length > 0);
+        const imgElements: HTMLImageElement[] = likedPosts.map(post => {
+            const imgElement = document.createElement('img') as HTMLImageElement;
+            imgElement.className = 'liked_img';
+            imgElement.setAttribute('data-id', String(post.id))
+            imgElement.src = post.image;
+            return imgElement;
+          });
+
+          
+        
+          imgElements.forEach(imgElement => {
+            container.appendChild(imgElement);
+          });
+        
+        container.addEventListener('click', async (event) => {
+            const target = event.target as HTMLElement;
+            if (target.tagName === 'IMG') {
+              const id = Number(target.getAttribute('data-id'));
+              container.remove();
+              await Router.openPost(id);
+            }
+          });
+      }
 }
 
 export default HeaderView;
