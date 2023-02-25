@@ -8,8 +8,10 @@ export let page = 1;
 
 class PostElementsController {
     static async checkPosition() {
+        const main = document.querySelector('main') as HTMLBodyElement;
+        main.innerHTML = '';
         window.addEventListener('scroll', async () => {
-            if (window.location.href.indexOf('/feed') !== -1) {
+            if (window.location.href.indexOf('/feed') !== -1 || window.location.href.indexOf('/recommendation')) {
                 const height = document.body.offsetHeight;
                 const screenHeight = window.innerHeight;
                 const scrolled = window.scrollY;
@@ -17,19 +19,30 @@ class PostElementsController {
                 const position = scrolled + screenHeight;
                 if (position >= threshold) {
                     page += 1;
-                    await this.renderPosts(page);
+                    await this.renderFeeds(page);
                 }
             }
         });
     }
 
-    static async renderPosts(pg: number) {
+    static async renderFeeds(pg: number) {
         const params = {
-            sessionId: '$2b$10$NhL.XLXwthdA4kACTPIJg.',
+            sessionId: localStorage.getItem('sessionId') as string,
             limit: 10,
             page: pg,
         };
-        const posts = await model.post.feed(params);
+        if (window.location.href.indexOf('/feed') !== -1) {
+            const posts = await model.post.feed(params);
+            this.renderPosts(posts);
+        }
+
+        if (window.location.href.indexOf('/recommendation') !== -1) {
+            const posts = await model.post.recommendationFeed(params);
+            this.renderPosts(posts);
+        }
+    }
+
+    static async renderPosts(posts: Post[]) {
         if (posts.length === 0) return;
         await posts.forEach((element: Post) => {
             postElemens.renderPost(element);
@@ -37,9 +50,7 @@ class PostElementsController {
     }
 
     static async likeDislikePost(element: Event) {
-        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-        const container = document.querySelector('main') as HTMLElement;
-
+        const sessionId = localStorage.getItem('sessionId') as string;
         const el = element.target as HTMLElement;
         const target = el.closest('.like_btn') as HTMLElement;
         if (target) {
@@ -56,24 +67,19 @@ class PostElementsController {
     }
 
     static async comment(event: Event) {
-        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
-        let isRequestInProgress = false;
-
+        const sessionId = localStorage.getItem('sessionId') as string;
         const target = (event.target as HTMLElement).closest('.imput_comment_btn') as HTMLElement;
-        if (!target || isRequestInProgress) {
+        if (!target) {
             return;
         }
-        isRequestInProgress = true;
         const input = target.previousSibling?.previousSibling as HTMLInputElement;
         if (!input || !input.dataset.post_id) {
-            isRequestInProgress = false;
             return;
         }
         const postId = Number(input.dataset.post_id);
         const text = input.value as string;
         const commentRequest = { sessionId, text };
         if (Number.isNaN(postId)) {
-            isRequestInProgress = false;
             return;
         }
         try {
@@ -85,20 +91,16 @@ class PostElementsController {
             const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
             const user = await model.user.get(Number(localStorage.userId));
             let img: string;
-
             if (user.settings.photo === '') {
                 img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
             } else {
                 img = user.settings.photo;
             }
-            const aaa = postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
-            block.innerHTML += aaa;
+            block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
             toolsComment.innerHTML = String(post.comments.length);
             input.value = '';
         } catch (error) {
             console.error(error);
-        } finally {
-            isRequestInProgress = false;
         }
     }
 
@@ -140,7 +142,7 @@ class PostElementsController {
     }
 
     static likesToComment() {
-        const sessionId = '$2b$10$NhL.XLXwthdA4kACTPIJg.';
+        const sessionId = localStorage.getItem('sessionId') as string;
         const container = document.querySelector('main') as HTMLElement;
         const click = container.addEventListener('click', async (event) => {
             if (localStorage.sessionId === undefined) return;
@@ -178,6 +180,28 @@ class PostElementsController {
             text.innerHTML = `${length} Likes`;
         });
     }
+
+    static async favorite(element: Event) {
+        const sessionId = localStorage.getItem('sessionId') as string;
+        const el = element.target as HTMLElement;
+        const target = el.closest('.favorite_btn') as HTMLElement;
+        if (target) {
+            const id = target.dataset.post_id;
+            if (id) {
+                const postId = Number(id);
+                if (!Number.isNaN(postId)) {
+                    await model.post.addFavorites(postId, sessionId);
+                    const svg = target.querySelector('path') as SVGPathElement;
+                    if (svg.getAttribute('stroke') === 'darkorange') {
+                        svg.setAttribute('stroke', 'white');
+                    } else {
+                        svg.setAttribute('stroke', 'darkorange');
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 export { PostElementsController };

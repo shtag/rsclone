@@ -20,10 +20,20 @@ export class postElemens {
         let img;
 
         if (userName.settings.photo === '') {
-            img = '../../../img/base.jpg';
+            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
         } else {
             img = userName.settings.photo;
         }
+        const dateInMs = PostData.date;
+        const date = new Date(dateInMs);
+        const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        const user = model.user.get(Number(localStorage.getItem('userId')));
+
+        let color ='';
+        if ((await user).favorites.includes(PostData.id)) {
+            color = "darkorange"
+        } else {color = "#f9fdfe"}
 
         return `
         <div class="post_wrapper">
@@ -44,7 +54,7 @@ export class postElemens {
         )}</div>
                     </div>
                     <form onsubmit="event.preventDefault();" data-post_id="${PostData.id}" class="comment_form_container">
-                <input
+                <input maxlength="150"
                 data-post_id="${PostData.id}"
                 autocomplete="off"
                 type="text"
@@ -60,7 +70,10 @@ export class postElemens {
                 </button>
             <form>
                 </div>
-                <div class="post_img_container"><img src=${PostData.image} alt="" class="post_img" /></div>
+                <div class="post_img_container">
+                <img src=${PostData.image} alt="" class="post_img" />
+                <p class="post_date">${dateToPost}</p>
+                </div>
             </div>
             
         </div>
@@ -73,6 +86,11 @@ export class postElemens {
                         />
                     </svg>
                     <p class="tools_text_likes">${PostData.likes.length}</p>
+                </div>
+                <div class="tools_container_item favorite_btn" data-post_id = "${PostData.id}">
+                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 19L9 11.44L1 19V1H17V19Z" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
                 <div class="tools_container_item comment_btn" data-post_id = "${PostData.id}">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,23 +108,20 @@ export class postElemens {
     }
 
     static async renderBlockWithComment(PostData: Post) {
-        const userName = await model.user.get(PostData.author);
-        const user: string = await userName.username;
+        const user = await model.user.get(Number(localStorage.userId));
         let img: string;
-
-        if (userName.settings.photo === '') {
+        if (user.settings.photo === '') {
             img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
         } else {
-            img = userName.settings.photo;
+            img = user.settings.photo;
         }
-        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user, img));
+        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user.username, img));
         return HTMLComment.join('');
     }
 
     static renderComment(comment: Comment, postId: number, user: string, img: string) {
         const dateInMs = comment.date;
         const date = new Date(dateInMs);
-        console.log(user, img);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
         return `
             <div class="comment">
@@ -136,6 +151,7 @@ export class postElemens {
             </div>
             `;
     }
+
 }
 
 export default postElemens;

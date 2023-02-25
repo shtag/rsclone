@@ -1,41 +1,49 @@
-import PageController from '../PageController';
+import postElemens from "../home-page/postElements/postElemensView";
+import HeaderView from "./HeaderView";
 
 class HeaderController {
-    static async switchTheme() {
-        const togler = document.querySelector('.theme') as HTMLInputElement;
+    static switchTheme() {
+        const toggle = document.querySelector('.theme') as HTMLInputElement;
         const root = document.querySelector('body') as HTMLBodyElement;
-
-        function handleColorSchemeChange(e: MediaQueryListEvent) {
-            if (e.matches) {
-                togler.checked = true;
-                root.classList.add('light-theme');
-            } else {
-                togler.checked = false;
-                root.classList.remove('light-theme');
-            }
+        
+        function setTheme(value: string) {
+          localStorage.setItem('theme', value);
+          if (value === 'light') {
+            root.classList.add('light-theme');
+            toggle.checked = true;
+          } else {
+            root.classList.remove('light-theme');
+            toggle.checked = false;
+          }
         }
-
+        
+        function handleColorSchemeChange(e: MediaQueryListEvent) {
+          if (e.matches) {
+            setTheme('light');
+          } else {
+            setTheme('dark');
+          }
+        }
+        
         const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: light)');
         colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
-
-        if (colorSchemeQuery.matches) {
-            togler.checked = true;
-            root.classList.add('light-theme');
-        } else {
-            togler.checked = false;
-            root.classList.remove('light-theme');
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          setTheme(savedTheme);
+        } else if (colorSchemeQuery.matches) {
+          setTheme('light');
         }
-
-        togler.addEventListener('click', () => {
-            if (togler.checked) {
-                togler.checked = true;
-                root.classList.add('light-theme');
-            } else {
-                togler.checked = false;
-                root.classList.remove('light-theme');
-            }
+        
+        toggle.addEventListener('click', () => {
+          if (toggle.checked) {
+            setTheme('light');
+          } else {
+            setTheme('dark');
+          }
         });
-    }
+      }
+      
 
     static loaderControlAnimation() {
         window.onload = () => {
@@ -43,6 +51,21 @@ class HeaderController {
             body.classList.remove('preload');
         };
     }
+
+
+    static openLikedPosts(){
+      const btn = document.querySelector('.likes-btn') as HTMLElement;      
+      btn.addEventListener('click', () => {
+        const container = document.querySelector('.liked_container') as HTMLElement;
+        if (container) {
+          container.remove();
+        } else {
+          HeaderView.renderLikedPostsContainer();
+        }
+      })
+    }
+
+    
 }
 
 export default HeaderController;
