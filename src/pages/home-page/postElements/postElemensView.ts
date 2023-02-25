@@ -54,7 +54,7 @@ export class postElemens {
         )}</div>
                     </div>
                     <form onsubmit="event.preventDefault();" data-post_id="${PostData.id}" class="comment_form_container">
-                <input
+                <input maxlength="150"
                 data-post_id="${PostData.id}"
                 autocomplete="off"
                 type="text"
