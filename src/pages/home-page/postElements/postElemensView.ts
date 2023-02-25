@@ -30,10 +30,10 @@ export class postElemens {
 
         const user = model.user.get(Number(localStorage.getItem('userId')));
 
-        let color ='';
+        let color = '';
         if ((await user).favorites.includes(PostData.id)) {
             color = "darkorange"
-        } else {color = "#f9fdfe"}
+        } else { color = "#f9fdfe" }
 
         return `
         <div class="post_wrapper">
@@ -48,7 +48,7 @@ export class postElemens {
                         </a>
                     </div>
                     <div class="post_info_description">
-                        <p class="post_info_description_text"><b>${userName.username}</b> ${PostData.description}</p>
+                        <p class="post_info_description_text"><a href="/${userName.username}" class="route">${userName.username}</a> ${PostData.description}</p>
                         <div class="comment_container" data-post_id="${PostData.id}">${await postElemens.renderBlockWithComment(
             PostData
         )}</div>
@@ -131,7 +131,7 @@ export class postElemens {
                         <img src="${img}" alt="" class="comment_mini_img" />
                     </a>
                     <div class="comment_text">
-                        <p><b>${user}</b>      ${comment.text}</p>
+                        <p><a href="/${user}" class="route">${user}</a>      ${comment.text}</p>
                     </div>
                 </div>
                     <button class="comment_like-btn" data-postID="${postId}" data-commentID="${comment.id}">

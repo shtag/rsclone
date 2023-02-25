@@ -3,7 +3,9 @@ import HeaderView from './pages/staticElements/HeaderView';
 import LoginPageController from './pages/login-page/LoginPageController';
 import PageController from './pages/PageController';
 import HeaderController from './pages/staticElements/HeaderController';
-import { PostElementsController } from './pages/home-page/postElements/postElementsController';
+import { PostElementsController, state } from './pages/home-page/postElements/postElementsController';
+import search from './pages/staticElements/search/searchPopupController';
+import { checkSession } from './types/functions';
 
 class Router {
     static route(event: Event) {
@@ -18,7 +20,7 @@ class Router {
     static async handleLocation() {
         const path: string[] = window.location.pathname.split('/');
         const users = await model.user.getAll();
-
+        PageController.renderStructure();
         const user = users.find((us) => us.username === path[1]);
         if (user && path.length === 2) {
             Router.openProfile(user.id);
@@ -40,26 +42,29 @@ class Router {
         } else if (user && path[2] === 'posts' && path.length === 3) {
             Router.openPosts(user.id);
         } else if (path[1] === 'add') {
-            Router.openAddPost();
+            Router.openAddPost()
         } else {
             Router.open404();
         }
+        search.renderPopup();
     }
 
     static async openAddPost() {
         console.log('open add post');
-        PageController.renderStructure();
+        const sessionValid = await checkSession();
+        if (!sessionValid) {
+            window.history.pushState({}, '', '/login');
+            Router.handleLocation();
+            return;
+        }
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         await PageController.addPost();
     }
 
     static async openProfile(id: number) {
         console.log('open profile');
-        PageController.renderStructure();
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         document.title = `${(await model.user.get(id)).username}'s profile`;
         await PageController.setUserProfileController(id);
@@ -67,24 +72,19 @@ class Router {
 
     static async openPost(id: number) {
         console.log('open post');
-        PageController.renderStructure();
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         PostElementsController.checkPosition();
         const main = document.querySelector('main') as HTMLBodyElement;
         document.title = 'Post';
         main.innerHTML = '';
-
         await PageController.setPost(id);
     }
 
     static async openPosts(id: number) {
         console.log('posts tab');
         document.title = `${(await model.user.get(id)).username}'s posts`;
-        PageController.renderStructure();
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
 
         await PageController.userPosts(id);
@@ -92,42 +92,49 @@ class Router {
 
     static async openLogin() {
         console.log('open login');
+        const sessionValid = await checkSession();
+        if (sessionValid) {
+            window.history.pushState({}, '', '/feed');
+            Router.handleLocation();
+            return;
+        }
         document.title = 'Login';
         const body = document.querySelector('body') as HTMLBodyElement;
         body.innerHTML = '';
-        PageController.renderStructure();
         LoginPageController.renderLoginPage();
     }
 
     static async openFavorites(id: number) {
         console.log('favorites');
         document.title = `${(await model.user.get(id)).username}'s favorites`;
-        PageController.renderStructure();
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
         HeaderController.loaderControlAnimation();
         PageController.userFavorite(id);
     }
 
     static async openFeed() {
         console.log('open feed');
+        const sessionValid = await checkSession();
+        if (!sessionValid) {
+            window.history.pushState({}, '', '/login');
+            Router.handleLocation();
+            return;
+        }
+        state.page = 1;
         document.title = 'Feed';
         HeaderController.loaderControlAnimation();
-        await PageController.renderStructure();
-        await PageController.setHomePageController();
+        PageController.setHomePageController();
     }
 
     static async openRecommendation() {
         console.log('open recommendation feed');
         document.title = 'Recommendation';
         HeaderController.loaderControlAnimation();
-        await PageController.renderStructure();
-        await PageController.setHomePageController();
+        PageController.setHomePageController();
     }
 
     static async open404() {
         console.log('open 404');
-        PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
         main.innerHTML = `
@@ -140,19 +147,24 @@ class Router {
     static setEventListeners() {
         const body = document.querySelector('body') as HTMLElement;
         body.addEventListener('click', (e) => {
-            const target = (e.target as HTMLElement).closest('.route') as HTMLAnchorElement;
-            if (target) {
-                console.log(target.href);
-            }
             Router.route(e);
         });
 
         window.addEventListener('load', async () => {
             await Router.handleLocation();
+            HeaderController.switchTheme();
         });
         window.addEventListener('popstate', async () => {
             await Router.handleLocation();
         });
+    }
+
+    static async checkSession(): Promise<boolean> {
+        const session = await model.auth.checkSession({ id: +localStorage.userId, sessionId: localStorage.sessionId });
+        if (!localStorage.sessionId || localStorage.sessionId === '' || !session.sessionActive) {
+            return false;
+        }
+        return true
     }
 }
 

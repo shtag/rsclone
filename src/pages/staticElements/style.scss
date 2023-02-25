@@ -1,9 +1,12 @@
 @import '/src/scss/base/variables';
 @import url('https://fonts.cdnfonts.com/css/axiforma');
+@import '/src/scss/base/variables';
+@import url('https://fonts.cdnfonts.com/css/axiforma');
 
 .header {
     width: 100%;
     margin: 0 auto;
+    font-family: 'Axiforma', sans-serif;
     font-family: 'Axiforma', sans-serif;
     padding-top: 20px;
     display: flex;
@@ -32,7 +35,19 @@
         background-color: navy;
         border-radius: 50px;
         transition: all 0.9s;
+        input:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: navy;
+            border-radius: 50px;
+            transition: all 0.9s;
 
+            background-color: #ecf0f3;
+        }
         background-color: #ecf0f3;
     }
 
@@ -40,7 +55,16 @@
         background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
         transition: background-image 0.9s;
     }
+    input:checked {
+        background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+        transition: background-image 0.9s;
+    }
 
+    input:checked:before {
+        transform: translate(100%);
+        transition: all 0.9s;
+        background-color: #f7ca33;
+    }
     input:checked:before {
         transform: translate(100%);
         transition: all 0.9s;
@@ -87,12 +111,16 @@
         }
     }
 
+    input {
+        cursor: pointer;
+    }
     button {
         height: 24px;
         width: 24px;
         border: none;
         background: transparent;
         transition: 0.2s;
+        cursor: pointer;
         &:hover {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -119,6 +147,12 @@
         transition: 0.2s;
     }
 
+    a.profile-btnBefore:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: 0.2s;
+    }
     a.profile-btnBefore:hover {
         -webkit-transform: scale(1.1);
         -ms-transform: scale(1.1);
@@ -157,7 +191,9 @@
     border-radius: 50px;
     margin-right: 20px;
     flex-direction: column;
-
+    button {
+        cursor: pointer;
+    }
     a {
         &:hover {
             -webkit-transform: scale(1.1);
@@ -257,11 +293,10 @@
     }
 }
 
-.liked_img{
+.liked_img {
     cursor: pointer;
     object-fit: cover;
     width: 100px;
     height: 100px;
     border-radius: 10px;
 }
-

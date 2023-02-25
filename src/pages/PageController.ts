@@ -1,5 +1,5 @@
 import AddPostController from './add-post/AddPostController';
-import { page, PostElementsController } from './home-page/postElements/postElementsController';
+import { PostElementsController, state } from './home-page/postElements/postElementsController';
 import HeaderController from './staticElements/HeaderController';
 import HeaderView from './staticElements/HeaderView';
 import OpenPostController from './user-profile/post/OpenPostController';
@@ -24,8 +24,8 @@ class PageController {
 
     static setHomePageController() {
         HeaderView.renderHeaderContainer();
-        HeaderController.switchTheme();
-        PostElementsController.renderFeeds(page);
+        // HeaderController.switchTheme();
+        PostElementsController.renderFeeds(state.page);
         PostElementsController.checkPosition();
         PostElementsController.likesToComment();
         PostElementsController.activeInput();
