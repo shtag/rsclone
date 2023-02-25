@@ -4,7 +4,10 @@ import { CommentsLikeRequest, Post } from '../../../types/types';
 import postElemens from './postElemensView';
 
 // eslint-disable-next-line import/no-mutable-exports
-export let page = 1;
+// export let page = 1;
+export const state = {
+    page: 1
+}
 
 class PostElementsController {
     static async checkPosition() {
@@ -16,8 +19,8 @@ class PostElementsController {
                 const threshold = height - screenHeight / 4;
                 const position = scrolled + screenHeight;
                 if (position >= threshold) {
-                    page += 1;
-                    await this.renderPosts(page);
+                    state.page += 1;
+                    await this.renderPosts(state.page);
                 }
             }
         });
@@ -31,8 +34,8 @@ class PostElementsController {
         };
         const posts = await model.post.feed(params);
         if (posts.length === 0) return;
-        await posts.forEach((element: Post) => {
-            postElemens.renderPost(element);
+        posts.forEach(async (element: Post) => {
+            await postElemens.renderPost(element);
         });
     }
 

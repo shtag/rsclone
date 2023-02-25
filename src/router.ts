@@ -6,6 +6,8 @@ import HeaderController from './pages/staticElements/HeaderController';
 import OpenPostView from './pages/user-profile/post/OpenPostView';
 import OpenPostController from './pages/user-profile/post/OpenPostController';
 import search from './pages/staticElements/search/searchPopupController';
+import { state } from './pages/home-page/postElements/postElementsController';
+import { checkSession } from './types/functions';
 
 class Router {
     static route(event: Event) {
@@ -40,15 +42,21 @@ class Router {
             localStorage.setItem('favorites', 'true');
         } else if (user && path[2] === 'posts' && path.length === 3) {
             Router.openPosts(user.id);
-        } else if(path[1] === 'add') {
+        } else if (path[1] === 'add') {
             Router.openAddPost()
-        }else {
+        } else {
             Router.open404();
         }
     }
 
     static async openAddPost() {
         console.log('open add post');
+        const sessionValid = await checkSession();
+        if (!sessionValid) {
+            window.history.pushState({}, '', '/login');
+            Router.handleLocation();
+            return;
+        }
         PageController.renderStructure();
         HeaderView.renderHeaderContainer();
         HeaderController.switchTheme();
@@ -93,6 +101,12 @@ class Router {
 
     static async openLogin() {
         console.log('open login');
+        const sessionValid = await checkSession();
+        if (sessionValid) {
+            window.history.pushState({}, '', '/feed');
+            Router.handleLocation();
+            return;
+        }
         document.title = 'Login';
         const body = document.querySelector('body') as HTMLBodyElement;
         body.innerHTML = '';
@@ -112,6 +126,13 @@ class Router {
 
     static async openFeed() {
         console.log('open feed');
+        const sessionValid = await checkSession();
+        if (!sessionValid) {
+            window.history.pushState({}, '', '/login');
+            Router.handleLocation();
+            return;
+        }
+        state.page = 1;
         PageController.renderStructure();
         const main = document.querySelector('main') as HTMLBodyElement;
         document.title = 'Feed';
@@ -148,6 +169,14 @@ class Router {
         window.addEventListener('popstate', async () => {
             await Router.handleLocation();
         });
+    }
+
+    static async checkSession(): Promise<boolean> {
+        const session = await model.auth.checkSession({ id: +localStorage.userId, sessionId: localStorage.sessionId });
+        if (!localStorage.sessionId || localStorage.sessionId === '' || !session.sessionActive) {
+            return false;
+        }
+        return true
     }
 }
 
