@@ -124,8 +124,6 @@
     display: flex;
     width: inherit;
     background-color: $dark-grey-color;
-
-    
 }
 
 .tools_container_item {
@@ -141,19 +139,17 @@
         -ms-user-select: none;
         user-select: none;
     }
-    
+
     &:hover {
         -webkit-transform: scale(1.1);
         -ms-transform: scale(1.1);
         transform: scale(1.1);
         transition: 0.2s;
     }
-    
 
     &:active {
         filter: opacity(0.5);
     }
-    
 }
 
 .comment {
@@ -260,5 +256,19 @@
             opacity: 0.65;
             pointer-events: none;
         }
+    }
+}
+
+@media (max-width: 1190px) {
+    .nav-bar_container {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 70%;
+        height: 40px;
+        flex-direction: initial;
+        position: sticky;
+        top: 0;
+        margin: 0 auto;
     }
 }
