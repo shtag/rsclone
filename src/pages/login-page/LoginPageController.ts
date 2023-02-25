@@ -1,3 +1,4 @@
+import { resetInputs } from "../../types/functions";
 import LoginPageView from "./LoginPageView";
 import LoginValidation from "./LoginValidation";
 import './login_page.scss'
@@ -20,12 +21,7 @@ class LoginPageController {
 
     static setListeners(): void {
         const loginPageForm = document.querySelector('.login_form') as HTMLFormElement;
-        function resetInputs() {
-            const inputs = document.querySelectorAll('.reg_input') as NodeListOf<HTMLInputElement>
-            for (let i = 0; i < inputs.length; i += 1) {
-                (inputs[i] as HTMLInputElement).value = ''
-            }
-        }
+        const inputs = document.querySelectorAll('.reg_input') as NodeListOf<HTMLInputElement>
         const body = document.querySelector('body') as HTMLBodyElement;
         const popups = document.querySelector('.popups') as HTMLBodyElement;
         body.addEventListener('click', (e) => {
@@ -35,12 +31,12 @@ class LoginPageController {
                 loginPageForm.classList.add('login_form__active')
                 popups.classList.add('login_active')
                 popups.classList.remove('signup_active')
-                resetInputs()
+                resetInputs(inputs)
             } else if (targetSign) {
                 loginPageForm.classList.add('login_form__active')
                 popups.classList.add('signup_active')
                 popups.classList.remove('login_active')
-                resetInputs()
+                resetInputs(inputs)
             }
             if ((e.target as HTMLElement).classList.contains('login_popup__btn')) {
                 if ((e.target as HTMLElement).textContent === 'Login') {
