@@ -61,6 +61,11 @@
     }
 }
 
+.comment_text {
+    overflow-wrap: break-word;
+    width: 231px;
+}
+
 .post_info_cotainer {
     flex-grow: 1;
     text-align: left;
