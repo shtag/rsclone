@@ -1,5 +1,5 @@
 import { URL } from '../../types/constants';
-import { UserInfo, UserList, UserListId, User, ChangeUsernamePass, UserSettingsRequest } from '../../types/types';
+import { UserList, UserListId, User, ChangeUsernamePass, UserSettingsRequest, SubscribeRequest } from '../../types/types';
 
 class ModelUsers {
     url: string;
@@ -29,7 +29,7 @@ class ModelUsers {
 
     async get(id: number): Promise<User> {
         try {
-            const body = { id }
+            const body = { id };
             const data = await fetch(`${this.url}/user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -49,7 +49,7 @@ class ModelUsers {
 
     async delete(id: number, sessionId: string): Promise<void> {
         try {
-            const body = {sessionId}
+            const body = { sessionId };
             const data = await fetch(`${this.url}/user/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -68,7 +68,7 @@ class ModelUsers {
      * @returns {Object} - object with username
      */
 
-    async changeUsernamePassword(id: number, userInfo: ChangeUsernamePass): Promise<{ username: string; }> {
+    async changeUsernamePassword(id: number, userInfo: ChangeUsernamePass): Promise<{ username: string }> {
         try {
             const data = await fetch(`${this.url}/user/${id}`, {
                 method: 'PATCH',
@@ -89,7 +89,7 @@ class ModelUsers {
      * @returns {status code}
      */
 
-    async changeSettings(id: number, settings: UserSettingsRequest):  Promise<boolean>{
+    async changeSettings(id: number, settings: UserSettingsRequest): Promise<boolean> {
         try {
             await fetch(`${this.url}/user/settings/${id}`, {
                 method: 'PATCH',
@@ -109,7 +109,7 @@ class ModelUsers {
      * @returns {Object} - object with id, username, password, subscriptions, sessions, settings
      */
 
-    async subscribe(userInfo: UserInfo): Promise<User> {
+    async subscribe(userInfo: SubscribeRequest): Promise<User> {
         try {
             const data = await fetch(`${this.url}/subscribe`, {
                 method: 'POST',
@@ -173,13 +173,13 @@ class ModelUsers {
         }
     }
 
-     /**
+    /**
      * Get userlist by id
      * @param {Array} list - array of numbers
      * @returns {Object} - object of users info
      */
 
-     async getUserlistById(list: UserListId): Promise<User[] | []> {
+    async getUserlistById(list: UserListId): Promise<User[] | []> {
         try {
             const data = await fetch(`${this.url}/userlistid`, {
                 method: 'POST',

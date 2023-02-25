@@ -1,3 +1,4 @@
+import model from '../../api/Model';
 import UserFavController from './user-favorite/UserFavController';
 import UserPageController from './user-info/UserInfoController';
 import UserPostsController from './user-posts/UserPostsController';
@@ -33,6 +34,17 @@ class GeneralUserController {
         }
         UserPostsController.setPostsInfo();
         await UserPostsController.setPosts(id);
+    }
+
+    static async checkSession(sessionId: string, id: number) {
+        const user = await model.user.get(id);
+        const { sessions } = user;
+
+        if (sessions.includes(sessionId)) {
+            return { equal: true };
+        }
+
+        return { equal: false, username: user.username };
     }
 }
 
