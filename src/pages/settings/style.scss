@@ -1,0 +1,195 @@
+@import '../../scss/base/_variables';
+
+.settings {
+    &__icon {
+        width: 40px;
+        height: 40px;
+        filter: invert(98%) sepia(7%) saturate(331%) hue-rotate(290deg) brightness(114%) contrast(100%);
+    }
+
+    &__title {
+        font-weight: 400;
+        text-align: center;
+    }
+
+    &__subtitle {
+        font-weight: 400;
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    &__credentials {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__interaction {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__block-title {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    &__label {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    &__error {
+        display: none;
+    }
+
+    &__name-block {
+        margin-bottom: 10px;
+    }
+
+    &__hint {
+        display: none;
+        position: absolute;
+        width: 200px;
+        font-size: 14px;
+        padding: 10px;
+        border-radius: 20px;
+        right: 55px;
+        top: -75px;
+        background: $gradient;
+
+        &_icon {
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+        }
+
+        &_open {
+            display: block;
+        }
+    }
+
+    &__input {
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: none;
+        font-size: 18px;
+        transition: 0.5s all;
+
+        &:focus {
+            border: none;
+            outline: none;
+            transform: scale(1.1);
+        }
+    }
+
+    &__submitCredentials,
+    &__submitInteraction {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        width: 150px !important;
+        height: 50px;
+    }
+
+    &__description {
+        margin-top: 10px;
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        resize: none;
+        overflow-y: hidden;
+        border: 1px solid gray;
+        height: 110px;
+        color: #f9fdfe;
+        background: transparent;
+        outline: 0;
+        border-radius: 20px;
+        padding: 20px;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    &__theme-block,
+    &__lang-block {
+        display: flex;
+        gap: 20px;
+        position: relative;
+    }
+
+    &__theme {
+        display: none;
+
+        & + label {
+            cursor: pointer;
+        }
+
+        & + label:before {
+            background: #fff;
+            height: 21px;
+            border: 1px solid $dark-grey-color;
+            content: ' ';
+            display: inline-block;
+            width: 21px;
+            vertical-align: middle;
+            margin-right: 10px;
+            position: relative;
+            top: -1px;
+            border-radius: 5px;
+        }
+
+        &:checked + label:before {
+            content: '\2713';
+            color: $dark-grey-color;
+            font-size: 24px;
+            text-align: center;
+            line-height: 21px;
+        }
+    }
+
+    &__lang {
+        position: relative;
+        width: 50px;
+        height: 25px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: red;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        background-image: url(https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png);
+        background-size: cover;
+        border-radius: 50px;
+        transition: background-image 0.9s;
+        box-shadow: 0px 2px 5px 1px grey;
+    }
+
+    &__lang::before {
+        content: '';
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 0.5s;
+        height: 25px;
+        width: 25px;
+        background: rgb(201 6 40);
+
+        border-radius: 50px;
+        transition: all 0.9s;
+    }
+
+    &__lang:checked {
+        background-image: url(https://i.postimg.cc/qqwDcGHT/1619318345-13-phonoteka-org-p-fon-rossiiskii-flag-dlya-prezentatsii-14.jpg);
+        transition: background-image 0.9s;
+    }
+
+    &__lang:checked::before {
+        transform: translateX(100%);
+        background-color: navy;
+    }
+}

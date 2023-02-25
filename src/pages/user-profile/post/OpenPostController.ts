@@ -1,6 +1,5 @@
 import model from '../../../api/Model';
 import postElemens from '../../home-page/postElements/postElemensView';
-import { PostElementsController } from '../../home-page/postElements/postElementsController';
 import OpenPostView from './OpenPostView';
 import { sessionId } from '../../../types/constants';
 
@@ -19,12 +18,11 @@ class OpenPostController {
 
         const route = goBack.querySelector('.route') as HTMLAnchorElement;
 
-        if (localStorage.getItem('favorites') === 'true') {
+        if (localStorage.getItem('favorites') === 'true' && userName.id === +localStorage.getItem('userId')!) {
             route.href = `/${userName.username}/favorites`;
         } else if (localStorage.getItem('favorites') === 'false') {
             route.href = `/${userName.username}`;
         }
-
 
         const postBlock = document.querySelector('.open__post') as HTMLDivElement;
         postBlock.innerHTML = await postElemens.renderPostElement(post);

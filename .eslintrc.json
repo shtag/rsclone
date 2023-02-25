@@ -2,6 +2,14 @@
     "extends": ["airbnb-base", "prettier", "plugin:@typescript-eslint/recommended"],
     "plugins": ["prettier"],
     "rules": {
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true,
+                "optionalDependencies": true,
+                "peerDependencies": true
+            }
+        ],
         "import/extensions": [
             "error",
             "ignorePackages",
