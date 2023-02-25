@@ -1,16 +1,11 @@
 import AddPostController from './add-post/AddPostController';
-import HomePageController from './home-page/HomePageController';
-import { PostElementsController } from './home-page/postElements/postElementsController';
+import { page, PostElementsController } from './home-page/postElements/postElementsController';
+import HeaderController from './staticElements/HeaderController';
+import HeaderView from './staticElements/HeaderView';
 import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
 
 class PageController {
-    HomePageController: HomePageController;
-
-    constructor() {
-        this.HomePageController = new HomePageController();
-    }
-
     static renderStructure() {
         const body = document.querySelector('body') as HTMLBodyElement;
         const header = document.querySelector('header');
@@ -27,8 +22,14 @@ class PageController {
         `;
     }
 
-    static setControllers() {
-        HomePageController.setHomePageController();
+    static setHomePageController() {
+        HeaderView.renderHeaderContainer();
+        HeaderController.switchTheme();
+        PostElementsController.renderFeeds(page);
+        PostElementsController.checkPosition();
+        PostElementsController.likesToComment();
+        PostElementsController.activeInput();
+        PostElementsController.reply();
     }
 
     static async setUserProfileController(id: number) {
@@ -60,7 +61,6 @@ class PageController {
         await OpenPostController.setPost(postId);
     }
 
-
     static async addPost() {
         const main = document.querySelector('.post__block');
         if (main) {
@@ -69,7 +69,7 @@ class PageController {
         AddPostController.setAddPost();
     }
 
-    static setEventListener(){
+    static setEventListener() {
         const body = document.querySelector('body') as HTMLBodyElement;
         body.addEventListener('click', async (event) => {
             const target = event.target as HTMLButtonElement;
@@ -78,6 +78,9 @@ class PageController {
             }
             if (target.closest('.like_btn')) {
                 await PostElementsController.likeDislikePost(event);
+            }
+            if (target.closest('.favorite_btn')) {
+                await PostElementsController.favorite(event);
             }
         });
     }

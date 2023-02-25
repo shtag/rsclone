@@ -1,4 +1,7 @@
 import model from '../../api/Model';
+import Router from '../../router';
+import { Post } from '../../types/types';
+import HeaderController from './HeaderController';
 
 export class HeaderView {
     static renderHeaderContainer() {
@@ -69,6 +72,11 @@ export class HeaderView {
         <a href="/feed" class="home-btn route"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.005 15.545C8.005 14.7501 8.32075 13.9878 8.8828 13.4258C9.44485 12.8638 10.2071 12.548 11.002 12.548C11.3957 12.5479 11.7855 12.6253 12.1492 12.7758C12.5129 12.9264 12.8434 13.1471 13.1218 13.4254C13.4002 13.7038 13.6211 14.0342 13.7718 14.3979C13.9224 14.7615 14 15.1513 14 15.545V21H21V10.543L11 1L1 10.543V21H8.005V15.545Z" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
         </svg></a>
+        <a href="/recommendation" class="recomendation-btn route"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.941 13.953L7.581 16.424L10.06 10.056L16.42 7.585L13.941 13.953Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.06 10.056L13.949 13.945L7.581 16.424L10.06 10.056Z" fill="#f9fdfe"/>
+        <path d="M12.001 22.505C17.8 22.505 22.501 17.804 22.501 12.005C22.501 6.20602 17.8 1.505 12.001 1.505C6.20201 1.505 1.501 6.20602 1.501 12.005C1.501 17.804 6.20201 22.505 12.001 22.505Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></a>
         <button class="search-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 10.5C19 12.1811 18.5015 13.8245 17.5675 15.2223C16.6335 16.6202 15.306 17.7096 13.7528 18.353C12.1996 18.9963 10.4906 19.1647 8.84174 18.8367C7.1929 18.5087 5.67834 17.6992 4.4896 16.5104C3.30085 15.3217 2.4913 13.8071 2.16333 12.1583C1.83535 10.5094 2.00368 8.80036 2.64703 7.24719C3.29037 5.69402 4.37984 4.3665 5.77766 3.43251C7.17547 2.49852 8.81886 2 10.5 2C12.7543 2 14.9164 2.89553 16.5104 4.48959C18.1045 6.08365 19 8.24566 19 10.5Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M16.511 16.511L22 22" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -97,6 +105,7 @@ export class HeaderView {
         }
         this.renderSettingPopup();
         this.openSetting();
+        HeaderController.openLikedPosts();
     }
 
     static renderSettingPopup() {
@@ -117,6 +126,44 @@ export class HeaderView {
             }
         };
     }
+
+
+    static renderLikedPostsContainer(){
+        const body = document.querySelector('body') as HTMLBodyElement;
+        const container = document.createElement('div') as HTMLElement;
+        container.className = 'liked_container';
+        body.append(container);
+        this.renderLikedImg();
+    }
+
+    static async renderLikedImg() {
+        const container = document.querySelector('.liked_container') as HTMLElement;
+        const userID = Number(localStorage.getItem('userId'));
+        const posts: Post[] = await model.post.getUserPosts(userID);
+        const likedPosts: Post[] = await posts.filter(post => post.likes.length > 0);
+        const imgElements: HTMLImageElement[] = likedPosts.map(post => {
+            const imgElement = document.createElement('img') as HTMLImageElement;
+            imgElement.className = 'liked_img';
+            imgElement.setAttribute('data-id', String(post.id))
+            imgElement.src = post.image;
+            return imgElement;
+          });
+
+          
+        
+          imgElements.forEach(imgElement => {
+            container.appendChild(imgElement);
+          });
+        
+        container.addEventListener('click', async (event) => {
+            const target = event.target as HTMLElement;
+            if (target.tagName === 'IMG') {
+              const id = Number(target.getAttribute('data-id'));
+              container.remove();
+              await Router.openPost(id);
+            }
+          });
+      }
 }
 
 export default HeaderView;
