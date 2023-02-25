@@ -45,8 +45,11 @@ class UserPageView {
                 </div>
               </div>
             </div>
+            <div class="user__description-block">
             <div class="user__description">
-              ${user.settings.descriptionProfile}
+            ${user.settings.descriptionProfile}
+          </div>
+          <button class="subscribe__btn open__post-btn"><div class="text_button">Subscribe</div></button>
             </div>
           </div>
         </div>
