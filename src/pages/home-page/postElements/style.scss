@@ -1,5 +1,5 @@
-@import "/src/scss/base/variables";
-@import url("https://fonts.cdnfonts.com/css/axiforma");
+@import '/src/scss/base/variables';
+@import url('https://fonts.cdnfonts.com/css/axiforma');
 
 .comments_container {
     text-align: center;
@@ -124,6 +124,9 @@
     display: flex;
     width: inherit;
     background-color: $dark-grey-color;
+    div {
+        cursor: pointer;
+    }
 }
 
 .tools_container_item {

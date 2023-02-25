@@ -1,4 +1,4 @@
-import model from "./api/Model";
+import model from "../api/Model";
 
 async function checkSession(): Promise<boolean> {
     const session = await model.auth.checkSession({ id: +localStorage.userId, sessionId: localStorage.sessionId });
@@ -15,4 +15,15 @@ function resetInputs(input: NodeListOf<HTMLInputElement>) {
     }
 }
 
-export { checkSession, resetInputs };
+function disableScroll() {
+    const html = document.querySelector('html') as HTMLElement;
+    html.classList.add('overflow_hidden')
+}
+
+function enableScroll() {
+    const html = document.querySelector('html') as HTMLElement;
+    html.classList.remove('overflow_hidden')
+}
+
+
+export { checkSession, resetInputs, disableScroll, enableScroll };

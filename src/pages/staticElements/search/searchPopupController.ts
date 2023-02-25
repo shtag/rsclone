@@ -12,6 +12,8 @@ class SearchController {
 
     async renderPopup() {
         const body = document.querySelector('body') as HTMLBodyElement;
+        const popup = document.querySelector('.search_popup_block') as HTMLElement;
+        if (popup) return;
         body.innerHTML += SearchView.structure();
         this.setListeners();
     }
@@ -66,7 +68,6 @@ class SearchController {
             }
             this.renderResult(searchResult);
         })
-
     }
 }
 

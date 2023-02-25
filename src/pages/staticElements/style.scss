@@ -111,12 +111,16 @@
         }
     }
 
+    input {
+        cursor: pointer;
+    }
     button {
         height: 24px;
         width: 24px;
         border: none;
         background: transparent;
         transition: 0.2s;
+        cursor: pointer;
         &:hover {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -187,7 +191,9 @@
     border-radius: 50px;
     margin-right: 20px;
     flex-direction: column;
-
+    button {
+        cursor: pointer;
+    }
     a {
         &:hover {
             -webkit-transform: scale(1.1);
