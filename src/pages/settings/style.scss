@@ -174,22 +174,21 @@
         position: absolute;
         top: 0;
         left: 0;
-        transition: 0.5s;
         height: 25px;
         width: 25px;
         background: rgb(201 6 40);
-
         border-radius: 50px;
         transition: all 0.9s;
     }
 
     &__lang:checked {
-        background-image: url(https://i.postimg.cc/qqwDcGHT/1619318345-13-phonoteka-org-p-fon-rossiiskii-flag-dlya-prezentatsii-14.jpg);
+        background-image: url(https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png);
         transition: background-image 0.9s;
     }
 
     &__lang:checked::before {
         transform: translateX(100%);
-        background-color: navy;
+        background-color: rgb(253 215 3);
+        transition: all 0.9s;
     }
 }

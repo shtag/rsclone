@@ -8,22 +8,26 @@ class UserPageView {
         const followers = await model.user.getFollowers(id);
         const following = await model.user.getSubscriptions(id);
         const postQuantity = await model.post.getUserPosts(id);
+
         let subButton = `
         <button class="subscribe__btn open__post-btn">
             <div class="text_button">Subscribe</div>
         </button>`;
+
         if (state.user.subscriptions.includes(user.id)) {
             subButton = `
             <button class="subscribe__btn open__post-btn">
                 <div class="text_button">Unsubscribe</div>
             </button>`;
         }
+
         if (user.id === +localStorage.userId) {
             subButton = `
             <button class="subscribe__btn open__post-btn display_none">
                 <div class="text_button">Unsubscribe</div>
             </button>`;
         }
+
         let img;
 
         if (user.settings.photo === '') {
@@ -71,8 +75,7 @@ class UserPageView {
                 </div>
             <div class="divider">
             <div class="divider__part"></div>
-            </div>
-        
+            </div>  
         <div class="user__post-block">
           <a class="route" href="/${user.username}/posts">
             <div class="user__post-item user__post-item_posts">
@@ -90,7 +93,6 @@ class UserPageView {
               <img class="user__post-item_icon view" src='/img/icons/change-view.svg' alt="view" />
           </div>
         </div>
-    
         `;
     }
 }
