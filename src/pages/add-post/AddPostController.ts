@@ -9,6 +9,8 @@ class AddPostController {
 
     static description: string;
 
+    static dropzoneDisabled = false;
+
     static async setAddPost() {
         const main = document.querySelector('main') as HTMLDivElement;
         main.innerHTML = AddPostView.renderAddPost();
@@ -39,11 +41,27 @@ class AddPostController {
             uploadBlock.style.display = 'none';
             deleteBtn.style.display = 'block';
             addBtn.disabled = false;
+
+            // Disable drag and drop after image has been uploaded through input
+            AddPostController.dropzoneDisabled = true;
+            dropZone.removeEventListener('dragover', AddPostController.handleDragOver);
+            dropZone.removeEventListener('drop', AddPostController.handleDrop);
         });
 
-        deleteBtn.addEventListener('click', () => {
-            dropZone.innerHTML = '';
+        deleteBtn.addEventListener('click', (e: Event) => {
+            alert('Do you want to delete the image?');
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
+
+            AddPostController.dropzoneDisabled = false;
+            dropZone.addEventListener('dragover', AddPostController.handleDragOver);
+            dropZone.addEventListener('drop', AddPostController.handleDrop);
         });
+
+        AddPostController.dropzoneDisabled = false;
+        dropZone.addEventListener('dragover', AddPostController.handleDragOver);
+        dropZone.addEventListener('drop', AddPostController.handleDrop);
 
         addDescription.addEventListener('keyup', () => {
             addDescription.style.height = '1px';
@@ -55,11 +73,14 @@ class AddPostController {
         });
 
         addBtn.addEventListener('click', async () => {
-            await model.post.create({ sessionId, image: AddPostController.image, description: AddPostController.description || '' });
+            try {
+                await model.post.create({ sessionId, image: AddPostController.image, description: AddPostController.description || '' });
+            } catch (error) {
+                alert('An error occured, please try again later.');
+            }
         });
 
         AddPostController.dropzone();
-        AddPostController.reloadPageAlert();
     }
 
     static async handleDrop(event: DragEvent) {
@@ -71,23 +92,34 @@ class AddPostController {
 
         event.preventDefault();
         dropZone.classList.remove('dragover');
+
+        // Check if file is not already uploaded
+        if (AddPostController.image) {
+            return;
+        }
+
         if (event.dataTransfer?.files?.length) {
             const file = event.dataTransfer.files[0];
             if (
                 file.type.startsWith('image/') &&
                 (file.name.endsWith('.jpeg') || file.name.endsWith('.jpg') || file.name.endsWith('.png') || file.name.endsWith('.gif'))
             ) {
-                const dropzoneImg = await model.uploadPhoto(event.dataTransfer.files as FileList);
-                AddPostController.image = dropzoneImg.data.link;
+                try {
+                    const dropzoneImg = await model.uploadPhoto(event.dataTransfer.files as FileList);
+                    AddPostController.image = dropzoneImg.data.link;
 
-                const img = document.createElement('img');
-                img.classList.add('add__preview');
-                img.src = URL.createObjectURL(file);
-                dropZone.appendChild(img);
-                addBtn.disabled = false;
-                uploadBlock.style.display = 'none';
-                deleteBtn.style.display = 'block';
-                form.setAttribute('data-dirty', 'true');
+                    const img = document.createElement('img');
+                    img.classList.add('add__preview');
+                    img.src = URL.createObjectURL(file);
+                    dropZone.appendChild(img);
+                    addBtn.disabled = false;
+                    uploadBlock.style.display = 'none';
+                    deleteBtn.style.display = 'block';
+                    form.setAttribute('data-dirty', 'true');
+                } catch (error) {
+                    alert('An error occured, please try again later.');
+                    throw new Error();
+                }
             }
         }
     }
@@ -97,6 +129,11 @@ class AddPostController {
 
         event.preventDefault();
         dropZone.classList.add('dragover');
+
+        // Check if file is not already uploaded
+        if (AddPostController.image) {
+            dropZone.classList.remove('dragover');
+        }
     }
 
     static dropzone() {
@@ -104,23 +141,13 @@ class AddPostController {
 
         dropZone.addEventListener('dragover', AddPostController.handleDragOver);
         dropZone.addEventListener('drop', AddPostController.handleDrop);
-    }
 
-    static reloadPageAlert() {
-        const form = document.querySelector('.add__form') as HTMLFormElement;
-        form.addEventListener('input', () => {
-            form.setAttribute('data-dirty', 'true');
-        });
-
-        form.addEventListener('submit', () => {
-            form.removeAttribute('data-dirty');
-        });
-
-        window.addEventListener('beforeunload', (e) => {
-            if (form && form.hasAttribute('data-dirty')) {
-                e.preventDefault();
-                e.returnValue = '';
-            }
+        // Add event listener to prevent dragging image after upload
+        const dropzoneImages = document.querySelectorAll('.add__preview') as NodeListOf<HTMLImageElement>;
+        dropzoneImages.forEach((image) => {
+            image.addEventListener('dragstart', (event) => {
+                event.preventDefault();
+            });
         });
     }
 }
