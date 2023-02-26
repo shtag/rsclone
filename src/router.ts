@@ -59,14 +59,12 @@ class Router {
             return;
         }
         await HeaderView.renderHeaderContainer();
-        // HeaderController.loaderControlAnimation();
         await PageController.addPost();
     }
 
     static async openProfile(id: number) {
         console.log('open profile');
         await HeaderView.renderHeaderContainer();
-        // HeaderController.loaderControlAnimation();
         document.title = `${(await model.user.get(id)).username}'s profile`;
         await PageController.setUserProfileController(id);
     }
@@ -74,7 +72,6 @@ class Router {
     static async openPost(id: number) {
         console.log('open post');
         await HeaderView.renderHeaderContainer();
-        // HeaderController.loaderControlAnimation();
         PostElementsController.checkPosition();
         const main = document.querySelector('main') as HTMLBodyElement;
         document.title = 'Post';
@@ -86,7 +83,6 @@ class Router {
         console.log('posts tab');
         document.title = `${(await model.user.get(id)).username}'s posts`;
         await HeaderView.renderHeaderContainer();
-        // HeaderController.loaderControlAnimation();
 
         await PageController.userPosts(id);
     }
@@ -109,7 +105,6 @@ class Router {
         console.log('favorites');
         document.title = `${(await model.user.get(id)).username}'s favorites`;
         await HeaderView.renderHeaderContainer();
-        // HeaderController.loaderControlAnimation();
         PageController.userFavorite(id);
     }
 
@@ -123,14 +118,18 @@ class Router {
         }
         state.page = 1;
         document.title = 'Feed';
-        // HeaderController.loaderControlAnimation();
         PageController.setHomePageController();
     }
 
     static async openRecommendation() {
         console.log('open recommendation feed');
         document.title = 'Recommendation';
-        // HeaderController.loaderControlAnimation();
+        const sessionValid = await checkSession();
+        if (!sessionValid) {
+            window.history.pushState({}, '', '/login');
+            Router.handleLocation();
+            return;
+        }
         PageController.setHomePageController();
     }
 

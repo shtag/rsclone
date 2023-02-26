@@ -3,7 +3,6 @@ import './pages/staticElements/style.scss';
 import './pages/home-page/postElements/style.scss'
 
 import Router from './router';
-import { sessionId } from './types/constants';
 import PageController from './pages/PageController';
 import HeaderController from './pages/staticElements/HeaderController';
 import { checkSession } from './types/functions';
