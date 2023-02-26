@@ -1,5 +1,7 @@
 import model from '../../../api/Model';
+import { checkSession } from '../../../types/functions';
 import { Post, Comment, User } from '../../../types/types';
+import svg from '../../staticElements/svg';
 import { state } from './postElementsController';
 
 export class postElemens {
@@ -19,7 +21,6 @@ export class postElemens {
     static async renderPostElement(PostData: Post) {
         const userName = await model.user.get(PostData.author);
         let img;
-
         if (userName.settings.photo === '') {
             img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
         } else {
@@ -28,7 +29,13 @@ export class postElemens {
         const dateInMs = PostData.date;
         const date = new Date(dateInMs);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
+        let deleteBtn = ''
+        if (await checkSession()) {
+            const user = await model.user.get(localStorage.userId);
+            if (user.id === PostData.author) {
+                deleteBtn = `${svg.delete}`
+            }
+        }
         let color = "#f9fdfe";
         if (state.sessionValid) {
             const user = await model.user.get(Number(localStorage.getItem('userId')));
@@ -93,6 +100,7 @@ export class postElemens {
                     <path d="M17 19L9 11.44L1 19V1H17V19Z" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
+                ${deleteBtn}
                 <div class="tools_container_item comment_btn" data-post_id = "${PostData.id}">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

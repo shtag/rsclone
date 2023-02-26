@@ -32,7 +32,8 @@ const svg = {
         <path d="M13.941 13.953L7.581 16.424L10.06 10.056L16.42 7.585L13.941 13.953Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M10.06 10.056L13.949 13.945L7.581 16.424L10.06 10.056Z" fill="#f9fdfe"/>
         <path d="M12.001 22.505C17.8 22.505 22.501 17.804 22.501 12.005C22.501 6.20602 17.8 1.505 12.001 1.505C6.20201 1.505 1.501 6.20602 1.501 12.005C1.501 17.804 6.20201 22.505 12.001 22.505Z" stroke="#f9fdfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`
+    </svg>`,
+    delete: `delete`
 }
 
 export default svg;
