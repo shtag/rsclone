@@ -57,14 +57,14 @@ class Router {
             Router.handleLocation();
             return;
         }
-        HeaderView.renderHeaderContainer();
+        await HeaderView.renderHeaderContainer();
         HeaderController.loaderControlAnimation();
         await PageController.addPost();
     }
 
     static async openProfile(id: number) {
         console.log('open profile');
-        HeaderView.renderHeaderContainer();
+        await HeaderView.renderHeaderContainer();
         HeaderController.loaderControlAnimation();
         document.title = `${(await model.user.get(id)).username}'s profile`;
         await PageController.setUserProfileController(id);
@@ -72,7 +72,7 @@ class Router {
 
     static async openPost(id: number) {
         console.log('open post');
-        HeaderView.renderHeaderContainer();
+        await HeaderView.renderHeaderContainer();
         HeaderController.loaderControlAnimation();
         PostElementsController.checkPosition();
         const main = document.querySelector('main') as HTMLBodyElement;
@@ -84,7 +84,7 @@ class Router {
     static async openPosts(id: number) {
         console.log('posts tab');
         document.title = `${(await model.user.get(id)).username}'s posts`;
-        HeaderView.renderHeaderContainer();
+        await HeaderView.renderHeaderContainer();
         HeaderController.loaderControlAnimation();
 
         await PageController.userPosts(id);
@@ -107,7 +107,7 @@ class Router {
     static async openFavorites(id: number) {
         console.log('favorites');
         document.title = `${(await model.user.get(id)).username}'s favorites`;
-        HeaderView.renderHeaderContainer();
+        await HeaderView.renderHeaderContainer();
         HeaderController.loaderControlAnimation();
         PageController.userFavorite(id);
     }
@@ -144,16 +144,15 @@ class Router {
         </div>`;
     }
 
-    static setEventListeners() {
+    static async setEventListeners() {
         const body = document.querySelector('body') as HTMLElement;
         body.addEventListener('click', (e) => {
-            Router.route(e);
+            if ((e.target as HTMLElement).closest('.route')) {
+                Router.route(e);
+            }
         });
-
-        window.addEventListener('load', async () => {
-            await Router.handleLocation();
-            HeaderController.switchTheme();
-        });
+        await Router.handleLocation();
+        HeaderController.switchTheme();
         window.addEventListener('popstate', async () => {
             await Router.handleLocation();
         });

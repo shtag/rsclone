@@ -123,6 +123,12 @@ interface PhotoAPI {
     success: boolean;
 }
 
+interface State {
+    page: number;
+    user: User;
+    sessionValid?: boolean
+}
+
 export {
     Post,
     PostRequest,
@@ -141,5 +147,6 @@ export {
     ChangeUsernamePass,
     SubscribeRequest,
     Search,
-    PhotoAPI
+    PhotoAPI,
+    State
 }

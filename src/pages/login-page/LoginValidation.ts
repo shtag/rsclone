@@ -10,7 +10,7 @@ class LoginValidation {
             passwordInput.setCustomValidity('')
             const res = await model.auth.login(usernameInput.value, passwordInput.value)
             localStorage.setItem('sessionId', res.sessionId)
-            localStorage.setItem('id', res.id.toString());
+            localStorage.setItem('userId', res.id.toString());
             document.querySelector('header')?.classList.add('header');
             window.history.pushState({}, '', '/feed');
             Router.handleLocation();

@@ -6,7 +6,8 @@ import postElemens from './postElemensView';
 // eslint-disable-next-line import/no-mutable-exports
 // export let page = 1;
 export const state = {
-    page: 1
+    page: 1,
+    user: await model.user.get(localStorage.userId),
 }
 
 class PostElementsController {
