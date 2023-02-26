@@ -89,9 +89,6 @@ class UserPageView {
               <button class="user__post-item_text">Favorites</button>
             </div>
           </a>
-          <div class="user__post-item user__post-item_view">
-              <img class="user__post-item_icon view" src='/img/icons/change-view.svg' alt="view" />
-          </div>
         </div>
         `;
     }

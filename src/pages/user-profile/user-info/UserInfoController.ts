@@ -12,22 +12,6 @@ class UserPageController {
 
         user.innerHTML = await UserPageView.renderUserInfo(id);
         await UserPageController.subscribe(id);
-        const view = document.querySelector('.view') as HTMLImageElement;
-
-        view?.addEventListener('click', () => {
-            view.classList.toggle('active_icon');
-            UserPageController.changeView();
-        });
-    }
-
-    static changeView() {
-        const postImg = document.querySelectorAll('.post__img') as NodeList;
-
-        postImg.forEach((img) => {
-            const image = img as HTMLImageElement;
-            image.style.width = '100%';
-            image.style.height = '465px';
-        });
     }
 
     static async subscribe(id: number) {
