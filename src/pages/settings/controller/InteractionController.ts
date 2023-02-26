@@ -32,8 +32,8 @@ class InteractionController {
         langToggle.addEventListener('change', (e: Event) => {
             const target = e.target as HTMLInputElement;
             if (target.checked) {
-                InteractionController.language = 'ru';
-                localStorage.setItem('lang', 'ru');
+                InteractionController.language = 'uk';
+                localStorage.setItem('lang', 'uk');
             } else {
                 InteractionController.language = 'en';
                 localStorage.setItem('lang', 'en');
@@ -41,7 +41,7 @@ class InteractionController {
             submit.disabled = false;
         });
 
-        if (localStorage.getItem('lang') === 'ru') {
+        if (localStorage.getItem('lang') === 'uk') {
             langToggle.checked = true;
         }
     }
@@ -52,7 +52,7 @@ class InteractionController {
         const submit = submitBtn;
 
         userName.addEventListener('input', () => {
-            const usernameRegex = /^[a-zA-Z0-9_а-яА-Я]{3,20}$/;
+            const usernameRegex = /^[a-zA-Z0-9_а-яА-Я\s]{3,20}$/;
 
             if (usernameRegex.test(userName.value) || userName.value === '') {
                 InteractionController.userName = userName.value;

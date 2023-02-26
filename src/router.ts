@@ -41,6 +41,7 @@ class Router {
             localStorage.setItem('favorites', 'true');
         } else if (user && path[2] === 'posts' && path.length === 3) {
             Router.openPosts(user.id);
+            localStorage.setItem('favorites', 'false');
         } else if (path[1] === 'add') {
             Router.openAddPost()
         } else {

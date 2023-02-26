@@ -8,6 +8,7 @@ class UserPageView {
         const followers = await model.user.getFollowers(id);
         const following = await model.user.getSubscriptions(id);
         const postQuantity = await model.post.getUserPosts(id);
+
         let subButton = `
         <button class="subscribe__btn open__post-btn">
             <div class="text_button">Subscribe</div>
@@ -24,15 +25,15 @@ class UserPageView {
             subButton = `
             <button class="subscribe__btn open__post-btn display_none">
                 <div class="text_button">Unsubscribe</div>
-            </button>`
+            </button>`;
         }
+
         let img;
 
         if (user.settings.photo === '') {
             img = '../../../img/base.jpg';
-        }
-        else {
-            img = user.settings.photo
+        } else {
+            img = user.settings.photo;
         }
 
         return ` 
@@ -74,8 +75,7 @@ class UserPageView {
                 </div>
             <div class="divider">
             <div class="divider__part"></div>
-            </div>
-        
+            </div>  
         <div class="user__post-block">
           <a class="route" href="/${user.username}/posts">
             <div class="user__post-item user__post-item_posts">
@@ -89,11 +89,7 @@ class UserPageView {
               <button class="user__post-item_text">Favorites</button>
             </div>
           </a>
-          <div class="user__post-item user__post-item_view">
-              <img class="user__post-item_icon view" src='/img/icons/change-view.svg' alt="view" />
-          </div>
         </div>
-    
         `;
     }
 }

@@ -1,13 +1,13 @@
 import model from '../../api/Model';
 import svg from './svg';
 
-
 import SettingsController from '../settings/controller/SettingsController';
 import SettingsView from '../settings/SettingsView';
 import Router from '../../router';
 import { Post } from '../../types/types';
 import HeaderController from './HeaderController';
 import { disableScroll } from '../../types/functions';
+
 
 export class HeaderView {
     static async renderHeaderContainer() {
@@ -27,7 +27,6 @@ export class HeaderView {
         } else {
             await HeaderView.renderHeaderBeforeLogin();
         }
-
     }
 
     static async renderHeaderAfterLogin() {
@@ -96,7 +95,7 @@ export class HeaderView {
         const popup = document.createElement('div') as HTMLDivElement;
         popup.className = 'setting_popup';
         const popupblock = document.querySelector('.setting_popup') as HTMLElement;
-        if (popupblock) return
+        if (popupblock) return;
         body.append(popup);
         popup.innerHTML += SettingsView.renderSettings();
         SettingsController.generalCredentialsController();
@@ -119,10 +118,12 @@ export class HeaderView {
         body.onclick = (event) => {
             if (!popup.contains(event.target as Node) && !btn.contains(event.target as Node)) {
                 popup.classList.remove('open');
+                // setTimeout(() => {
+                //     window.location.reload();
+                // }, 1000);
             }
         };
     }
-
 
     static renderLikedPostsContainer() {
         const body = document.querySelector('body') as HTMLBodyElement;
@@ -136,18 +137,16 @@ export class HeaderView {
         const container = document.querySelector('.liked_container') as HTMLElement;
         const userID = Number(localStorage.getItem('userId'));
         const posts: Post[] = await model.post.getUserPosts(userID);
-        const likedPosts: Post[] = await posts.filter(post => post.likes.length > 0);
-        const imgElements: HTMLImageElement[] = likedPosts.map(post => {
+        const likedPosts: Post[] = await posts.filter((post) => post.likes.length > 0);
+        const imgElements: HTMLImageElement[] = likedPosts.map((post) => {
             const imgElement = document.createElement('img') as HTMLImageElement;
             imgElement.className = 'liked_img';
-            imgElement.setAttribute('data-id', String(post.id))
+            imgElement.setAttribute('data-id', String(post.id));
             imgElement.src = post.image;
             return imgElement;
         });
 
-
-
-        imgElements.forEach(imgElement => {
+        imgElements.forEach((imgElement) => {
             container.appendChild(imgElement);
         });
 
