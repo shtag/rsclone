@@ -1,7 +1,8 @@
 import confetti from 'canvas-confetti';
 
 import model from '../../../api/Model';
-import { state } from '../../home-page/postElements/postElementsController';
+import Router from '../../../router';
+import { checkSession } from '../../../types/functions';
 
 class CredentialsController {
     static newLogin: string;
@@ -93,7 +94,7 @@ class CredentialsController {
     }
 
     static async changeUserCredentials(sessionId: string, userId: string) {
-        if (state.sessionValid) {
+        if (await checkSession()) {
             CredentialsController.validateNewLogin();
             CredentialsController.validateNewPassword();
         }
@@ -102,29 +103,33 @@ class CredentialsController {
         const form = document.querySelector('.settings__form-credentials') as HTMLFormElement;
         const errorMessage = document.querySelector('.settings__error_submit') as HTMLSpanElement;
 
-        submitBtn.addEventListener('click', (e: Event) => {
+        submitBtn.addEventListener('click', async (e: Event) => {
             e.preventDefault();
             try {
                 if (CredentialsController.newLogin && !CredentialsController.newPassword) {
-                    model.user.changeUsernamePassword(+userId, {
+                    await model.user.changeUsernamePassword(+userId, {
                         sessionId,
                         username: CredentialsController.newLogin,
                     });
                     window.history.pushState({}, '', `/${CredentialsController.newLogin}`);
                 } else if (CredentialsController.newLogin && CredentialsController.newPassword) {
-                    model.user.changeUsernamePassword(+userId, {
+                    await model.user.changeUsernamePassword(+userId, {
                         sessionId,
                         password: CredentialsController.newPassword,
                         username: CredentialsController.newLogin,
                     });
                     window.history.pushState({}, '', `/${CredentialsController.newLogin}`);
                 } else if (!CredentialsController.newLogin && CredentialsController.newPassword) {
-                    model.user.changeUsernamePassword(+userId, {
+                    await model.user.changeUsernamePassword(+userId, {
                         sessionId,
                         password: CredentialsController.newPassword,
                     });
                     window.history.pushState({}, '', `/${CredentialsController.oldLogin}`);
                 }
+                const user = document.querySelector('.user');
+                user?.remove();
+                Router.handleLocation();
+                
                 confetti({
                     particleCount: 400,
                     startVelocity: 90,
