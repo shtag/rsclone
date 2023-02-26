@@ -1,6 +1,7 @@
 import confetti from 'canvas-confetti';
 
 import model from '../../../api/Model';
+import Router from '../../../router';
 
 class InteractionController {
     static language: string;
@@ -139,6 +140,9 @@ class InteractionController {
                 startVelocity: 90,
                 spread: 360,
             });
+            const user = document.querySelector('.user');
+            user?.remove();
+            Router.handleLocation();
 
             submitBtn.disabled = true;
             formInteraction.reset();
