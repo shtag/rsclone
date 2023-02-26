@@ -11,26 +11,25 @@ class UserPageView {
         let subButton = `
         <button class="subscribe__btn open__post-btn">
             <div class="text_button">Subscribe</div>
-        </button>`
+        </button>`;
         if (state.user.subscriptions.includes(user.id)) {
             subButton = `
             <button class="subscribe__btn open__post-btn">
                 <div class="text_button">Unsubscribe</div>
-            </button>`
+            </button>`;
         }
         if (user.id === +localStorage.userId) {
             subButton = `
             <button class="subscribe__btn open__post-btn display_none">
                 <div class="text_button">Unsubscribe</div>
-            </button>`
+            </button>`;
         }
         let img;
 
         if (user.settings.photo === '') {
             img = '../../../img/base.jpg';
-        }
-        else {
-            img = user.settings.photo
+        } else {
+            img = user.settings.photo;
         }
 
         return ` 
