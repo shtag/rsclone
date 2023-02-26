@@ -1,11 +1,12 @@
 import model from "../api/Model";
 
 async function checkSession(): Promise<boolean> {
-    const session = await model.auth.checkSession({ id: +localStorage.userId, sessionId: localStorage.sessionId });
-    if (!localStorage.sessionId || localStorage.sessionId === '' || !session.sessionActive) {
-        return false;
+    try {
+        const session = await model.auth.checkSession({ id: +localStorage.userId, sessionId: localStorage.sessionId });
+        return true;
+    } catch {
+        return false
     }
-    return true
 }
 
 function resetInputs(input: NodeListOf<HTMLInputElement>) {

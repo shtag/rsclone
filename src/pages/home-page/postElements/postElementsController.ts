@@ -1,13 +1,12 @@
 import model from '../../../api/Model';
-import { CommentsLikeRequest, Post } from '../../../types/types';
+import { CommentsLikeRequest, Post, State } from '../../../types/types';
 
 import postElemens from './postElemensView';
 
 // eslint-disable-next-line import/no-mutable-exports
 // export let page = 1;
-export const state = {
+export const state: State = {
     page: 1,
-    user: await model.user.get(localStorage.userId),
 }
 
 class PostElementsController {

@@ -10,7 +10,7 @@ import HeaderController from './HeaderController';
 import { disableScroll } from '../../types/functions';
 
 export class HeaderView {
-    static renderHeaderContainer() {
+    static async renderHeaderContainer() {
         const header = document.querySelector('header') as HTMLElement;
         let HTMLHeader = '';
         HTMLHeader = `
@@ -23,9 +23,9 @@ export class HeaderView {
         `;
         header.innerHTML = HTMLHeader;
         if (localStorage.sessionId !== undefined) {
-            HeaderView.renderHeaderAfterLogin();
+            await HeaderView.renderHeaderAfterLogin();
         } else {
-            HeaderView.renderHeaderBeforeLogin();
+            await HeaderView.renderHeaderBeforeLogin();
         }
 
     }
@@ -88,7 +88,7 @@ export class HeaderView {
         }
         this.renderSettingPopup();
         this.openSetting();
-        HeaderController.openLikedPosts();
+        // HeaderController.openLikedPosts();
     }
 
     static renderSettingPopup() {

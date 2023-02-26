@@ -46,6 +46,21 @@ class GeneralUserController {
 
         return { equal: false, username: user.username };
     }
+
+    static async setListeners() {
+        const body = document.querySelector('body') as HTMLBodyElement;
+        body.addEventListener('click', async (e) => {
+            const target = e.target as HTMLElement;
+            if (target.closest('.subscribe__btn')) {
+                const users = await model.user.getAll();
+                const username = window.location.pathname.split('/')[1];
+                const user = users.find(u => u.username === username)
+                if (user) {
+                    UserPageController.subscribeToUser(user.id);
+                }
+            }
+        })
+    }
 }
 
 export default GeneralUserController;

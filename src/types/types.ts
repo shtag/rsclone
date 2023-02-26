@@ -125,7 +125,7 @@ interface PhotoAPI {
 
 interface State {
     page: number;
-    user: User;
+    user?: User;
     sessionValid?: boolean
 }
 

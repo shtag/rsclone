@@ -1,4 +1,5 @@
 import model from '../../../api/Model';
+import { state } from '../../home-page/postElements/postElementsController';
 import GeneralUserController from '../UserProfileController';
 import UserPageView from './UserInfoView';
 
@@ -11,7 +12,9 @@ class UserPageController {
         main?.append(user);
 
         user.innerHTML = await UserPageView.renderUserInfo(id);
-        await UserPageController.subscribe(id);
+        if (state.sessionValid) {
+            await UserPageController.subscribe(id);
+        }
         const view = document.querySelector('.view') as HTMLImageElement;
 
         view?.addEventListener('click', () => {
@@ -54,6 +57,18 @@ class UserPageController {
             localStorage.setItem('subscribed', (!subscribed).toString());
             await model.user.subscribe({ sessionId: currentSessionId, username });
         });
+    }
+
+    static async subscribeToUser(id: number) {
+        const currentSessionId = localStorage.getItem('sessionId') as string;
+        const currentUserId = localStorage.getItem('userId') as string;
+        const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
+        const subscribed = localStorage.getItem('subscribed') === 'true';
+        const session = await GeneralUserController.checkSession(currentSessionId, id);
+        const username = session.username as string;
+        subscribeBtn.children[0].innerHTML = subscribed ? 'Subscribe' : 'Unsubscribe';
+        localStorage.setItem('subscribed', (!subscribed).toString());
+        await model.user.subscribe({ sessionId: currentSessionId, username });
     }
 }
 

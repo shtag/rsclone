@@ -1,4 +1,5 @@
 import { resetInputs } from "../../types/functions";
+import PageController from "../PageController";
 import LoginPageView from "./LoginPageView";
 import LoginValidation from "./LoginValidation";
 import './login_page.scss'
@@ -6,6 +7,7 @@ import './login_page.scss'
 class LoginPageController {
 
     static renderLoginPage() {
+        PageController.renderStructure();
         (document.querySelector('.header') as HTMLBodyElement).classList.remove('header');
         const body = document.querySelector('main') as HTMLBodyElement;
         body.innerHTML = '';

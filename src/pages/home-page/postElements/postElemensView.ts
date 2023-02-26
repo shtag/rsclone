@@ -1,5 +1,6 @@
 import model from '../../../api/Model';
-import { Post, Comment } from '../../../types/types';
+import { Post, Comment, User } from '../../../types/types';
+import { state } from './postElementsController';
 
 export class postElemens {
     static async renderPost(PostData: Post) {
@@ -28,13 +29,14 @@ export class postElemens {
         const date = new Date(dateInMs);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
-        const user = model.user.get(Number(localStorage.getItem('userId')));
+        let color = "#f9fdfe";
+        if (state.sessionValid) {
+            const user = await model.user.get(Number(localStorage.getItem('userId')));
 
-        let color = '';
-        if ((await user).favorites.includes(PostData.id)) {
-            color = "darkorange"
-        } else { color = "#f9fdfe" }
-
+            if (user.favorites.includes(PostData.id)) {
+                color = "darkorange"
+            }
+        }
         return `
         <div class="post_wrapper">
             <div class="post">
@@ -58,7 +60,6 @@ export class postElemens {
                 data-post_id="${PostData.id}"
                 autocomplete="off"
                 type="text"
-                id="uname"
                 name="name"
                 placeholder="Add a comment..."
                 size="30" required />
@@ -108,14 +109,11 @@ export class postElemens {
     }
 
     static async renderBlockWithComment(PostData: Post) {
-        const user = await model.user.get(Number(localStorage.userId));
-        let img: string;
-        if (user.settings.photo === '') {
-            img = 'https://i.postimg.cc/zBhxtTWj/base.jpg';
-        } else {
-            img = user.settings.photo;
-        }
-        const HTMLComment = PostData.comments.map((comment) => postElemens.renderComment(comment, PostData.id, user.username, img));
+        const users = await model.user.getAll()
+        const HTMLComment = PostData.comments.map((comment) => {
+            const user = users.find(us => us.id === comment.author) as User;
+            return postElemens.renderComment(comment, PostData.id, user.username, user.settings.photo);
+        })
         return HTMLComment.join('');
     }
 

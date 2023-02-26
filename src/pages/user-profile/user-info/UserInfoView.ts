@@ -12,11 +12,13 @@ class UserPageView {
         <button class="subscribe__btn open__post-btn">
             <div class="text_button">Subscribe</div>
         </button>`
-        if (state.user.subscriptions.includes(user.id)) {
-            subButton = `
-            <button class="subscribe__btn open__post-btn">
-                <div class="text_button">Unsubscribe</div>
-            </button>`
+        if (state.user) {
+            if (state.user.subscriptions.includes(user.id)) {
+                subButton = `
+                <button class="subscribe__btn open__post-btn">
+                    <div class="text_button">Unsubscribe</div>
+                </button>`
+            }
         }
         if (user.id === +localStorage.userId) {
             subButton = `

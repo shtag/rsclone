@@ -2,6 +2,7 @@ import model from '../../../api/Model';
 import postElemens from '../../home-page/postElements/postElemensView';
 import OpenPostView from './OpenPostView';
 import { sessionId } from '../../../types/constants';
+import { state } from '../../home-page/postElements/postElementsController';
 
 class OpenPostController {
     static async setPost(postId: number) {
@@ -17,7 +18,6 @@ class OpenPostController {
         goBack.innerHTML = await OpenPostView.renderPost(postId);
 
         const route = goBack.querySelector('.route') as HTMLAnchorElement;
-
         if (localStorage.getItem('favorites') === 'true' && userName.id === +localStorage.getItem('userId')!) {
             route.href = `/${userName.username}/favorites`;
         } else if (localStorage.getItem('favorites') === 'false') {

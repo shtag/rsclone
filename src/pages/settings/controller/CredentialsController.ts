@@ -1,6 +1,7 @@
 import confetti from 'canvas-confetti';
 
 import model from '../../../api/Model';
+import { state } from '../../home-page/postElements/postElementsController';
 
 class CredentialsController {
     static newLogin: string;
@@ -92,8 +93,10 @@ class CredentialsController {
     }
 
     static async changeUserCredentials(sessionId: string, userId: string) {
-        CredentialsController.validateNewLogin();
-        CredentialsController.validateNewPassword();
+        if (state.sessionValid) {
+            CredentialsController.validateNewLogin();
+            CredentialsController.validateNewPassword();
+        }
 
         const submitBtn = document.querySelector('.settings__submitCredentials') as HTMLButtonElement;
         const form = document.querySelector('.settings__form-credentials') as HTMLFormElement;
