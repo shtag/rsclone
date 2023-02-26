@@ -14,8 +14,8 @@ import GeneralUserController from './pages/user-profile/UserProfileController';
 class App {
     static async start() {
         console.log('start');
-        localStorage.setItem('sessionId', sessionId);
-        localStorage.setItem('userId', '1');
+        // localStorage.setItem('sessionId', sessionId);
+        // localStorage.setItem('userId', '1');
         if (await checkSession()) {
             state.user = await model.user.get(+localStorage.userId);
         }

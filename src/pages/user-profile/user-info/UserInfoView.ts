@@ -21,7 +21,7 @@ class UserPageView {
                 </button>`
             }
         }
-        if (user.id === +localStorage.userId) {
+        if (user.id === +localStorage.userId || !state.sessionValid) {
             subButton = `
             <button class="subscribe__btn open__post-btn display_none">
                 <div class="text_button">Unsubscribe</div>

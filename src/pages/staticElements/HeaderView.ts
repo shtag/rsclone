@@ -6,7 +6,7 @@ import SettingsView from '../settings/SettingsView';
 import Router from '../../router';
 import { Post } from '../../types/types';
 import HeaderController from './HeaderController';
-import { disableScroll } from '../../types/functions';
+import { disableScroll, enableScroll } from '../../types/functions';
 
 
 export class HeaderView {
@@ -82,12 +82,11 @@ export class HeaderView {
         const search = NavBar.querySelector('.search-btn') as HTMLButtonElement;
         const setting = NavBar.querySelector('.setting-btn') as HTMLButtonElement;
         if (localStorage.sessionId === undefined) {
-            search.disabled = true;
+            search.disabled = false;
             setting.disabled = true;
         }
         this.renderSettingPopup();
         this.openSetting();
-        // HeaderController.openLikedPosts();
     }
 
     static renderSettingPopup() {
@@ -109,8 +108,9 @@ export class HeaderView {
         btn.onclick = () => {
             if (popup.classList.contains('open')) {
                 popup.classList.remove('open');
-                disableScroll();
+                enableScroll();
             } else {
+                disableScroll();
                 popup.classList.add('open');
             }
         };
@@ -118,9 +118,7 @@ export class HeaderView {
         body.onclick = (event) => {
             if (!popup.contains(event.target as Node) && !btn.contains(event.target as Node)) {
                 popup.classList.remove('open');
-                // setTimeout(() => {
-                //     window.location.reload();
-                // }, 1000);
+                enableScroll();
             }
         };
     }

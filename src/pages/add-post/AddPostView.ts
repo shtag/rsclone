@@ -1,8 +1,8 @@
 import './style.scss';
 
 class AddPostView {
-   static renderAddPost() {
-      return `
+    static renderAddPost() {
+        return `
         <div class="add__block">
         <div class="add__gradient">
            <form class="add__form">
@@ -33,7 +33,25 @@ class AddPostView {
         </div>
      </div> 
         `;
-   }
+    }
+
+    static loader() {
+        return `
+        <div class="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        </div>`
+    }
 }
 
 export default AddPostView;

@@ -1,4 +1,3 @@
-import postElemens from "../home-page/postElements/postElemensView";
 import HeaderView from "./HeaderView";
 
 class HeaderController {

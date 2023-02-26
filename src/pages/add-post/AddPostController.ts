@@ -1,7 +1,7 @@
 import confetti from 'canvas-confetti';
 
 import model from '../../api/Model';
-import { sessionId } from '../../types/constants';
+import Router from '../../router';
 import AddPostView from './AddPostView';
 
 class AddPostController {
@@ -32,7 +32,10 @@ class AddPostController {
         deleteBtn.style.padding = '12px';
 
         addImg.addEventListener('change', async () => {
+            dropZone.innerHTML = AddPostView.loader();
             const img = await model.uploadPhoto(addImg.files as FileList);
+            const loader = document.querySelector('.lds-spinner') as HTMLElement;
+            loader.remove();
             AddPostController.image = img.data.link;
 
             const dropZoneImg = document.createElement('img');
@@ -51,14 +54,8 @@ class AddPostController {
         });
 
         deleteBtn.addEventListener('click', () => {
-            alert('Do you want to delete the image?');
-            setTimeout(() => {
-                window.location.reload();
-            }, 500);
-
-            AddPostController.dropzoneDisabled = false;
-            dropZone.addEventListener('dragover', AddPostController.handleDragOver);
-            dropZone.addEventListener('drop', AddPostController.handleDrop);
+            main.innerHTML = '';
+            Router.handleLocation();
         });
 
         AddPostController.dropzoneDisabled = false;
@@ -76,17 +73,18 @@ class AddPostController {
 
         addBtn.addEventListener('click', async () => {
             try {
-                await model.post.create({ sessionId, image: AddPostController.image, description: AddPostController.description || '' });
+                if (localStorage.sessionId) {
+                    await model.post.create({ sessionId: localStorage.sessionId, image: AddPostController.image, description: AddPostController.description || '' });
+                }
                 confetti({
                     particleCount: 400,
                     startVelocity: 90,
                     spread: 360,
                 });
 
-                const currentUrl = window.location.href;
-                const newUrl = currentUrl.replace(/[^/]+$/, 'feed');
                 setTimeout(() => {
-                    window.location.replace(newUrl);
+                    window.history.pushState({}, '', '/feed');
+                    Router.handleLocation();
                 }, 2000);
             } catch (error) {
                 alert('An error occured, please try again later.');
@@ -106,11 +104,6 @@ class AddPostController {
         event.preventDefault();
         dropZone.classList.remove('dragover');
 
-        // Check if file is not already uploaded
-        if (AddPostController.image) {
-            return;
-        }
-
         if (event.dataTransfer?.files?.length) {
             const file = event.dataTransfer.files[0];
             if (
@@ -118,9 +111,15 @@ class AddPostController {
                 (file.name.endsWith('.jpeg') || file.name.endsWith('.jpg') || file.name.endsWith('.png') || file.name.endsWith('.gif'))
             ) {
                 try {
+                    dropZone.innerHTML = AddPostView.loader();
                     const dropzoneImg = await model.uploadPhoto(event.dataTransfer.files as FileList);
+                    const loader = document.querySelector('.lds-spinner') as HTMLElement;
+                    loader.remove();
                     AddPostController.image = dropzoneImg.data.link;
-
+                    const tempImg = document.querySelector('.add__preview') as HTMLImageElement;
+                    if (tempImg) {
+                        tempImg.remove();
+                    }
                     const img = document.createElement('img');
                     img.classList.add('add__preview');
                     img.src = URL.createObjectURL(file);

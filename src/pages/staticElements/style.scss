@@ -130,6 +130,12 @@
         &:active {
             filter: opacity(0.5);
         }
+        &:disabled {
+            cursor: auto;
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
     }
 
     a.profile-btnBefore {
