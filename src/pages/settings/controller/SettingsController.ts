@@ -2,7 +2,7 @@ import CredentialsController from './CredentialsController';
 import InteractionController from './InteractionController';
 
 class SettingsController {
-    static generalCredentialsController() {
+    static async generalCredentialsController () {
         const sessionId = localStorage.getItem('sessionId') as string;
         const userId = localStorage.getItem('userId') as string;
 

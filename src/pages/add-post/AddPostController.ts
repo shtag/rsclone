@@ -1,3 +1,5 @@
+import confetti from 'canvas-confetti';
+
 import model from '../../api/Model';
 import { sessionId } from '../../types/constants';
 import AddPostView from './AddPostView';
@@ -48,7 +50,7 @@ class AddPostController {
             dropZone.removeEventListener('drop', AddPostController.handleDrop);
         });
 
-        deleteBtn.addEventListener('click', (e: Event) => {
+        deleteBtn.addEventListener('click', () => {
             alert('Do you want to delete the image?');
             setTimeout(() => {
                 window.location.reload();
@@ -75,6 +77,17 @@ class AddPostController {
         addBtn.addEventListener('click', async () => {
             try {
                 await model.post.create({ sessionId, image: AddPostController.image, description: AddPostController.description || '' });
+                confetti({
+                    particleCount: 400,
+                    startVelocity: 90,
+                    spread: 360,
+                });
+
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.replace(/[^/]+$/, 'feed');
+                setTimeout(() => {
+                    window.location.replace(newUrl);
+                }, 2000);
             } catch (error) {
                 alert('An error occured, please try again later.');
             }
