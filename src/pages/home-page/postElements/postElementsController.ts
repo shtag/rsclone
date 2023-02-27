@@ -134,7 +134,7 @@ class PostElementsController {
                 const parent = target.parentNode;
                 if (parent) {
                     const sibling = parent.previousSibling?.previousSibling as HTMLElement;
-                    const getReplyUser = sibling.querySelector('b');
+                    const getReplyUser = sibling.querySelector('.user-text');
                     const text = getReplyUser?.innerHTML;
                     const getInputContainer = sibling.parentNode?.parentNode?.parentNode?.parentElement as HTMLElement;
                     const input = getInputContainer.querySelector('input') as HTMLInputElement;

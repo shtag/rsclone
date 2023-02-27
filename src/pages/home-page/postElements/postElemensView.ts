@@ -137,7 +137,7 @@ export class postElemens {
                         <img src="${img}" alt="" class="comment_mini_img" />
                     </a>
                     <div class="comment_text">
-                        <p><a href="/${user}" class="route">${user}</a>      ${comment.text}</p>
+                        <p><a href="/${user}" class="route user-text">${user}</a>      ${comment.text}</p>
                     </div>
                 </div>
                     <button class="comment_like-btn" data-postID="${postId}" data-commentID="${comment.id}">
