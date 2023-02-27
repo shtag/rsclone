@@ -14,12 +14,12 @@ class ModelAuth {
      * @returns {Object} - object - {username: string, sessionId: string, access: boolean}
      */
 
-    async login(username: string, password: string):  Promise<Login>{
+    async login(username: string, password: string): Promise<Login> {
         try {
             const body = {
                 username,
-                password
-            }
+                password,
+            };
             const data = await fetch(`${this.url}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -42,8 +42,8 @@ class ModelAuth {
         try {
             const body = {
                 username,
-                password
-            }
+                password,
+            };
             const data = await fetch(`${this.url}/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -62,7 +62,7 @@ class ModelAuth {
      * @returns {Object} - object - {sessionActive: boolean}
      */
 
-    async checkSession(authData: LogoutData): Promise<{ sessionActive: boolean; }> {
+    async checkSession(authData: LogoutData): Promise<{ sessionActive: boolean }> {
         try {
             const data = await fetch(`${this.url}/user/session`, {
                 method: 'POST',
@@ -84,14 +84,17 @@ class ModelAuth {
 
     async logout(authData: LogoutData): Promise<void> {
         try {
-            const data = await fetch(`${this.url}/logout`, {
+            const response = await fetch(`${this.url}/logout`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(authData),
             });
 
-            return data.json();
+            await response.text();
+
+            return;
         } catch (error) {
+            console.error(`An error occurred while logging out: ${error}`);
             throw new Error();
         }
     }
