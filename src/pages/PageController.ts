@@ -23,7 +23,6 @@ class PageController {
 
     static setHomePageController() {
         HeaderView.renderHeaderContainer();
-        // HeaderController.switchTheme();
         PostElementsController.renderFeeds(state.page);
         PostElementsController.checkPosition();
         PostElementsController.likesToComment();
