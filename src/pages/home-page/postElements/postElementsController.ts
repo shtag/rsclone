@@ -1,4 +1,5 @@
 import model from '../../../api/Model';
+import Router from '../../../router';
 import { checkSession } from '../../../types/functions';
 import { CommentsLikeRequest, Post, State } from '../../../types/types';
 import LoadersView from '../../staticElements/loaders/loadersView';
@@ -9,7 +10,7 @@ import postElemens from './postElemensView';
 // export let page = 1;
 export const state: State = {
     page: 1,
-}
+};
 
 class PostElementsController {
     static async checkPosition() {
@@ -143,7 +144,7 @@ class PostElementsController {
                 const parent = target.parentNode;
                 if (parent) {
                     const sibling = parent.previousSibling?.previousSibling as HTMLElement;
-                    const getReplyUser = sibling.querySelector('b');
+                    const getReplyUser = sibling.querySelector('.user-text');
                     const text = getReplyUser?.innerHTML;
                     const getInputContainer = sibling.parentNode?.parentNode?.parentNode?.parentElement as HTMLElement;
                     const input = getInputContainer.querySelector('input') as HTMLInputElement;
@@ -214,6 +215,53 @@ class PostElementsController {
         }
     }
 
+    static async delPost(element: Event) {
+        const sessionId = localStorage.getItem('sessionId') as string;
+        const el = element.target as HTMLElement;
+        const target = el.closest('.delete_btn') as HTMLElement;
+        const container = el.closest('.comments_container') as HTMLElement;
+        if (target) {
+            const id = target.dataset.post_id;
+            if (id) {
+                const postId = Number(id);
+                if (!Number.isNaN(postId)) {
+                    const popup = document.createElement('div');
+                    popup.classList.add('popup');
+                    const popupHtml = `
+                            <div class="popup">
+                            <div class="popup_content">
+                                <p>Are you sure you want to delete this post?</p>
+                                <div class="popup_buttons">
+                                <button class="popup_button confirm_button">Yes</button>
+                                <button class="popup_button cancel_button">No</button>
+                                </div>
+                            </div>
+                            </div>
+                        `;
+                    const popupContainer = document.createElement('div');
+                    popupContainer.innerHTML = popupHtml;
+                    document.body.appendChild(popupContainer);
+
+                    const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+                    const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
+
+                    confirmButton.addEventListener('click', async () => {
+                        const responce = await model.post.delete(postId, sessionId);
+                        if (responce === true) {
+                            if (window.location.href.indexOf(`/p/${postId}`) !== -1) {
+                                Router.openProfile(localStorage.userId);
+                            } else await container.remove();
+                        }
+                        popupContainer.remove();
+                    });
+
+                    cancelButton.addEventListener('click', () => {
+                        popupContainer.remove();
+                    });
+                }
+            }
+        }
+    }
 }
 
 export { PostElementsController };

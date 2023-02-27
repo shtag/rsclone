@@ -30,7 +30,6 @@ class PageController {
 
     static setHomePageController() {
         HeaderView.renderHeaderContainer();
-        // HeaderController.switchTheme();
         PostElementsController.renderFeeds(state.page);
         PostElementsController.checkPosition();
         PostElementsController.likesToComment();
@@ -88,7 +87,16 @@ class PageController {
             if (target.closest('.favorite_btn')) {
                 await PostElementsController.favorite(event);
             }
+            if (target.closest('.delete_btn')) {
+                await PostElementsController.delPost(event);
+            }
         });
+    }
+
+    static setDictionary() {
+        const toggler = document.querySelector('.settings__lang') as HTMLInputElement;
+        // gweibnm язык в локал
+         
     }
 }
 
