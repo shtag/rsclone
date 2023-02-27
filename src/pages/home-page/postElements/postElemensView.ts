@@ -1,6 +1,7 @@
 import model from '../../../api/Model';
 import { checkSession } from '../../../types/functions';
 import { Post, Comment, User } from '../../../types/types';
+import dictionary from '../../staticElements/dictionary';
 import svg from '../../staticElements/svg';
 import { state } from './postElementsController';
 
@@ -43,6 +44,7 @@ export class postElemens {
                 deleteBtn = `<div data-post_id="${PostData.id}" class="tools_container_item delete_btn" >${svg.delete}</div>`
             }
         }
+        const ln = dictionary[localStorage.lang];
         
         return `
         <div class="post_wrapper">
@@ -68,7 +70,7 @@ export class postElemens {
                 autocomplete="off"
                 type="text"
                 name="name"
-                placeholder="Add a comment..."
+                placeholder="${ln.AddComment}"
                 size="30" required />
                 <button type="button" class="imput_comment_btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,6 +131,7 @@ export class postElemens {
         const dateInMs = comment.date;
         const date = new Date(dateInMs);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const ln = dictionary[localStorage.lang];
         return `
             <div class="comment">
                 <div class="post_info_comment">
@@ -151,8 +154,8 @@ export class postElemens {
                 </div>
                 <div class="comment_tools">
                     <p class="comment_tools_time">${dateToPost}</p>
-                    <p class="comment_tools_like">${comment.likes.length} Likes</p>
-                    <button class="comment_tools_reply">reply</button>
+                    <p class="comment_tools_like">${comment.likes.length} ${ln.likes}</p>
+                    <button class="comment_tools_reply">${ln.reply}</button>
                 </div>
             </div>
             `;

@@ -1,6 +1,5 @@
 import AddPostController from './add-post/AddPostController';
 import { PostElementsController, state } from './home-page/postElements/postElementsController';
-import HeaderController from './staticElements/HeaderController';
 import HeaderView from './staticElements/HeaderView';
 import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
@@ -84,6 +83,12 @@ class PageController {
                 await PostElementsController.delPost(event);
             }
         });
+    }
+
+    static setDictionary() {
+        const toggler = document.querySelector('.settings__lang') as HTMLInputElement;
+        // gweibnm язык в локал
+         
     }
 }
 

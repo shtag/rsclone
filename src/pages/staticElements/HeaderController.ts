@@ -1,3 +1,4 @@
+import lang from "./dictionary";
 import HeaderView from "./HeaderView";
 
 class HeaderController {
@@ -45,6 +46,7 @@ class HeaderController {
     static setListeners() {
         const body = document.querySelector('body') as HTMLElement;
         body.addEventListener('click', (e) => {
+            console.log(lang)
             const target = e.target as HTMLElement;
             if (target.closest('.likes-btn')) {
                 HeaderController.openLikedPosts()

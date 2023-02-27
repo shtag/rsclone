@@ -18,6 +18,7 @@ class App {
         if (await checkSession()) {
             state.user = await model.user.get(+localStorage.userId);
         }
+        if (!localStorage.lang) {localStorage.lang = 'en'}
         Router.setEventListeners();
         PageController.setEventListener();
         HeaderController.loaderControlAnimation();
