@@ -110,6 +110,10 @@
             &::-webkit-scrollbar-thumb:hover {
                 background: #555;
             }
+            .lds-ring {
+                position: relative;
+                left: calc(50% - 35px);
+            }
         }
         .search_post {
             display: flex;

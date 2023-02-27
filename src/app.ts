@@ -9,6 +9,7 @@ import { checkSession } from './types/functions';
 import { state } from './pages/home-page/postElements/postElementsController';
 import model from './api/Model';
 import GeneralUserController from './pages/user-profile/UserProfileController';
+import search from './pages/staticElements/search/searchPopupController';
 
 class App {
     static async start() {
@@ -23,6 +24,9 @@ class App {
         HeaderController.loaderControlAnimation();
         HeaderController.setListeners();
         GeneralUserController.setListeners();
+        setTimeout(() => {
+            search.setBodyListeners()
+        }, 500);
     }
 }
 

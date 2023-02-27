@@ -26,6 +26,31 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex-grow: 1;
+}
+.light-theme {
+    footer {
+        a {
+            color: black;
+        }
+    }
+}
+footer {
+    display: flex;
+    gap: 20px;
+    transition: 0.2s;
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+        &:hover {
+            color: #555;
+        }
+    }
 }
 /* width */
 ::-webkit-scrollbar {
