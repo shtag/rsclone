@@ -86,12 +86,16 @@
         }
     }
 
+    &__submitCredentials {
+        margin: 20px 0;
+    }
+
     &__submitCredentials,
-    &__submitInteraction {
+    &__submitInteraction,
+    &__logout {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 20px 0;
         width: 150px !important;
         height: 50px;
     }
@@ -190,5 +194,25 @@
         transform: translateX(100%);
         background-color: rgb(253 215 3);
         transition: all 0.9s;
+    }
+
+    &__btns {
+        margin: 20px 0;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    &__deleteAccount {
+        cursor: pointer;
+        margin-left: auto;
+        width: 53px;
+        height: 53px;
+        filter: invert(98%) sepia(105%) saturate(500%) hue-rotate(290deg) brightness(114%) contrast(100%);
+        transition: 0.9s all;
+
+        &:hover {
+            transform: rotate(360deg);
+        }
     }
 }

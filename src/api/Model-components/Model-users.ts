@@ -55,7 +55,9 @@ class ModelUsers {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
             });
-            return data.json();
+            await data.text();
+
+            return;
         } catch (error) {
             throw new Error();
         }
