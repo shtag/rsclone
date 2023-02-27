@@ -33,7 +33,7 @@ export class postElemens {
         if (await checkSession()) {
             const user = await model.user.get(localStorage.userId);
             if (user.id === PostData.author) {
-                deleteBtn = `<div class="tools_container_item delete_btn">${svg.delete}</div>`
+                deleteBtn = `<div data-post_id="${PostData.id}" class="tools_container_item delete_btn" >${svg.delete}</div>`
             }
         }
         let color = "#f9fdfe";

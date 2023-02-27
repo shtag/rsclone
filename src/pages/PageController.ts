@@ -81,6 +81,9 @@ class PageController {
             if (target.closest('.favorite_btn')) {
                 await PostElementsController.favorite(event);
             }
+            if (target.closest('.delete_btn')) {
+                await PostElementsController.delPost(event);
+            }
         });
     }
 }

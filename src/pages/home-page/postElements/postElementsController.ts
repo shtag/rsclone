@@ -7,7 +7,7 @@ import postElemens from './postElemensView';
 // export let page = 1;
 export const state: State = {
     page: 1,
-}
+};
 
 class PostElementsController {
     static async checkPosition() {
@@ -205,6 +205,28 @@ class PostElementsController {
         }
     }
 
+    static async delPost(element: Event) {
+        console.log(element);
+        const sessionId = localStorage.getItem('sessionId') as string;
+        const el = element.target as HTMLElement;
+        const target = el.closest('.delete_btn') as HTMLElement;
+        const container = el.closest('.comments_container') as HTMLElement;
+        if (target) {
+            const id = target.dataset.post_id;
+            console.log(id);
+            if (id) {
+                const postId = Number(id);
+                if (!Number.isNaN(postId)) {
+                    const responce = await model.post.delete(postId, sessionId);
+                    console.log(responce);
+                    if (responce === true) {
+                        if (window.location.href.indexOf(`/p/${postId}`) !== -1) return;
+                        await container.remove();
+                    }
+                }
+            }
+        }
+    }
 }
 
 export { PostElementsController };

@@ -1,5 +1,5 @@
-@import '/src/scss/base/variables';
-@import url('https://fonts.cdnfonts.com/css/axiforma');
+@import "/src/scss/base/variables";
+@import url("https://fonts.cdnfonts.com/css/axiforma");
 
 .comments_container {
     text-align: center;
@@ -202,6 +202,7 @@
         gap: 15px;
         align-items: center;
     }
+
     .post_info_comment {
         display: flex;
         justify-content: space-between;
