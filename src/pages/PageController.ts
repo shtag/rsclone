@@ -2,6 +2,7 @@ import AddPostController from './add-post/AddPostController';
 import { PostElementsController, state } from './home-page/postElements/postElementsController';
 import HeaderController from './staticElements/HeaderController';
 import HeaderView from './staticElements/HeaderView';
+import search from './staticElements/search/searchPopupController';
 import OpenPostController from './user-profile/post/OpenPostController';
 import GeneralUserController from './user-profile/UserProfileController';
 
@@ -17,7 +18,14 @@ class PageController {
         body.innerHTML = `
             <header class="container header"></header>
             <main class="container"></main>
-            <footer class="container"></footer>
+            <footer class="container">
+            <a href="https://github.com/shtag">shtag</a>
+            <a href="https://github.com/wozzzie">wozzzie</a>
+            <a href="https://github.com/astap13">astap13</a>
+            <a href="https://rs.school/js/">
+                <img src="https://rs.school/images/rs_school_js.svg" height="30"> 
+            </a>
+            </footer>
         `;
     }
 

@@ -7,6 +7,7 @@ import Router from '../../router';
 import { Post } from '../../types/types';
 import HeaderController from './HeaderController';
 import { disableScroll, enableScroll } from '../../types/functions';
+import search from './search/searchPopupController';
 
 
 export class HeaderView {
@@ -79,10 +80,10 @@ export class HeaderView {
         `;
         NavBar.innerHTML = HTMLNavBar;
         body.append(NavBar);
-        const search = NavBar.querySelector('.search-btn') as HTMLButtonElement;
+        const searchBtn = NavBar.querySelector('.search-btn') as HTMLButtonElement;
         const setting = NavBar.querySelector('.setting-btn') as HTMLButtonElement;
         if (localStorage.sessionId === undefined) {
-            search.disabled = false;
+            searchBtn.disabled = false;
             setting.disabled = true;
         }
         this.renderSettingPopup();

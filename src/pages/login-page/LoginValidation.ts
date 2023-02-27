@@ -12,7 +12,7 @@ class LoginValidation {
             localStorage.setItem('sessionId', res.sessionId)
             localStorage.setItem('userId', res.id.toString());
             document.querySelector('header')?.classList.add('header');
-            window.history.pushState({}, '', '/feed');
+            window.history.pushState({}, '', '/recomendation');
             Router.handleLocation();
         } catch {
             usernameInput.setCustomValidity('sss')
@@ -33,7 +33,10 @@ class LoginValidation {
         const passwordConfirmInput = document.querySelector('.signup_password_confirm') as HTMLInputElement;
         passwordInput.minLength = 5;
         passwordConfirmInput.minLength = 5;
-
+        const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()+=-]{5,22}$/;
+        const loginRegex = /^[a-zA-Z0-9]{5,22}$/;
+        const validUsername = loginRegex.test(usernameInput.value);
+        const validPassword = passwordRegex.test(passwordInput.value);
         const a = document.querySelectorAll('.validate_error');
         const login = a[0] as HTMLElement;
         login.addEventListener('mouseover', () => {
@@ -42,7 +45,7 @@ class LoginValidation {
             passwordInput.setCustomValidity('')
         })
         let valid = true;
-        if (passwordInput.value === passwordConfirmInput.value) {
+        if (passwordInput.value === passwordConfirmInput.value && validPassword) {
             passwordInput.setCustomValidity('');
             passwordConfirmInput.setCustomValidity('');
         } else {
@@ -53,7 +56,7 @@ class LoginValidation {
             login.classList.remove('hide_error');
             return
         }
-        if (valid && usernameInput.value.length > 4) {
+        if (valid && validUsername) {
             try {
                 await model.auth.signUp(usernameInput.value, passwordInput.value);
                 (e.target as HTMLButtonElement).textContent = "✓"
@@ -71,7 +74,7 @@ class LoginValidation {
         } else {
             usernameInput.setCustomValidity('ss');
             login.classList.remove('hide_error');
-            login.textContent = 'Username has to be longer than 4 letters';
+            login.textContent = 'Username has to be longer than 4 letters, lesser than 22 letters and don`t have spaces';
         }
     }
 }
