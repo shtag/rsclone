@@ -1,4 +1,5 @@
 import model from '../../../api/Model';
+import Router from '../../../router';
 import { CommentsLikeRequest, Post, State } from '../../../types/types';
 
 import postElemens from './postElemensView';
@@ -215,11 +216,39 @@ class PostElementsController {
             if (id) {
                 const postId = Number(id);
                 if (!Number.isNaN(postId)) {
-                    const responce = await model.post.delete(postId, sessionId);
-                    if (responce === true) {
-                        if (window.location.href.indexOf(`/p/${postId}`) !== -1) return;
-                        await container.remove();
-                    }
+                    const popup = document.createElement('div');
+                    popup.classList.add('popup');
+                    const popupHtml = `
+                            <div class="popup">
+                            <div class="popup_content">
+                                <p>Are you sure you want to delete this post?</p>
+                                <div class="popup_buttons">
+                                <button class="popup_button confirm_button">Yes</button>
+                                <button class="popup_button cancel_button">No</button>
+                                </div>
+                            </div>
+                            </div>
+                        `;
+                    const popupContainer = document.createElement('div');
+                    popupContainer.innerHTML = popupHtml;
+                    document.body.appendChild(popupContainer);
+
+                    const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+                    const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
+
+                    confirmButton.addEventListener('click', async () => {
+                        const responce = await model.post.delete(postId, sessionId);
+                        if (responce === true) {
+                            if (window.location.href.indexOf(`/p/${postId}`) !== -1) {
+                                Router.openProfile(localStorage.userId);
+                            } else await container.remove();
+                        }
+                        popupContainer.remove();
+                    });
+
+                    cancelButton.addEventListener('click', () => {
+                        popupContainer.remove();
+                    });
                 }
             }
         }
