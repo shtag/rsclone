@@ -151,6 +151,7 @@ class InteractionController {
         });
 
         InteractionController.settingsLogOut(userId, sessionId);
+        InteractionController.settingsDeleteAccount(userId, sessionId);
     }
 
     static settingsLogOut(userId: string, sessionId: string) {
@@ -163,6 +164,21 @@ class InteractionController {
 
             localStorage.removeItem('sessionId');
             localStorage.removeItem('userId');
+            Router.handleLocation();
+        });
+    }
+
+    static settingsDeleteAccount(userId: string, sessionId: string) {
+        const deleteAccountBtn = document.querySelector('.settings__deleteAccount') as HTMLImageElement;
+
+        deleteAccountBtn.addEventListener('click', async () => {
+            if (await checkSession()) {
+                await model.user.delete(+userId, sessionId);
+            }
+            localStorage.removeItem('sessionId');
+            localStorage.removeItem('userId');
+            window.history.pushState({}, '', '/login');
+
             Router.handleLocation();
         });
     }
