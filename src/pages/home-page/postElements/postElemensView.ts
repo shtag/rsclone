@@ -3,7 +3,6 @@ import { checkSession } from '../../../types/functions';
 import { Post, Comment, User } from '../../../types/types';
 import dictionary from '../../staticElements/dictionary';
 import svg from '../../staticElements/svg';
-import { state } from './postElementsController';
 
 export class postElemens {
     static async renderPost(PostData: Post) {

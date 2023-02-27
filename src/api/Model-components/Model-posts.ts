@@ -90,7 +90,6 @@ class ModelPosts {
             }
 
             )
-            console.log(await test.json());
             return true
         } catch (error) {
             return false
