@@ -6,6 +6,7 @@ import HeaderController from './pages/staticElements/HeaderController';
 import { PostElementsController, state } from './pages/home-page/postElements/postElementsController';
 import search from './pages/staticElements/search/searchPopupController';
 import { checkSession } from './types/functions';
+import LoadersView from './pages/staticElements/loaders/loadersView';
 
 class Router {
     static route(event: Event) {
@@ -18,6 +19,9 @@ class Router {
     }
 
     static async handleLocation() {
+        const main = document.querySelector('body') as HTMLElement;
+        main.innerHTML = LoadersView.addGlobal();
+        main.classList.add('flex_center')
         const path: string[] = window.location.pathname.split('/');
         const users = await model.user.getAll();
         PageController.renderStructure();
@@ -47,7 +51,8 @@ class Router {
         } else {
             Router.open404();
         }
-        search.renderPopup();
+        main.classList.remove('flex_center');
+        await search.renderPopup();
     }
 
     static async openAddPost() {
@@ -156,6 +161,7 @@ class Router {
         window.addEventListener('popstate', async () => {
             await Router.handleLocation();
         });
+
     }
 
     static async checkSession(): Promise<boolean> {

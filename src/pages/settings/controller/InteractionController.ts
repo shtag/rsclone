@@ -2,6 +2,7 @@ import confetti from 'canvas-confetti';
 
 import model from '../../../api/Model';
 import Router from '../../../router';
+import { checkSession } from '../../../types/functions';
 
 class InteractionController {
     static language: string;
@@ -119,12 +120,45 @@ class InteractionController {
                 startVelocity: 90,
                 spread: 360,
             });
+
             const user = document.querySelector('.user');
             user?.remove();
             Router.handleLocation();
 
             submitBtn.disabled = true;
             formInteraction.reset();
+        });
+
+        InteractionController.settingsLogOut(userId, sessionId);
+        InteractionController.settingsDeleteAccount(userId, sessionId);
+    }
+
+    static settingsLogOut(userId: string, sessionId: string) {
+        const logOutBtn = document.querySelector('.settings__logOut') as HTMLButtonElement;
+
+        logOutBtn.addEventListener('click', async () => {
+            if (await checkSession()) {
+                await model.auth.logout({ sessionId, id: +userId });
+            }
+
+            localStorage.removeItem('sessionId');
+            localStorage.removeItem('userId');
+            Router.handleLocation();
+        });
+    }
+
+    static settingsDeleteAccount(userId: string, sessionId: string) {
+        const deleteAccountBtn = document.querySelector('.settings__deleteAccount') as HTMLImageElement;
+
+        deleteAccountBtn.addEventListener('click', async () => {
+            if (await checkSession()) {
+                await model.user.delete(+userId, sessionId);
+            }
+            localStorage.removeItem('sessionId');
+            localStorage.removeItem('userId');
+            window.history.pushState({}, '', '/login');
+
+            Router.handleLocation();
         });
     }
 }

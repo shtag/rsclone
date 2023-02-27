@@ -1,6 +1,8 @@
 import model from '../../../api/Model';
 import Router from '../../../router';
+import { checkSession } from '../../../types/functions';
 import { CommentsLikeRequest, Post, State } from '../../../types/types';
+import LoadersView from '../../staticElements/loaders/loadersView';
 
 import postElemens from './postElemensView';
 
@@ -87,11 +89,12 @@ class PostElementsController {
             return;
         }
         try {
-            if (localStorage.sessionId === undefined) return;
+            if (!(await checkSession())) return;
+            target.innerHTML = LoadersView.add();
             const post = await model.comment.add(postId, commentRequest);
-            const parrent = (event.target as HTMLElement).closest('.post_info_cotainer') as HTMLElement;
+            const parrent = target.closest('.post_info_cotainer') as HTMLElement;
             const block = parrent.querySelector('.comment_container') as HTMLElement;
-            const postContainer = (event.target as HTMLElement).closest('.comments_container') as HTMLElement;
+            const postContainer = target.closest('.comments_container') as HTMLElement;
             const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
             const user = await model.user.get(Number(localStorage.userId));
             let img: string;
@@ -103,6 +106,12 @@ class PostElementsController {
             block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
             toolsComment.innerHTML = String(post.comments.length);
             input.value = '';
+            setTimeout(() => {
+                target.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 3L9.21802 10.083" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"></path>
+                <path d="M11.698 20.334L22 3.001H2L9.218 10.084L11.698 20.334Z" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"></path>
+                </svg>`
+            }, 500);
         } catch (error) {
             console.error(error);
         }

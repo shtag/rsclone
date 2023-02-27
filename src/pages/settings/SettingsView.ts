@@ -41,10 +41,20 @@ class SettingsView {
                  <span class="settings__error_description"></span>
               </div>
         </div>
+        <div class="settings__btns">
         <button type="submit" class="settings__submitInteraction open__post-btn" disabled>
         <div class="text_button">${ln.SaveChanges}</div>
         </button>
         <span class="settings__error_submit"></span>
+
+        <button type="button" class="settings__logOut open__post-btn">
+        <div class="text_button">Log out</div>
+        </button>
+
+        <img class="settings__deleteAccount" src="/img/icons/delete-account.png" alt="delete-account" />
+
+        </div>
+       
         </form>
         `;
     }
