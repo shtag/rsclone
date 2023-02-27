@@ -22,13 +22,6 @@ class SettingsView {
         </form>
         <div class="settings__interaction">
            <h2 class="settings__subtitle">User interaction</h2>
-           <div class="settings__theme-block">
-              <h3 class="settings__block-title">Theme: </h3>
-              <input class="settings__theme" type="checkbox" name="themeAuto" id="themeAuto" value="themeAuto">
-              <label for="themeAuto">Automatically change theme</label>
-              <img class="settings__hint_icon" src="/img/icons/hint-icon.svg"/>
-              <div class="settings__hint">You don't need to click submit button to apply theme changes. It's done automatically.</div>
-           </div>
            <div class="settings__lang-block">
               <h3 class="settings__block-title">Language:</h3>
               <input type="checkbox" class="settings__lang">

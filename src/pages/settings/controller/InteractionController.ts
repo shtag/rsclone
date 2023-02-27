@@ -10,22 +10,6 @@ class InteractionController {
 
     static description: string;
 
-    static changeSettingsTheme() {
-        const autoTheme = document.querySelector('.settings__theme') as HTMLInputElement;
-
-        autoTheme.addEventListener('click', () => {
-            if (autoTheme.checked) {
-                localStorage.setItem('autoTheme', 'true');
-            } else {
-                localStorage.removeItem('autoTheme');
-            }
-        });
-
-        if (localStorage.getItem('autoTheme') === 'true') {
-            autoTheme.checked = true;
-        }
-    }
-
     static changeSettingsLang(submitBtn: HTMLButtonElement) {
         const langToggle = document.querySelector('.settings__lang') as HTMLInputElement;
         const submit = submitBtn;
@@ -115,14 +99,9 @@ class InteractionController {
         const hintIcon = document.querySelector('.settings__hint_icon') as HTMLImageElement;
         const hint = document.querySelector('.settings__hint') as HTMLDivElement;
 
-        InteractionController.changeSettingsTheme();
         InteractionController.changeSettingsLang(submitBtn);
         InteractionController.changeSettingsName(submitBtn);
         InteractionController.changeSettingsDescription(submitBtn);
-
-        hintIcon.addEventListener('click', () => {
-            hint.classList.toggle('settings__hint_open');
-        });
 
         submitBtn.addEventListener('click', async (e: Event) => {
             e.preventDefault();

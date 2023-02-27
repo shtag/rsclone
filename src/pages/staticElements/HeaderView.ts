@@ -5,7 +5,6 @@ import SettingsController from '../settings/controller/SettingsController';
 import SettingsView from '../settings/SettingsView';
 import Router from '../../router';
 import { Post } from '../../types/types';
-import HeaderController from './HeaderController';
 import { disableScroll, enableScroll } from '../../types/functions';
 
 
