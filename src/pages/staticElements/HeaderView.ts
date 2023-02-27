@@ -87,6 +87,9 @@ export class HeaderView {
         }
         this.renderSettingPopup();
         this.openSetting();
+        setTimeout(async () => {
+            await search.renderPopup()
+        }, 500)
     }
 
     static renderSettingPopup() {

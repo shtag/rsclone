@@ -43,6 +43,7 @@ footer {
     display: flex;
     gap: 20px;
     transition: 0.2s;
+    justify-content: center;
     a {
         text-decoration: none;
         color: white;
@@ -82,6 +83,7 @@ footer {
 .container {
     max-width: 950px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .day {

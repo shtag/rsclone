@@ -19,9 +19,10 @@ class Router {
     }
 
     static async handleLocation() {
-        const main = document.querySelector('body') as HTMLElement;
-        main.innerHTML = LoadersView.addGlobal();
-        main.classList.add('flex_center')
+        const main = document.querySelector('html') as HTMLElement;
+        main.innerHTML += LoadersView.addGlobal();
+        // main.innerHTML = LoadersView.addGlobal();
+        // main.classList.add('flex_center')
         const path: string[] = window.location.pathname.split('/');
         const users = await model.user.getAll();
         PageController.renderStructure();
@@ -38,7 +39,7 @@ class Router {
             Router.openFeed();
         } else if (path[1] === 'p' && path.length === 3) {
             Router.openPost(+path[2]);
-        } else if (path[1] === 'recommendation') {
+        } else if (path[1] === 'recommendation' && path.length === 2) {
             Router.openRecommendation();
         } else if (user && path[2] === 'favorites' && path.length === 3) {
             Router.openFavorites(user.id);
@@ -51,8 +52,10 @@ class Router {
         } else {
             Router.open404();
         }
-        main.classList.remove('flex_center');
-        await search.renderPopup();
+        // main.classList.remove('flex_center');
+
+        const loader = document.querySelector('.global_loader');
+        LoadersView.removeGlobal();
     }
 
     static async openAddPost() {

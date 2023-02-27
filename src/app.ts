@@ -19,7 +19,7 @@ class App {
         if (await checkSession()) {
             state.user = await model.user.get(+localStorage.userId);
         }
-        if (!localStorage.lang) {localStorage.lang = 'en'}
+        if (!localStorage.lang) { localStorage.lang = 'en' }
         Router.setEventListeners();
         PageController.setEventListener();
         HeaderController.loaderControlAnimation();
@@ -27,7 +27,7 @@ class App {
         GeneralUserController.setListeners();
         setTimeout(() => {
             search.setBodyListeners()
-        }, 500);
+        }, 2000);
     }
 }
 

@@ -61,6 +61,20 @@
     }
 }
 
+.global_loader {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.3);
+    backdrop-filter: blur(25px);
+}
+
 .lds-roller {
     display: inline-block;
     position: relative;

@@ -39,6 +39,12 @@ class PostElementsController {
         };
         if (window.location.href.indexOf('/feed') !== -1) {
             const posts = await model.post.feed(params);
+            if (posts.length === 0) {
+                const main = document.querySelector('main') as HTMLElement;
+                main.innerHTML = `
+                <div>here is no posts yet</div>
+                `
+            }
             this.renderPosts(posts);
         }
 

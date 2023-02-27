@@ -6,7 +6,15 @@ class LoadersView {
     }
 
     static addGlobal() {
-        return `<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`
+        return `
+        <div class="global_loader">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>`
+    }
+
+    static removeGlobal() {
+        const loader = document.querySelector('.global_loader');
+        loader?.remove();
     }
 
     static center() {
