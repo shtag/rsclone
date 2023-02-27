@@ -29,6 +29,13 @@ export class postElemens {
         const dateInMs = PostData.date;
         const date = new Date(dateInMs);
         const dateToPost = date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        let color = "#f9fdfe";
+        if (await checkSession()) {
+            const user = await model.user.get(Number(localStorage.getItem('userId')));
+            if (user.favorites.includes(PostData.id)) {
+                color = "darkorange"
+            }
+        }
         let deleteBtn = ''
         if (await checkSession()) {
             const user = await model.user.get(localStorage.userId);
@@ -36,14 +43,7 @@ export class postElemens {
                 deleteBtn = `<div data-post_id="${PostData.id}" class="tools_container_item delete_btn" >${svg.delete}</div>`
             }
         }
-        let color = "#f9fdfe";
-        if (state.sessionValid) {
-            const user = await model.user.get(Number(localStorage.getItem('userId')));
-
-            if (user.favorites.includes(PostData.id)) {
-                color = "darkorange"
-            }
-        }
+        
         return `
         <div class="post_wrapper">
             <div class="post">
