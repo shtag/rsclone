@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti';
 import model from '../../../api/Model';
 import Router from '../../../router';
 import { checkSession } from '../../../types/functions';
+import dictionary from '../../staticElements/dictionary';
 
 class CredentialsController {
     static newLogin: string;
@@ -28,10 +29,11 @@ class CredentialsController {
         CredentialsController.oldLogin = oldLogin;
 
         login.addEventListener('input', () => {
+            const ln = dictionary[localStorage.lang];
             const isLoginValid = loginRegex.test(login.value);
 
             if (usernames.includes(login.value)) {
-                errorMessage.innerText = 'Username is already taken.';
+                errorMessage.innerText = `${ln.UsernameAlready}`;
                 errorMessage.style.display = 'block';
                 submitBtn.disabled = true;
             }

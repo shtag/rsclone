@@ -39,6 +39,7 @@ interface Dictionary {
     No: string;
     AreYou: string;
     deleteyouraccount: string;
+    UsernameAlready: string;
   }
 
 const en: Dictionary = {
@@ -81,7 +82,8 @@ const en: Dictionary = {
     Yes: 'Yes',
     No: 'No',
     AreYou: 'Are you sure you want to',
-    deleteyouraccount: 'delete your account'
+    deleteyouraccount: 'delete your account',
+    UsernameAlready: 'Username is already taken.'
 };
 
 const uk: Dictionary = {
@@ -124,7 +126,8 @@ const uk: Dictionary = {
     Yes: 'Так',
     No: 'Нi',
     AreYou: 'Ви впевнені, що хочете',
-    deleteyouraccount: 'видалити свій обліковий запис'
+    deleteyouraccount: 'видалити свій обліковий запис',
+    UsernameAlready: 'Користувач з таким іменем вже зареєстрований.'
 }
 
 const bl: Dictionary = {
@@ -167,7 +170,8 @@ const bl: Dictionary = {
     Yes: 'Так',
     No: 'Не',
     AreYou: 'Вы ўпэўненыя, што хочаце',
-    deleteyouraccount: 'выдаліць свой уліковы запіс'
+    deleteyouraccount: 'выдаліць свой уліковы запіс',
+    UsernameAlready: 'Імя карыстальніка ўжо занята.'
 }
 
 const pl: Dictionary = {
@@ -210,7 +214,8 @@ const pl: Dictionary = {
     Yes: 'Tak',
     No: 'Nie',
     AreYou: 'Czy na pewno chcesz',
-    deleteyouraccount: 'usunąć swoje konto'
+    deleteyouraccount: 'usunąć swoje konto',
+    UsernameAlready: 'Nazwa użytkownika jest już zajęta.'
 };
 
 const dictionary: {[key: string]:Dictionary} = {
