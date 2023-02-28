@@ -19,9 +19,9 @@ class UserPageController {
         user.innerHTML = await UserPageView.renderUserInfo(id);
 
         UserPageController.addProfilePhoto(id);
-        if (state.sessionValid) {
-            await UserPageController.subscribe(id);
-        }
+        // if (state.sessionValid) {
+        //     await UserPageController.subscribe(id);
+        // }
 
         const view = document.querySelector('.view') as HTMLImageElement;
 
@@ -73,7 +73,7 @@ class UserPageController {
         const user = await model.user.get(id);
         const followers = await model.user.getFollowers(id);
         const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
-        const currentSessionId = localStorage.getItem('userId') as string;
+        const currentSessionId = localStorage.getItem('sessionId') as string;
         await model.user.subscribe({ sessionId: currentSessionId, username: user.username });
         const userCount = document.querySelector('.user__followers_quantity') as HTMLElement;
         if (subscribeBtn.children[0].textContent === ln.Unsubscribe) {
@@ -136,7 +136,7 @@ class UserPageController {
                     });
 
                     setTimeout(() => {
-                         window.history.pushState({}, '', `/${userName.username}`);
+                        window.history.pushState({}, '', `/${userName.username}`);
                         Router.handleLocation();
                         popupContainer.remove();
                     }, 1500);

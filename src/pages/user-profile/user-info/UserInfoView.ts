@@ -20,7 +20,7 @@ class UserPageView {
             if (state.user.subscriptions.includes(user.id)) {
                 subButton = `
                 <button class="subscribe__btn open__post-btn">
-                    <div class="text_button">${ln.Subscribe}</div>
+                    <div class="text_button">${ln.Unsubscribe}</div>
                 </button>`
             }
         }
