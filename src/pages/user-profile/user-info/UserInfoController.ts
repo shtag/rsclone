@@ -17,10 +17,12 @@ class UserPageController {
         main?.append(user);
 
         user.innerHTML = await UserPageView.renderUserInfo(id);
+
         UserPageController.addProfilePhoto(id);
         if (state.sessionValid) {
             await UserPageController.subscribe(id);
         }
+
         const view = document.querySelector('.view') as HTMLImageElement;
 
         view?.addEventListener('click', () => {
@@ -55,27 +57,31 @@ class UserPageController {
         subscribeBtn.style.display = !session.equal ? 'block' : 'none';
         const username = session.username as string;
 
-        subscribeBtn.addEventListener('click', async () => {
-            const subscribed = localStorage.getItem('subscribed') === 'true';
-            subscribeBtn.children[0].innerHTML = subscribed ? 'Subscribe' : 'Unsubscribe';
-            localStorage.setItem('subscribed', (!subscribed).toString());
-            await model.user.subscribe({ sessionId: currentSessionId, username });
+        // subscribeBtn.addEventListener('click', async () => {
+        //     const subscribed = localStorage.getItem('subscribed') === 'true';
+        //     subscribeBtn.children[0].innerHTML = subscribed ? 'Subscribe' : 'Unsubscribe';
+        //     localStorage.setItem('subscribed', (!subscribed).toString());
+        //     await model.user.subscribe({ sessionId: currentSessionId, username });
 
-            const followers = await model.user.getFollowers(id);
-            followersQuantity.innerHTML = String(followers.length);
-        });
+        //     const followers = await model.user.getFollowers(id);
+        //     followersQuantity.innerHTML = String(followers.length);
+        // });
     }
 
     static async subscribeToUser(id: number) {
-        const currentSessionId = localStorage.getItem('sessionId') as string;
-        const currentUserId = localStorage.getItem('userId') as string;
+        const ln = dictionary[localStorage.lang];
+        const user = await model.user.get(id);
+        const followers = await model.user.getFollowers(id);
         const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
-        const subscribed = localStorage.getItem('subscribed') === 'true';
-        const session = await GeneralUserController.checkSession(currentSessionId, id);
-        const username = session.username as string;
-        subscribeBtn.children[0].innerHTML = subscribed ? 'Subscribe' : 'Unsubscribe';
-        localStorage.setItem('subscribed', (!subscribed).toString());
-        await model.user.subscribe({ sessionId: currentSessionId, username });
+        const currentSessionId = localStorage.getItem('userId') as string;
+        await model.user.subscribe({ sessionId: currentSessionId, username: user.username });
+        const userCount = document.querySelector('.user__followers_quantity') as HTMLElement;
+        if (subscribeBtn.children[0].textContent === ln.Unsubscribe) {
+            subscribeBtn.children[0].innerHTML = ln.Subscribe;
+        } else {
+            subscribeBtn.children[0].innerHTML = ln.Unsubscribe;
+        }
+        userCount.textContent = followers.length.toString();
     }
 
     static async addProfilePhoto(id: number) {

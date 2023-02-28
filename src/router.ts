@@ -53,6 +53,8 @@ class Router {
         }
         main.classList.remove('flex_center');
         await search.renderPopup();
+        const html = document.querySelector('html') as HTMLElement;
+        html.style.overflow = '';
     }
 
     static async openAddPost() {
