@@ -12,23 +12,68 @@ class InteractionController {
     static description: string;
 
     static changeSettingsLang(submitBtn: HTMLButtonElement) {
-        const langToggle = document.querySelector('.settings__lang') as HTMLInputElement;
         const submit = submitBtn;
 
-        langToggle.addEventListener('change', (e: Event) => {
-            const target = e.target as HTMLInputElement;
-            if (target.checked) {
-                InteractionController.language = 'uk';
-                localStorage.setItem('lang', 'uk');
-            } else {
-                InteractionController.language = 'en';
-                localStorage.setItem('lang', 'en');
-            }
+        const langMenu = document.querySelector('.settings__lang') as HTMLDivElement;
+        const langItems = document.querySelector('.settings__lang-items') as HTMLUListElement;
+        const langItem = document.querySelectorAll('.settings__lang-item') as NodeListOf<Element>;
+        const flag = document.querySelector('.settings__lang-flag') as HTMLImageElement;
+        const langText = document.querySelector('.settings__lang-text') as HTMLParagraphElement;
+
+        langMenu.addEventListener('click', () => {
+            langItems.classList.toggle('settings__lang-items_open');
+        });
+
+        langItem.forEach((item) => {
+            item.addEventListener('click', (e: Event) => {
+                const target = e.target as Element;
+
+                if (target.innerHTML === 'English' || target.className === 'settings__en settings__lang-flag') {
+                    localStorage.setItem('lang', 'en');
+                    langText.innerText = 'English';
+                    flag.src = 'https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png';
+                } else if (target.innerHTML === 'Український' || target.className === 'settings__uk settings__lang-flag') {
+                    localStorage.setItem('lang', 'uk');
+                    langText.innerText = 'Український';
+                    flag.src = 'https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png';
+                } else if (target.innerHTML === 'Беларуская' || target.className === 'settings__bl settings__lang-flag') {
+                    localStorage.setItem('lang', 'bl');
+                    langText.innerText = 'Беларуская';
+                    flag.src = 'https://i.postimg.cc/tJNGH7cS/pl.png';
+                } else if (target.innerHTML === 'Polski' || target.className === 'settings__pl settings__lang-flag') {
+                    localStorage.setItem('lang', 'pl');
+                    langText.innerText = 'Polski';
+                    flag.src = 'https://i.postimg.cc/MHPtRSfZ/a3.png';
+                }
+                langItems.classList.remove('settings__lang-items_open');
+            });
             submit.disabled = false;
         });
 
-        if (localStorage.getItem('lang') === 'uk') {
-            langToggle.checked = true;
+        switch (localStorage.getItem('lang')) {
+            case 'en':
+                langText.innerText = 'English';
+                flag.src = 'https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png';
+                break;
+            case 'uk':
+                langText.innerText = 'Український';
+                flag.src = 'https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png';
+                break;
+
+            case 'bl':
+                langText.innerText = 'Беларуская';
+                flag.src = 'https://i.postimg.cc/tJNGH7cS/pl.png';
+                break;
+
+            case 'pl':
+                langText.innerText = 'Polski';
+                flag.src = 'https://i.postimg.cc/MHPtRSfZ/a3.png';
+                break;
+
+            default:
+                langText.innerText = 'English';
+                flag.src = 'https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png';
+                break;
         }
     }
 
@@ -137,13 +182,25 @@ class InteractionController {
         const logOutBtn = document.querySelector('.settings__logOut') as HTMLButtonElement;
 
         logOutBtn.addEventListener('click', async () => {
-            if (await checkSession()) {
-                await model.auth.logout({ sessionId, id: +userId });
-            }
+            InteractionController.settingsConfirmation('log out');
+            const popupContainer = document.querySelector('.popup__container') as HTMLDivElement;
+            const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+            const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
 
-            localStorage.removeItem('sessionId');
-            localStorage.removeItem('userId');
-            Router.handleLocation();
+            confirmButton.addEventListener('click', async () => {
+                if (await checkSession()) {
+                    await model.auth.logout({ sessionId, id: +userId });
+                }
+
+                localStorage.removeItem('sessionId');
+                localStorage.removeItem('userId');
+                Router.handleLocation();
+                popupContainer.remove();
+            });
+
+            cancelButton.addEventListener('click', () => {
+                popupContainer.remove();
+            });
         });
     }
 
@@ -151,15 +208,47 @@ class InteractionController {
         const deleteAccountBtn = document.querySelector('.settings__deleteAccount') as HTMLImageElement;
 
         deleteAccountBtn.addEventListener('click', async () => {
-            if (await checkSession()) {
-                await model.user.delete(+userId, sessionId);
-            }
-            localStorage.removeItem('sessionId');
-            localStorage.removeItem('userId');
-            window.history.pushState({}, '', '/login');
+            InteractionController.settingsConfirmation('delete your account');
 
-            Router.handleLocation();
+            const popupContainer = document.querySelector('.popup__container') as HTMLDivElement;
+            const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+            const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
+
+            confirmButton.addEventListener('click', async () => {
+                if (await checkSession()) {
+                    await model.user.delete(+userId, sessionId);
+                }
+                localStorage.removeItem('sessionId');
+                localStorage.removeItem('userId');
+                window.history.pushState({}, '', '/login');
+
+                Router.handleLocation();
+            });
+
+            cancelButton.addEventListener('click', () => {
+                popupContainer.remove();
+            });
         });
+    }
+
+    static settingsConfirmation(text: string) {
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        const popupHtml = `
+                <div class="popup">
+                <div class="popup_content">
+                    <p>Are you sure you want to ${text}?</p>
+                    <div class="popup_buttons">
+                    <button class="popup_button confirm_button">Yes</button>
+                    <button class="popup_button cancel_button">No</button>
+                    </div>
+                </div>
+                </div>
+            `;
+        const popupContainer = document.createElement('div');
+        popupContainer.className = 'popup__container';
+        popupContainer.innerHTML = popupHtml;
+        document.body.appendChild(popupContainer);
     }
 }
 
