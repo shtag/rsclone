@@ -130,11 +130,10 @@ class PostElementsController {
         try {
             if (!(await checkSession())) return;
             target.innerHTML = LoadersView.add();
-            const post = await model.comment.add(postId, commentRequest);
             const parrent = target.closest('.post_info_cotainer') as HTMLElement;
             const block = parrent.querySelector('.comment_container') as HTMLElement;
             const postContainer = target.closest('.comments_container') as HTMLElement;
-            const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
+
             const user = await model.user.get(Number(localStorage.userId));
             let img: string;
             if (user.settings.photo === '') {
@@ -142,8 +141,12 @@ class PostElementsController {
             } else {
                 img = user.settings.photo;
             }
+            const post = await model.comment.add(postId, commentRequest);
             block.innerHTML += postElemens.renderComment(post.comments[post.comments.length - 1], postId, user.username, img);
-            toolsComment.innerHTML = String(post.comments.length);
+            if (postContainer) {
+                const toolsComment = postContainer.querySelector('.tools_text_comment') as HTMLElement;
+                toolsComment.innerHTML = String(post.comments.length);
+            }
             input.value = '';
             setTimeout(() => {
                 target.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

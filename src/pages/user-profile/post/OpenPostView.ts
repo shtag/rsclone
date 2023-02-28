@@ -13,7 +13,7 @@ class OpenPostView {
         <div class="open__post-settings">
         <a class="route" href="/${userName.username}"><button class="open__post-btn"><div class="text_button">${ln.GoBack}</div></button></a>
         </div>
-        <div class="open__post"></div>
+        <div class="open__post comments_container"></div>
         `;
     }
 }
