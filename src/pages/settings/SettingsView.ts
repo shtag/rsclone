@@ -41,11 +41,11 @@ class SettingsView {
                        <p class="setting__lang-name">Український</p>
                     </div>
                     <div class="settings__lang-item">
-                       <img class="settings__bl settings__lang-flag" src="https://i.postimg.cc/tJNGH7cS/pl.png"/>
+                       <img class="settings__bl settings__lang-flag" src="https://i.postimg.cc/MHPtRSfZ/a3.png"/>
                        <p class="setting__lang-name">Беларуская</p>
                     </div>
                     <div class="settings__lang-item">
-                       <img class="settings__pl settings__lang-flag" src="https://i.postimg.cc/MHPtRSfZ/a3.png"/>
+                       <img class="settings__pl settings__lang-flag" src="https://i.postimg.cc/tJNGH7cS/pl.png"/>
                        <p class="setting__lang-name">Polski</p>
                     </div>
                  </div>
