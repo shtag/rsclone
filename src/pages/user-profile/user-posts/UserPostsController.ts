@@ -54,8 +54,15 @@ class UserPostsController {
         text.classList.add('active_icon');
         iconFav.classList.remove('active');
         textFav.classList.remove('active_icon');
-
         dividerPart.style.marginLeft = '7%';
+
+        if (localStorage.getItem('lang') === 'en' || localStorage.getItem('lang') === 'pl') {
+            dividerPart.style.marginLeft = '7%';
+        } else if (localStorage.getItem('lang') === 'uk') {
+            dividerPart.style.marginLeft = '10%';
+        } else if (localStorage.getItem('lang') === 'bl') {
+            dividerPart.style.marginLeft = '12%';
+        }
     }
 }
 

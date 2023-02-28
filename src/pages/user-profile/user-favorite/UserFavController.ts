@@ -29,9 +29,16 @@ class UserFavController {
 
         icon.classList.add('active');
         text.classList.add('active_icon');
-        dividerPart.style.marginLeft = '24.5%';
         iconPosts.classList.remove('active');
         textPosts.classList.remove('active_icon');
+
+        if (localStorage.getItem('lang') === 'en' || localStorage.getItem('lang') === 'pl') {
+            dividerPart.style.marginLeft = '24.5%';
+        } else if (localStorage.getItem('lang') === 'uk') {
+            dividerPart.style.marginLeft = '28.5%';
+        } else if (localStorage.getItem('lang') === 'bl') {
+            dividerPart.style.marginLeft = '35%';
+        }
     }
 }
 
