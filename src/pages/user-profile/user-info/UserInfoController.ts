@@ -1,5 +1,6 @@
 import model from '../../../api/Model';
 import { state } from '../../home-page/postElements/postElementsController';
+import dictionary from '../../staticElements/dictionary';
 import GeneralUserController from '../UserProfileController';
 import UserPageView from './UserInfoView';
 
@@ -12,9 +13,9 @@ class UserPageController {
         main?.append(user);
 
         user.innerHTML = await UserPageView.renderUserInfo(id);
-        if (state.sessionValid) {
-            await UserPageController.subscribe(id);
-        }
+        // if (state.sessionValid) {
+        //     await UserPageController.subscribe(id);
+        // }
         const view = document.querySelector('.view') as HTMLImageElement;
 
         view?.addEventListener('click', () => {
@@ -61,15 +62,25 @@ class UserPageController {
     }
 
     static async subscribeToUser(id: number) {
+        const user = await model.user.get(id);
+        const ln = dictionary[localStorage.lang];
         const currentSessionId = localStorage.getItem('sessionId') as string;
+        await model.user.subscribe({ sessionId: currentSessionId, username: user.username });
         const currentUserId = localStorage.getItem('userId') as string;
         const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
-        const subscribed = localStorage.getItem('subscribed') === 'true';
+        const followers = await model.user.getFollowers(id);
+        const userCount = document.querySelector('.user__followers_quantity') as HTMLElement;
+        userCount.innerHTML = followers.length.toString();
+        console.log(followers.filter(us => us.id === +currentUserId))
+        if (followers.filter(us => us.id === +currentUserId).length > 0) {
+            subscribeBtn.children[0].innerHTML = ln.Unsubscribe;
+        } else {
+            subscribeBtn.children[0].innerHTML = ln.Subscribe;
+        }
+        // const subscribed = localStorage.getItem('subscribed') === 'true';
         const session = await GeneralUserController.checkSession(currentSessionId, id);
         const username = session.username as string;
-        subscribeBtn.children[0].innerHTML = subscribed ? 'Subscribe' : 'Unsubscribe';
-        localStorage.setItem('subscribed', (!subscribed).toString());
-        await model.user.subscribe({ sessionId: currentSessionId, username });
+        // localStorage.setItem('subscribed', (!subscribed).toString());
     }
 }
 

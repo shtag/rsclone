@@ -1,4 +1,5 @@
 import model from '../../../api/Model';
+import { checkSession } from '../../../types/functions';
 import { state } from '../../home-page/postElements/postElementsController';
 import dictionary from '../../staticElements/dictionary';
 import './style.scss';
@@ -23,7 +24,7 @@ class UserPageView {
                 </button>`
             }
         }
-        if (user.id === +localStorage.userId || !state.sessionValid) {
+        if (user.id === +localStorage.userId || !await checkSession()) {
             subButton = `
             <button class="subscribe__btn open__post-btn display_none">
                 <div class="text_button">${ln.Unsubscribe}</div>
