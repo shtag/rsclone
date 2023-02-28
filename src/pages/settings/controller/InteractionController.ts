@@ -33,9 +33,9 @@ class InteractionController {
                     localStorage.setItem('lang', 'en');
                     langText.innerText = 'English';
                     flag.src = 'https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png';
-                } else if (target.innerHTML === 'Український' || target.className === 'settings__uk settings__lang-flag') {
+                } else if (target.innerHTML === 'Українська' || target.className === 'settings__uk settings__lang-flag') {
                     localStorage.setItem('lang', 'uk');
-                    langText.innerText = 'Український';
+                    langText.innerText = 'Українська';
                     flag.src = 'https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png';
                 } else if (target.innerHTML === 'Беларуская' || target.className === 'settings__bl settings__lang-flag') {
                     localStorage.setItem('lang', 'bl');
@@ -57,7 +57,7 @@ class InteractionController {
                 flag.src = 'https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png';
                 break;
             case 'uk':
-                langText.innerText = 'Український';
+                langText.innerText = 'Українська';
                 flag.src = 'https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png';
                 break;
             case 'bl':

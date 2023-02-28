@@ -38,7 +38,7 @@ class SettingsView {
                     </div>
                     <div class="settings__lang-item">
                        <img class="settings__uk settings__lang-flag" src="https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png"/>
-                       <p class="setting__lang-name">Український</p>
+                       <p class="setting__lang-name">Українська</p>
                     </div>
                     <div class="settings__lang-item">
                        <img class="settings__bl settings__lang-flag" src="https://i.postimg.cc/MHPtRSfZ/a3.png"/>
