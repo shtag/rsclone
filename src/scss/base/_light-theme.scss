@@ -1,0 +1,132 @@
+@import "_variables.scss";
+
+.light-theme {
+    background-color: $white-color;
+    color: $black-color;
+    .header {
+        .header-bar_container {
+            background-color: $white-color;
+        }
+        &-bar_container {
+            background-color: $white-color;
+        }
+        button {
+            filter: invert(1);
+        }
+        a.profile-btn {
+            background-color: $light-grey-color;
+        }
+    }
+
+    .nav-bar_container {
+        background-color: $white-color;
+        button {
+            filter: invert(1);
+        }
+
+        a {
+            filter: invert(1);
+        }
+    }
+
+    .comments_container,
+    .open__post {
+        .post_wrapper {
+            border: 1px solid #c4c4c454;
+            a {
+                color: $black-color;
+            }
+        }
+
+        .tools {
+            border: 1px solid #c4c4c454;
+        }
+
+        div {
+            background-color: transparent;
+            color: $black-color;
+        }
+
+        svg {
+            filter: invert(1);
+        }
+
+        input {
+            background-color: #c4c4c454;
+            color: $black-color;
+        }
+
+        .comment_tools {
+            color: $light-grey-color;
+        }
+
+        .comment_tools_reply {
+            color: $light-grey-color;
+        }
+    }
+
+    .user {
+        &__description {
+            color: $medium-grey-color;
+        }
+
+        &__name_nickname {
+            color: $medium-grey-color;
+        }
+
+        &__statistics_title {
+            color: $medium-grey-color;
+        }
+    }
+
+    .divider {
+        background-color: $light-grey-color;
+    }
+
+    .add__description {
+        font-weight: 400;
+        background-color: #c4c4c454;
+        color: #121212;
+    }
+
+    .create_post-btn {
+        filter: invert(1);
+
+        .post_info_cotainer {
+            a {
+                color: $black-color;
+            }
+        }
+
+        .setting_popup {
+            background-color: #f9fdfea3;
+            border: 1px solid #c4c4c454;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+    }
+
+    .popup_content {
+        background-color: $white-color;
+        color: $black-color;
+    }
+
+    .user__divider,
+    .divider {
+        background-color: #c4c4c454;
+    }
+
+    .add__form {
+        background: $white-color;
+    }
+
+    .login_btn, .signup_btn {
+        color: $white-color;
+    }
+
+    .popup_wrapper{
+        h2{
+            color: $white-color;
+        }
+    }
+}
