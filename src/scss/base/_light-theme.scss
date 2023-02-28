@@ -29,9 +29,13 @@
         }
     }
 
-    .comments_container {
+    .comments_container,
+    .open__post {
         .post_wrapper {
             border: 1px solid #c4c4c454;
+            a {
+                color: $black-color;
+            }
         }
 
         .tools {
@@ -80,8 +84,9 @@
     }
 
     .add__description {
-        color: $medium-grey-color;
         font-weight: 400;
+        background-color: #c4c4c454;
+        color: #121212;
     }
 
     .create_post-btn {
@@ -99,5 +104,19 @@
             -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
         }
+    }
+
+    .popup_content {
+        background-color: $white-color;
+        color: $black-color;
+    }
+
+    .user__divider,
+    .divider {
+        background-color: #c4c4c454;
+    }
+
+    .add__form {
+        background: $white-color;
     }
 }

@@ -1,6 +1,37 @@
 @import "/src/scss/base/variables";
 @import url("https://fonts.cdnfonts.com/css/axiforma");
 
+@-webkit-keyframes pop-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+@-moz-keyframes pop-in {
+    0% {
+        opacity: 0;
+        -moz-transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: scale(1);
+    }
+}
+@keyframes pop-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .comments_container {
     text-align: center;
 }
@@ -300,9 +331,9 @@
     z-index: 9999;
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-  }
-  
-  .popup_content {
+}
+
+.popup_content {
     background-color: $black-color;
     padding: 20px;
     border-radius: 5px;
@@ -310,14 +341,17 @@
     color: $white-color;
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
-  }
-  
-  .popup_content p {
+    -webkit-animation: pop-in 0.5s;
+    -moz-animation: pop-in 0.5s;
+    -ms-animation: pop-in 0.5s;
+}
+
+.popup_content p {
     margin: 0 0 10px;
     font-size: 18px;
-  }
-  
-  .popup_button {
+}
+
+.popup_button {
     padding: 10px 20px;
     background-color: #f00;
     color: #fff;
@@ -325,17 +359,16 @@
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-  }
-  
-  .popup_button:hover {
+}
+
+.popup_button:hover {
     background-color: #c00;
-  }
+}
 
-  .cancel_button {
+.cancel_button {
     background-color: green;
-  }
+}
 
-  .cancel_button:hover {
+.cancel_button:hover {
     background-color: rgb(0, 103, 0);
-  }
-  
+}
