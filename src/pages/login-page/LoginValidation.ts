@@ -12,7 +12,7 @@ class LoginValidation {
             localStorage.setItem('sessionId', res.sessionId)
             localStorage.setItem('userId', res.id.toString());
             document.querySelector('header')?.classList.add('header');
-            window.history.pushState({}, '', '/recomendation');
+            window.history.pushState({}, '', '/recommendation');
             Router.handleLocation();
         } catch {
             usernameInput.setCustomValidity('sss')
