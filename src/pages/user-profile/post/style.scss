@@ -8,11 +8,10 @@
         border: none;
         padding: 10px;
         width: 115px;
-        border-radius: 10px;
+        border-radius: 50px;
         cursor: pointer;
         background: $medium-grey-color;
         transition: 0.5s;
-        border: 2px solid transparent;
         color: $white-color;
 
         &::after {
@@ -29,13 +28,11 @@
             height: 100%;
             background: $gradient;
             transition: 0.5s;
-            border-radius: 10px;
-            border: 2px solid transparent;
+            border-radius: 50px;
         }
         &:hover::after {
             opacity: 1;
             transition: 0.5s;
-            border: 2px solid white;
         }
         .text_button {
             position: relative;
@@ -58,8 +55,7 @@
                 height: 100%;
                 background: grey;
                 transition: 0.5s;
-                border-radius: 10px;
-                border: 2px solid transparent;
+                border-radius: 50px;
             }
  
         }

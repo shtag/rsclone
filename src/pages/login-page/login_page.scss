@@ -29,7 +29,7 @@
         border: none;
         padding: 12px 24px;
         width: 115px;
-        border-radius: 10px;
+        border-radius: 50px;
         cursor: pointer;
         background: $medium-grey-color;
         transition: 0.5s;
@@ -48,13 +48,12 @@
             height: 100%;
             background: $gradient;
             transition: 0.5s;
-            border-radius: 10px;
+            border-radius: 50px;
             border: 2px solid transparent;
         }
         &:hover::after{
             opacity: 1;
             transition: 0.5s;
-            border: 2px solid white;
         }
         .text_button {
             position: relative;
@@ -91,7 +90,7 @@
         flex-direction: column;
         align-items: center;
         gap: 15px;
-        background-color: $medium-grey-color;
+        background-color: $dark-grey-color;
         padding: 20px;
         width: 400px;
         border-radius: 20px;
@@ -108,6 +107,8 @@
         padding: 5px 10px;
         border: none;
         transition: 0.3s;
+        background-color: $black-color;
+        color: $white-color;
         &:invalid{
             box-shadow: inset 0px 0px 10px red;
             border: 3px solid red;
@@ -127,13 +128,14 @@
             }
         }
         &::placeholder{
-            color: black;
+            color: $medium-grey-color;
         }
         &:focus{
             outline: none;
             transform: scale(1.01);
         }
     }
+    
     .validate_error {
         position: absolute;
         top: calc(100% - 20px);
@@ -153,11 +155,15 @@
         padding: 5px 10px;
         cursor: pointer;
         border-radius: 10px;
-        background-color: white;
-        border: 2px solid white;
+        background-color: $medium-grey-color;
+        border: none;
         transition: 0.3s;
+        border-radius: 40px;
+        color: $white-color;
         &:hover {
-            border: 2px solid black;
+            border: none;
+            background-color: $white-color;
+            color: $black-color;
         }
     }
 }

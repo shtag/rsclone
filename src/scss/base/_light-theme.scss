@@ -119,4 +119,14 @@
     .add__form {
         background: $white-color;
     }
+
+    .login_btn, .signup_btn {
+        color: $white-color;
+    }
+
+    .popup_wrapper{
+        h2{
+            color: $white-color;
+        }
+    }
 }
