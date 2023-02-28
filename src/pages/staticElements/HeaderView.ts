@@ -8,7 +8,6 @@ import { Post } from '../../types/types';
 import { disableScroll, enableScroll } from '../../types/functions';
 import search from './search/searchPopupController';
 
-
 export class HeaderView {
     static async renderHeaderContainer() {
         const header = document.querySelector('header') as HTMLElement;
@@ -127,15 +126,25 @@ export class HeaderView {
     }
 
     static renderLikedPostsContainer() {
-        const body = document.querySelector('body') as HTMLBodyElement;
-        const container = document.createElement('div') as HTMLElement;
-        container.className = 'liked_container';
-        body.append(container);
+        const popupHtml = `
+            <div class="popup">
+            <div class="popup_content liked_content"></div>
+            <button class="popup_button confirm_button liked_btn">Close</button>
+            </div>                                
+            `;
+        const popupContainer = document.createElement('div');
+        popupContainer.className = "popupContainer";
+        popupContainer.innerHTML = popupHtml;
+        document.body.append(popupContainer);
+        const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+        confirmButton.addEventListener('click', async () => {
+            popupContainer.remove();
+        });
         this.renderLikedImg();
     }
 
     static async renderLikedImg() {
-        const container = document.querySelector('.liked_container') as HTMLElement;
+        const container = document.querySelector('.liked_content') as HTMLElement;
         const userID = Number(localStorage.getItem('userId'));
         const posts: Post[] = await model.post.getUserPosts(userID);
         const likedPosts: Post[] = await posts.filter((post) => post.likes.length > 0);
@@ -155,8 +164,10 @@ export class HeaderView {
             const target = event.target as HTMLElement;
             if (target.tagName === 'IMG') {
                 const id = Number(target.getAttribute('data-id'));
-                container.remove();
+                const popupContainer = document.querySelector('.popupContainer') as HTMLElement;
+                popupContainer.remove();
                 await Router.openPost(id);
+                container.remove();
             }
         });
     }

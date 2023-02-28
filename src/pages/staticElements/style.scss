@@ -262,29 +262,19 @@
     left: 10%;
 }
 
-.liked_container {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+.liked_content {
+        
         width: 345px;
-        height: 200px;
+        height: 220px;
         border-radius: 50px;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: all 0.6s ease-in-out;
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(5px);
+        overflow-y: scroll;
+        gap: 22px;
         display: flex;
         flex-wrap: wrap;
-        background-color: rgba(30, 30, 30, 0.5450980392);
-        padding: 40px;
-        gap: 20px;
-        overflow-y: scroll;
       
 
     &::-webkit-scrollbar {
+        display: none;
         width: 5px;
         height: auto;
     }
@@ -302,6 +292,11 @@
     &::-webkit-scrollbar-corner {
         background: transparent;
     }
+}
+
+.liked_btn {
+    position: absolute;
+    bottom: 336px;
 }
 
 .liked_img {
