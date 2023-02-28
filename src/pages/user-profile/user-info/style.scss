@@ -16,6 +16,15 @@
     width: 100%;
     margin: 40px auto 20px;
 
+    &__photo {
+        cursor: pointer;
+        position: absolute;
+        bottom: 28px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        filter: invert(72%) sepia(93%) saturate(5358%) hue-rotate(22deg) brightness(103%) contrast(112%);    }
+
     &__infoStat {
         width: 100%;
     }
@@ -158,4 +167,13 @@
 
 .subscribe__btn {
     width: 140px;
+}
+
+
+.add__photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
