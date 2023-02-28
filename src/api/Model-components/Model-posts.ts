@@ -82,7 +82,7 @@ class ModelPosts {
     async delete(id: number, sessionId: string): Promise<boolean> {
         try {
             const body = { sessionId }
-            
+
             const test = await fetch(`${this.url}/post/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -131,8 +131,8 @@ class ModelPosts {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedData),
             });
-
-            return data.json();
+            const result = await data.json();
+            return result;
         } catch (error) {
             throw new Error();
         }

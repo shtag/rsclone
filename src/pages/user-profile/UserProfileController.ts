@@ -56,7 +56,7 @@ class GeneralUserController {
                 const username = window.location.pathname.split('/')[1];
                 const user = users.find(u => u.username === username)
                 if (user) {
-                    UserPageController.subscribeToUser(user.id);
+                    await UserPageController.subscribeToUser(user.id);
                 }
             }
         })
