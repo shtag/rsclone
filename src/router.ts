@@ -59,7 +59,7 @@ class Router {
         const loader2 = document.querySelector('.global_loader') as HTMLElement;
         setTimeout(() => {
             loader2.classList.add('display_none');
-        }, 400)
+        }, 0)
         html.style.overflow = '';
     }
 

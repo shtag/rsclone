@@ -2,6 +2,7 @@ import confetti from 'canvas-confetti';
 import model from '../../../api/Model';
 import Router from '../../../router';
 import dictionary from '../../staticElements/dictionary';
+import LoadersView from '../../staticElements/loaders/loadersView';
 import UserPageView from './UserInfoView';
 
 class UserPageController {
@@ -49,7 +50,9 @@ class UserPageController {
             const popupHtml = `
                     <div class="popup">
                     <div class="add__photo popup_content">
-                    <img class="add__photo_new user__avatar_img" src="/img/base.jpg" alt="avatar" />
+                    <div class="avatar_img_block">
+                        <img class="add__photo_new user__avatar_img" src="/img/base.jpg" alt="avatar" />
+                    </div>
                     <input class="add__avatar add__img" type="file" id="file" accept=".jpg,.jpeg,.png,.gif"/>
                     <label for="file" class="add__label">
                     <span>${ln.UploadYourImage}</span>
@@ -65,17 +68,24 @@ class UserPageController {
             popupContainer.innerHTML = popupHtml;
             document.body.appendChild(popupContainer);
             const pop = document.querySelector('.popup') as HTMLImageElement;
-            pop.addEventListener('click', () => {
-                popupContainer.remove();
+            pop.addEventListener('click', (e) => {
+                if ((e.target as HTMLElement).classList.contains('popup')) {
+                    popupContainer.remove();
+                }
             })
             const addAvatar = document.querySelector('.add__avatar') as HTMLInputElement;
             const newPhoto = popupContainer.querySelector('.add__photo_new') as HTMLImageElement;
             const createPhoto = popupContainer.querySelector('.add__photo_submit') as HTMLButtonElement;
 
             addAvatar.addEventListener('change', async () => {
+                const block = document.querySelector('.avatar_img_block') as HTMLElement;
+                block.innerHTML = LoadersView.add();
                 const img = await model.uploadPhoto(addAvatar.files as FileList);
                 UserPageController.avatar = img.data.link;
                 newPhoto.src = img.data.link;
+                block.innerHTML = `
+                <img class="add__photo_new user__avatar_img" src="${img.data.link}" alt="avatar" />
+                `
                 createPhoto.disabled = false;
             });
 

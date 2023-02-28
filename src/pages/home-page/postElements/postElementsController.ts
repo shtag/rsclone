@@ -40,13 +40,13 @@ class PostElementsController {
         };
         if (window.location.href.indexOf('/feed') !== -1) {
             const posts = await model.post.feed(params);
-            this.renderPosts(posts);
+            await this.renderPosts(posts);
 
         }
 
         if (window.location.href.indexOf('/recommendation') !== -1) {
             const posts = await model.post.recommendationFeed(params);
-            this.renderPosts(posts);
+            await this.renderPosts(posts);
         }
     }
 
