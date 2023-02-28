@@ -71,16 +71,17 @@ class UserPageController {
     static async subscribeToUser(id: number) {
         const ln = dictionary[localStorage.lang];
         const user = await model.user.get(id);
-        const followers = await model.user.getFollowers(id);
         const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
         const currentSessionId = localStorage.getItem('sessionId') as string;
-        await model.user.subscribe({ sessionId: currentSessionId, username: user.username });
+        const subUser = await model.user.subscribe({ sessionId: currentSessionId, username: user.username });
+        console.log(subUser)
         const userCount = document.querySelector('.user__followers_quantity') as HTMLElement;
-        if (subscribeBtn.children[0].textContent === ln.Unsubscribe) {
-            subscribeBtn.children[0].innerHTML = ln.Subscribe;
+        if (subUser.subscriptions.includes(id)) {
+            subscribeBtn.children[0].textContent = ln.Unsubscribe;
         } else {
-            subscribeBtn.children[0].innerHTML = ln.Unsubscribe;
+            subscribeBtn.children[0].textContent = ln.Subscribe;
         }
+        const followers = await model.user.getFollowers(id);
         userCount.textContent = followers.length.toString();
     }
 
