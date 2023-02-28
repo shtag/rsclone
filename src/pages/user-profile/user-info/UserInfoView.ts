@@ -41,7 +41,7 @@ class UserPageView {
         return ` 
         <div class="user__block">
             <div class="user__avatar-block">
-                <div class="user__avatar_add"></div>
+                <img src="/img/add-photo.png" class="user__photo"/>
                     <img class="user__avatar_img" src="${img}" alt="avatar" />
                 </div>
                 <div class="user__infoStat">
