@@ -39,15 +39,15 @@ class InteractionController {
                 } else if (target.innerHTML === 'Беларуская' || target.className === 'settings__bl settings__lang-flag') {
                     localStorage.setItem('lang', 'bl');
                     langText.innerText = 'Беларуская';
-                    flag.src = 'https://i.postimg.cc/tJNGH7cS/pl.png';
+                    flag.src = 'https://i.postimg.cc/MHPtRSfZ/a3.png';
                 } else if (target.innerHTML === 'Polski' || target.className === 'settings__pl settings__lang-flag') {
                     localStorage.setItem('lang', 'pl');
                     langText.innerText = 'Polski';
-                    flag.src = 'https://i.postimg.cc/MHPtRSfZ/a3.png';
+                    flag.src = 'https://i.postimg.cc/tJNGH7cS/pl.png';
                 }
                 langItems.classList.remove('settings__lang-items_open');
+                submit.disabled = false;
             });
-            submit.disabled = false;
         });
 
         switch (localStorage.getItem('lang')) {
@@ -59,17 +59,14 @@ class InteractionController {
                 langText.innerText = 'Український';
                 flag.src = 'https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png';
                 break;
-
             case 'bl':
                 langText.innerText = 'Беларуская';
-                flag.src = 'https://i.postimg.cc/tJNGH7cS/pl.png';
-                break;
-
-            case 'pl':
-                langText.innerText = 'Polski';
                 flag.src = 'https://i.postimg.cc/MHPtRSfZ/a3.png';
                 break;
-
+            case 'pl':
+                langText.innerText = 'Polski';
+                flag.src = 'https://i.postimg.cc/tJNGH7cS/pl.png';
+                break;
             default:
                 langText.innerText = 'English';
                 flag.src = 'https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png';
@@ -142,8 +139,6 @@ class InteractionController {
     static async changeUserInteraction(sessionId: string, userId: string) {
         const submitBtn = document.querySelector('.settings__submitInteraction') as HTMLButtonElement;
         const formInteraction = document.querySelector('.settings__form-interaction') as HTMLFormElement;
-        const hintIcon = document.querySelector('.settings__hint_icon') as HTMLImageElement;
-        const hint = document.querySelector('.settings__hint') as HTMLDivElement;
 
         InteractionController.changeSettingsLang(submitBtn);
         InteractionController.changeSettingsName(submitBtn);

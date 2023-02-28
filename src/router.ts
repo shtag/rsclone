@@ -20,7 +20,7 @@ class Router {
 
     static async handleLocation() {
         const main = document.querySelector('body') as HTMLElement;
-        main.innerHTML = LoadersView.addGlobal();
+        // main.innerHTML = LoadersView.addGlobal();
         main.classList.add('flex_center')
         const path: string[] = window.location.pathname.split('/');
         const users = await model.user.getAll();
