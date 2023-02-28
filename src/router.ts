@@ -19,46 +19,51 @@ class Router {
     }
 
     static async handleLocation() {
-        const main = document.querySelector('body') as HTMLElement;
-        // main.innerHTML = LoadersView.addGlobal();
-        main.classList.add('flex_center')
+        PageController.renderStructure();
+        const loader = document.querySelector('.global_loader') as HTMLElement;
+        loader.classList.remove('display_none');
+        loader.innerHTML = LoadersView.addGlobal();
+        loader.classList.add('flex_center')
+
         const path: string[] = window.location.pathname.split('/');
         const users = await model.user.getAll();
-        PageController.renderStructure();
         const user = users.find((us) => us.username === path[1]);
         if (user && path.length === 2) {
-            Router.openProfile(user.id);
+            await Router.openProfile(user.id);
             localStorage.setItem('favorites', 'false');
         } else if (path[1] === 'feed' && path.length === 2) {
-            Router.openFeed();
+            await Router.openFeed();
         } else if (path[1] === 'login' && path.length === 2) {
-            Router.openLogin();
+            await Router.openLogin();
         } else if (path[1] === '' && path.length === 2) {
             window.history.pushState({}, '', '/feed');
-            Router.openFeed();
+            await Router.openFeed();
         } else if (path[1] === 'p' && path.length === 3) {
-            Router.openPost(+path[2]);
+            await Router.openPost(+path[2]);
         } else if (path[1] === 'recommendation') {
-            Router.openRecommendation();
+            await Router.openRecommendation();
         } else if (user && path[2] === 'favorites' && path.length === 3) {
-            Router.openFavorites(user.id);
+            await Router.openFavorites(user.id);
             localStorage.setItem('favorites', 'true');
         } else if (user && path[2] === 'posts' && path.length === 3) {
-            Router.openPosts(user.id);
+            await Router.openPosts(user.id);
             localStorage.setItem('favorites', 'false');
         } else if (path[1] === 'add') {
-            Router.openAddPost()
+            await Router.openAddPost();
         } else {
-            Router.open404();
+            await Router.open404();
         }
-        main.classList.remove('flex_center');
+
         await search.renderPopup();
         const html = document.querySelector('html') as HTMLElement;
+        const loader2 = document.querySelector('.global_loader') as HTMLElement;
+        setTimeout(() => {
+            loader2.classList.add('display_none');
+        }, 400)
         html.style.overflow = '';
     }
 
     static async openAddPost() {
-        console.log('open add post');
         const sessionValid = await checkSession();
         if (!sessionValid) {
             window.history.pushState({}, '', '/login');
@@ -70,14 +75,12 @@ class Router {
     }
 
     static async openProfile(id: number) {
-        console.log('open profile');
         await HeaderView.renderHeaderContainer();
         document.title = `${(await model.user.get(id)).username}'s profile`;
         await PageController.setUserProfileController(id);
     }
 
     static async openPost(id: number) {
-        console.log('open post');
         await HeaderView.renderHeaderContainer();
         PostElementsController.checkPosition();
         const main = document.querySelector('main') as HTMLBodyElement;
@@ -87,7 +90,6 @@ class Router {
     }
 
     static async openPosts(id: number) {
-        console.log('posts tab');
         document.title = `${(await model.user.get(id)).username}'s posts`;
         await HeaderView.renderHeaderContainer();
 
@@ -95,7 +97,6 @@ class Router {
     }
 
     static async openLogin() {
-        console.log('open login');
         const sessionValid = await checkSession();
         if (sessionValid) {
             window.history.pushState({}, '', '/feed');
@@ -109,14 +110,12 @@ class Router {
     }
 
     static async openFavorites(id: number) {
-        console.log('favorites');
         document.title = `${(await model.user.get(id)).username}'s favorites`;
         await HeaderView.renderHeaderContainer();
         PageController.userFavorite(id);
     }
 
     static async openFeed() {
-        console.log('open feed');
         const sessionValid = await checkSession();
         if (!sessionValid) {
             window.history.pushState({}, '', '/login');
@@ -125,11 +124,11 @@ class Router {
         }
         state.page = 1;
         document.title = 'Feed';
-        PageController.setHomePageController();
+        await PageController.setHomePageController();
+
     }
 
     static async openRecommendation() {
-        console.log('open recommendation feed');
         document.title = 'Recommendation';
         const sessionValid = await checkSession();
         if (!sessionValid) {
@@ -137,11 +136,10 @@ class Router {
             Router.handleLocation();
             return;
         }
-        PageController.setHomePageController();
+        await PageController.setHomePageController();
     }
 
     static async open404() {
-        console.log('open 404');
         const main = document.querySelector('main') as HTMLBodyElement;
         main.innerHTML = '';
         main.innerHTML = `

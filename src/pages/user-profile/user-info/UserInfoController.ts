@@ -1,9 +1,7 @@
 import confetti from 'canvas-confetti';
 import model from '../../../api/Model';
 import Router from '../../../router';
-import { state } from '../../home-page/postElements/postElementsController';
 import dictionary from '../../staticElements/dictionary';
-import GeneralUserController from '../UserProfileController';
 import UserPageView from './UserInfoView';
 
 class UserPageController {
@@ -18,54 +16,7 @@ class UserPageController {
 
         user.innerHTML = await UserPageView.renderUserInfo(id);
 
-        UserPageController.addProfilePhoto(id);
-        // if (state.sessionValid) {
-        //     await UserPageController.subscribe(id);
-        // }
-
-        const view = document.querySelector('.view') as HTMLImageElement;
-
-        view?.addEventListener('click', () => {
-            view.classList.toggle('active_icon');
-            UserPageController.changeView();
-        });
-    }
-
-    static changeView() {
-        const postImg = document.querySelectorAll('.post__img') as NodeList;
-
-        postImg.forEach((img) => {
-            const image = img as HTMLImageElement;
-            image.style.width = '100%';
-            image.style.height = '465px';
-        });
-    }
-
-    static async subscribe(id: number) {
-        const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
-        const followersQuantity = document.querySelector('.user__followers_quantity') as HTMLParagraphElement;
-        const currentSessionId = localStorage.getItem('sessionId') as string;
-        const currentUserId = localStorage.getItem('userId') as string;
-
-        const userSubscriptions = await model.user.getSubscriptions(+currentUserId);
-        const ids = userSubscriptions.map((usersId) => usersId.id);
-
-        const isSubscribed = !!ids.includes(id);
-        localStorage.setItem('subscribed', isSubscribed.toString());
-
-        const session = await GeneralUserController.checkSession(currentSessionId, id);
-        subscribeBtn.style.display = !session.equal ? 'block' : 'none';
-        const username = session.username as string;
-
-        // subscribeBtn.addEventListener('click', async () => {
-        //     const subscribed = localStorage.getItem('subscribed') === 'true';
-        //     subscribeBtn.children[0].innerHTML = subscribed ? 'Subscribe' : 'Unsubscribe';
-        //     localStorage.setItem('subscribed', (!subscribed).toString());
-        //     await model.user.subscribe({ sessionId: currentSessionId, username });
-
-        //     const followers = await model.user.getFollowers(id);
-        //     followersQuantity.innerHTML = String(followers.length);
-        // });
+        await UserPageController.addProfilePhoto(id);
     }
 
     static async subscribeToUser(id: number) {
@@ -74,7 +25,6 @@ class UserPageController {
         const subscribeBtn = document.querySelector('.subscribe__btn') as HTMLButtonElement;
         const currentSessionId = localStorage.getItem('sessionId') as string;
         const subUser = await model.user.subscribe({ sessionId: currentSessionId, username: user.username });
-        console.log(subUser)
         const userCount = document.querySelector('.user__followers_quantity') as HTMLElement;
         if (subUser.subscriptions.includes(id)) {
             subscribeBtn.children[0].textContent = ln.Unsubscribe;
@@ -87,6 +37,7 @@ class UserPageController {
 
     static async addProfilePhoto(id: number) {
         const photo = document.querySelector('.user__photo') as HTMLImageElement;
+        if (!photo) return;
         const ln = dictionary[localStorage.lang];
         const userName = await model.user.get(id)
 
@@ -113,7 +64,10 @@ class UserPageController {
             popupContainer.className = 'popup__container';
             popupContainer.innerHTML = popupHtml;
             document.body.appendChild(popupContainer);
-
+            const pop = document.querySelector('.popup') as HTMLImageElement;
+            pop.addEventListener('click', () => {
+                popupContainer.remove();
+            })
             const addAvatar = document.querySelector('.add__avatar') as HTMLInputElement;
             const newPhoto = popupContainer.querySelector('.add__photo_new') as HTMLImageElement;
             const createPhoto = popupContainer.querySelector('.add__photo_submit') as HTMLButtonElement;

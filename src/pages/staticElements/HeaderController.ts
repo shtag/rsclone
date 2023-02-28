@@ -48,8 +48,6 @@ class HeaderController {
             const target = e.target as HTMLElement;
             if (target.closest('.likes-btn')) {
                 HeaderController.openLikedPosts()
-            } else if (target.closest('.likes-btns')) {
-                console.log(11);
             }
         })
     }

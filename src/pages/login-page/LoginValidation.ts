@@ -12,6 +12,8 @@ class LoginValidation {
             localStorage.setItem('sessionId', res.sessionId)
             localStorage.setItem('userId', res.id.toString());
             document.querySelector('header')?.classList.add('header');
+            const loginPage = document.querySelector('.login_page');
+            loginPage?.remove();
             window.history.pushState({}, '', '/recommendation');
             Router.handleLocation();
         } catch {

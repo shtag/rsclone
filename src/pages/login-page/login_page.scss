@@ -22,7 +22,8 @@
             justify-content: space-around;
         }
     }
-    .login_btn, .signup_btn {
+    .login_btn,
+    .signup_btn {
         position: relative;
         text-align: center;
         outline: none;
@@ -34,7 +35,7 @@
         background: $medium-grey-color;
         transition: 0.5s;
         border: 2px solid transparent;
-        &::after{
+        &::after {
             position: absolute;
             top: -2px;
             left: -2px;
@@ -51,7 +52,7 @@
             border-radius: 50px;
             border: 2px solid transparent;
         }
-        &:hover::after{
+        &:hover::after {
             opacity: 1;
             transition: 0.5s;
         }
@@ -60,11 +61,11 @@
             z-index: 3;
         }
     }
-    input[type="radio"] {
+    input[type='radio'] {
         display: none;
     }
 }
-.login_popup__fade{
+.login_popup__fade {
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -83,7 +84,8 @@
 .signup_active {
     left: 975px;
 }
-.login_popup, .signup_popup {
+.login_popup,
+.signup_popup {
     .popup_wrapper {
         position: relative;
         display: flex;
@@ -100,8 +102,8 @@
     height: fit-content;
     position: relative;
     transition: 0.5s;
-    
-    input{
+
+    input {
         width: 90%;
         border-radius: 10px;
         padding: 5px 10px;
@@ -109,7 +111,7 @@
         transition: 0.3s;
         background-color: $black-color;
         color: $white-color;
-        &:invalid{
+        &:invalid {
             box-shadow: inset 0px 0px 10px red;
             border: 3px solid red;
             transition: 0.2s;
@@ -127,15 +129,15 @@
                 transform: translateX(4px);
             }
         }
-        &::placeholder{
+        &::placeholder {
             color: $medium-grey-color;
         }
-        &:focus{
+        &:focus {
             outline: none;
             transform: scale(1.01);
         }
     }
-    
+
     .validate_error {
         position: absolute;
         top: calc(100% - 20px);
@@ -152,7 +154,7 @@
         top: 30px;
     }
     button {
-        padding: 5px 10px;
+        padding: 10px 20px;
         cursor: pointer;
         border-radius: 10px;
         background-color: $medium-grey-color;

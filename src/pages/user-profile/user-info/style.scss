@@ -24,6 +24,10 @@
         width: 40px;
         height: 40px;
         filter: invert(72%) sepia(93%) saturate(5358%) hue-rotate(22deg) brightness(103%) contrast(112%);
+        transition: 0.3s;
+        &:hover {
+            transform: rotate(220deg) scale(1.02);
+        }
     }
 
     &__infoStat {

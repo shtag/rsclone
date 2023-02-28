@@ -14,20 +14,18 @@ import search from './pages/staticElements/search/searchPopupController';
 class App {
     static async start() {
         console.log('start');
-        // localStorage.setItem('sessionId', sessionId);
-        // localStorage.setItem('userId', '1');
         if (await checkSession()) {
             state.user = await model.user.get(+localStorage.userId);
         }
-        if (!localStorage.lang) {localStorage.lang = 'en'}
-        Router.setEventListeners();
+        if (!localStorage.lang) { localStorage.lang = 'en' }
+        await Router.setEventListeners();
         PageController.setEventListener();
         HeaderController.loaderControlAnimation();
         HeaderController.setListeners();
-        GeneralUserController.setListeners();
+        await GeneralUserController.setListeners();
         setTimeout(() => {
             search.setBodyListeners()
-        }, 500);
+        }, 2500);
     }
 }
 

@@ -44,7 +44,7 @@ export class postElemens {
             }
         }
         const ln = dictionary[localStorage.lang];
-        
+
         return `
         <div class="post_wrapper">
             <div class="post">

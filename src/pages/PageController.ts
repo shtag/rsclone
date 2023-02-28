@@ -25,13 +25,14 @@ class PageController {
                 <img src="https://rs.school/images/rs_school_js.svg" height="30"> 
             </a>
             </footer>
+            <div class="global_loader"></div>
         `;
     }
 
-    static setHomePageController() {
+    static async setHomePageController() {
         HeaderView.renderHeaderContainer();
         PostElementsController.renderFeeds(state.page);
-        PostElementsController.checkPosition();
+        await PostElementsController.checkPosition();
         PostElementsController.likesToComment();
         PostElementsController.activeInput();
         PostElementsController.reply();
@@ -96,7 +97,7 @@ class PageController {
     static setDictionary() {
         const toggler = document.querySelector('.settings__lang') as HTMLInputElement;
         // gweibnm язык в локал
-         
+
     }
 }
 

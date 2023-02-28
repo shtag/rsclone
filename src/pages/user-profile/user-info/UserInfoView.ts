@@ -39,12 +39,16 @@ class UserPageView {
             img = user.settings.photo;
         }
 
+        let addPhotoBtn = `<img src="/img/add-photo.png" class="user__photo"/>`
+        if (id !== +localStorage.userId) {
+            addPhotoBtn = ``;
+        }
         return ` 
         <div class="user__block">
             <div class="user__avatar-block">
-                <img src="/img/add-photo.png" class="user__photo"/>
-                    <img class="user__avatar_img" src="${img}" alt="avatar" />
-                </div>
+                ${addPhotoBtn}
+                <img class="user__avatar_img" src="${img}" alt="avatar" />
+            </div>
                 <div class="user__infoStat">
                     <div class="user__info">
                         <div class="user__name">
@@ -80,7 +84,7 @@ class UserPageView {
             <div class="divider__part"></div>
             </div>  
         <div class="user__post-block">
-          <a class="route" href="/${user.username}/posts">
+          <a class="route" href="/${user.username}">
             <div class="user__post-item user__post-item_posts">
               <img class="user__post-item_icon active_icon" src='/img/icons/posts-icon.svg' alt="posts" />
               <button class="user__post-item_text active">${ln.Posts}</button>
