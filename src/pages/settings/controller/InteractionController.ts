@@ -147,14 +147,6 @@ class InteractionController {
 
         submitBtn.addEventListener('click', async (e: Event) => {
             e.preventDefault();
-            await model.user.changeSettings(+userId, {
-                sessionId,
-                settings: {
-                    language: InteractionController.language,
-                    name: InteractionController.userName,
-                    descriptionProfile: InteractionController.description,
-                },
-            });
 
             confetti({
                 particleCount: 400,
@@ -168,6 +160,15 @@ class InteractionController {
 
             submitBtn.disabled = true;
             formInteraction.reset();
+
+           await model.user.changeSettings(+userId, {
+                sessionId,
+                settings: {
+                    // language: InteractionController.language,
+                    name: InteractionController.userName,
+                    descriptionProfile: InteractionController.description,
+                },
+            });
         });
 
         InteractionController.settingsLogOut(userId, sessionId);
