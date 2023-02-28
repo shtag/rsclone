@@ -182,13 +182,25 @@ class InteractionController {
         const logOutBtn = document.querySelector('.settings__logOut') as HTMLButtonElement;
 
         logOutBtn.addEventListener('click', async () => {
-            if (await checkSession()) {
-                await model.auth.logout({ sessionId, id: +userId });
-            }
+            InteractionController.settingsConfirmation('log out');
+            const popupContainer = document.querySelector('.popup__container') as HTMLDivElement;
+            const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+            const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
 
-            localStorage.removeItem('sessionId');
-            localStorage.removeItem('userId');
-            Router.handleLocation();
+            confirmButton.addEventListener('click', async () => {
+                if (await checkSession()) {
+                    await model.auth.logout({ sessionId, id: +userId });
+                }
+
+                localStorage.removeItem('sessionId');
+                localStorage.removeItem('userId');
+                Router.handleLocation();
+                popupContainer.remove();
+            });
+
+            cancelButton.addEventListener('click', () => {
+                popupContainer.remove();
+            });
         });
     }
 
@@ -196,15 +208,47 @@ class InteractionController {
         const deleteAccountBtn = document.querySelector('.settings__deleteAccount') as HTMLImageElement;
 
         deleteAccountBtn.addEventListener('click', async () => {
-            if (await checkSession()) {
-                await model.user.delete(+userId, sessionId);
-            }
-            localStorage.removeItem('sessionId');
-            localStorage.removeItem('userId');
-            window.history.pushState({}, '', '/login');
+            InteractionController.settingsConfirmation('delete your account');
 
-            Router.handleLocation();
+            const popupContainer = document.querySelector('.popup__container') as HTMLDivElement;
+            const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
+            const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
+
+            confirmButton.addEventListener('click', async () => {
+                if (await checkSession()) {
+                    await model.user.delete(+userId, sessionId);
+                }
+                localStorage.removeItem('sessionId');
+                localStorage.removeItem('userId');
+                window.history.pushState({}, '', '/login');
+
+                Router.handleLocation();
+            });
+
+            cancelButton.addEventListener('click', () => {
+                popupContainer.remove();
+            });
         });
+    }
+
+    static settingsConfirmation(text: string) {
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        const popupHtml = `
+                <div class="popup">
+                <div class="popup_content">
+                    <p>Are you sure you want to ${text}?</p>
+                    <div class="popup_buttons">
+                    <button class="popup_button confirm_button">Yes</button>
+                    <button class="popup_button cancel_button">No</button>
+                    </div>
+                </div>
+                </div>
+            `;
+        const popupContainer = document.createElement('div');
+        popupContainer.className = 'popup__container';
+        popupContainer.innerHTML = popupHtml;
+        document.body.appendChild(popupContainer);
     }
 }
 
