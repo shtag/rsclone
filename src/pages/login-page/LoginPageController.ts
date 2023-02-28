@@ -7,7 +7,7 @@ import './login_page.scss'
 class LoginPageController {
 
     static renderLoginPage() {
-        // PageController.renderStructure();
+        PageController.renderStructure();
         (document.querySelector('.header') as HTMLBodyElement).classList.remove('header');
         const main = document.querySelector('main') as HTMLElement;
         main.innerHTML = '';

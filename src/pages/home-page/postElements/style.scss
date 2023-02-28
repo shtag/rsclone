@@ -1,5 +1,5 @@
-@import "/src/scss/base/variables";
-@import url("https://fonts.cdnfonts.com/css/axiforma");
+@import '/src/scss/base/variables';
+@import url('https://fonts.cdnfonts.com/css/axiforma');
 
 @-webkit-keyframes pop-in {
     0% {
@@ -190,6 +190,22 @@
     margin-top: 30px;
 }
 
+// .comment_input {
+//     border: none;
+//     background-color: #121212;
+//     height: 35px;
+//     width: 87%;
+//     border-radius: 50px;
+//     text-indent: 20px;
+//     outline: none;
+//     color: white;
+//     font-size: 15px;
+// }
+// .imput_comment_btn {
+//     border: 0;
+//     background: transparent;
+//     color: white;
+// }
 .comment_container {
     margin-top: 10px;
     overflow-y: scroll;
@@ -197,7 +213,11 @@
     height: 255px;
     text-align: start;
     padding-right: 20px;
-
+    button {
+        border: 0;
+        background: transparent;
+        color: white;
+    }
     &::-webkit-scrollbar {
         width: 5px;
         height: auto;

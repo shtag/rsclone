@@ -2,6 +2,7 @@ import model from '../../../api/Model';
 import Router from '../../../router';
 import { checkSession } from '../../../types/functions';
 import { CommentsLikeRequest, Post, State } from '../../../types/types';
+import dictionary from '../../staticElements/dictionary';
 import LoadersView from '../../staticElements/loaders/loadersView';
 
 import postElemens from './postElemensView';
@@ -40,6 +41,7 @@ class PostElementsController {
         if (window.location.href.indexOf('/feed') !== -1) {
             const posts = await model.post.feed(params);
             this.renderPosts(posts);
+
         }
 
         if (window.location.href.indexOf('/recommendation') !== -1) {
@@ -50,9 +52,46 @@ class PostElementsController {
 
     static async renderPosts(posts: Post[]) {
         if (posts.length === 0) return;
-        posts.forEach(async (element: Post) => {
-            await postElemens.renderPost(element);
-        });
+        const main = document.querySelector('main') as HTMLElement;
+        const dom = posts.map((element) => {
+            const res = postElemens.renderPostElement(element);
+            return res;
+        })
+        const ln = dictionary[localStorage.lang];
+        const res = await Promise.all(dom).then(val => val.map(el => `<div class="comments_container">${el}</div>`))
+        main.innerHTML += res.join('');
+        const container = document.querySelectorAll('.post_info_cotainer') as NodeListOf<HTMLElement>;
+        for (let i = 0; i < container.length; i += 1) {
+            const form = container[i].querySelector('.comment_form_container') as HTMLFormElement;
+            if (!form) {
+                const input = container[i].querySelector('.comment_input') as HTMLInputElement;
+                const btn = container[i].querySelector('.imput_comment_btn') as HTMLButtonElement;
+                input.remove();
+                btn.remove();
+                container[i].innerHTML += `
+                <form onsubmit="event.preventDefault();" data-post_id="${container[i].dataset.post_id}" class="comment_form_container">
+                            <input maxlength="150"
+                            data-post_id="${container[i].dataset.post_id}"
+                            class="comment_input"
+                            autocomplete="off"
+                            type="text"
+                            name="name"
+                            placeholder="${ln.AddComment}"
+                            size="30" required />
+                            <button type="button" class="imput_comment_btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 3L9.21802 10.083" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
+                                    <path d="M11.698 20.334L22 3.001H2L9.218 10.084L11.698 20.334Z" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        <form>`
+            }
+        }
+
+
+        // posts.forEach(async (element: Post) => {
+        //     await postElemens.renderPost(element);
+        // });
     }
 
     static async likeDislikePost(element: Event) {

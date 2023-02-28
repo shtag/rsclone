@@ -48,7 +48,7 @@ export class postElemens {
         return `
         <div class="post_wrapper">
             <div class="post">
-                <div class="post_info_cotainer">
+                <div class="post_info_cotainer" data-post_id="${PostData.id}">
                     <div class="post_info_account">
                         <a class="post_info_account_img route" href="/${userName.username}">
                             <img class="mini-round-img" src="${img}" alt="" />
@@ -64,20 +64,21 @@ export class postElemens {
         )}</div>
                     </div>
                     <form onsubmit="event.preventDefault();" data-post_id="${PostData.id}" class="comment_form_container">
-                <input maxlength="150"
-                data-post_id="${PostData.id}"
-                autocomplete="off"
-                type="text"
-                name="name"
-                placeholder="${ln.AddComment}"
-                size="30" required />
-                <button type="button" class="imput_comment_btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 3L9.21802 10.083" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M11.698 20.334L22 3.001H2L9.218 10.084L11.698 20.334Z" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            <form>
+                        <input maxlength="150"
+                        data-post_id="${PostData.id}"
+                        class="comment_input"
+                        autocomplete="off"
+                        type="text"
+                        name="name"
+                        placeholder="${ln.AddComment}"
+                        size="30" required />
+                        <button type="button" class="imput_comment_btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 3L9.21802 10.083" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M11.698 20.334L22 3.001H2L9.218 10.084L11.698 20.334Z" stroke="#f9fdfe" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    <form>
                 </div>
                 <div class="post_img_container">
                 <img src=${PostData.image} alt="" class="post_img" />
@@ -103,14 +104,7 @@ export class postElemens {
                 </div>
                 ${deleteBtn}
                 <div class="tools_container_item comment_btn" data-post_id = "${PostData.id}">
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M19.656 16.008C20.8711 13.9061 21.2795 11.4337 20.8048 9.05272C20.3301 6.67172 19.0048 4.54497 17.0765 3.06978C15.1482 1.59458 12.7488 0.871855 10.3266 1.0366C7.9043 1.20135 5.62486 2.24231 3.91408 3.96501C2.20329 5.68772 1.17817 7.97432 1.03024 10.3977C0.882302 12.821 1.62166 15.2153 3.1102 17.1334C4.59874 19.0514 6.73463 20.3619 9.11887 20.82C11.5031 21.2782 13.9726 20.8527 16.066 19.623L21 21L19.656 16.008Z"
-                            stroke="#f9fdfe"
-                            stroke-width="2"
-                            stroke-linejoin="round"
-                        />
-                    </svg>
+                    ${svg.comment}
                     <p class="tools_text_comment">${PostData.comments.length}</p>
                 </div>
             </div>
