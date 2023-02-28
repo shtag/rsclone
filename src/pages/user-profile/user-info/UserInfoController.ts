@@ -40,7 +40,7 @@ class UserPageController {
         const photo = document.querySelector('.user__photo') as HTMLImageElement;
         if (!photo) return;
         const ln = dictionary[localStorage.lang];
-        const userName = await model.user.get(id)
+        const userName = await model.user.get(id);
 
         const sessionId = localStorage.getItem('sessionId') as string;
 
@@ -72,7 +72,7 @@ class UserPageController {
                 if ((e.target as HTMLElement).classList.contains('popup')) {
                     popupContainer.remove();
                 }
-            })
+            });
             const addAvatar = document.querySelector('.add__avatar') as HTMLInputElement;
             const newPhoto = popupContainer.querySelector('.add__photo_new') as HTMLImageElement;
             const createPhoto = popupContainer.querySelector('.add__photo_submit') as HTMLButtonElement;
@@ -85,15 +85,13 @@ class UserPageController {
                 newPhoto.src = img.data.link;
                 block.innerHTML = `
                 <img class="add__photo_new user__avatar_img" src="${img.data.link}" alt="avatar" />
-                `
+                `;
                 createPhoto.disabled = false;
             });
 
-            createPhoto.addEventListener('click', async () => {
+            createPhoto.addEventListener('click', async (e: Event) => {
+                e.preventDefault();
                 try {
-                    if (localStorage.sessionId) {
-                        await model.user.changeSettings(id, { sessionId, settings: { photo: UserPageController.avatar } });
-                    }
                     confetti({
                         particleCount: 400,
                         startVelocity: 90,
@@ -105,6 +103,8 @@ class UserPageController {
                         Router.handleLocation();
                         popupContainer.remove();
                     }, 1500);
+
+                    await model.user.changeSettings(id, { sessionId, settings: { photo: UserPageController.avatar } });
                 } catch (error) {
                     alert('An error occured, please try again later.');
                 }
