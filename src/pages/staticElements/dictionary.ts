@@ -32,6 +32,13 @@ interface Dictionary {
     DeleteImage: string;
     Unsubscribe: string;
     Subscribe: string;
+    LogOut: string;
+    Close: string;
+    DelPost: string;
+    Yes: string;
+    No: string;
+    AreYou: string;
+    deleteyouraccount: string;
   }
 
 const en: Dictionary = {
@@ -67,7 +74,14 @@ const en: Dictionary = {
     CreatePost: 'Create post',
     DeleteImage: 'Delete image',
     Unsubscribe: 'Unsubscribe',
-    Subscribe: 'Subscribe'
+    Subscribe: 'Subscribe',
+    LogOut: 'Log out',
+    Close: 'Close',
+    DelPost: 'Are you sure you want to delete this post?',
+    Yes: 'Yes',
+    No: 'No',
+    AreYou: 'Are you sure you want to',
+    deleteyouraccount: 'delete your account'
 };
 
 const uk: Dictionary = {
@@ -89,7 +103,7 @@ const uk: Dictionary = {
     ProfileDecription: 'Опис профілю',
     EnterNewDecription: 'Введіть опис',
     Favorites: 'Обрані',
-    GoBack: 'Повернутися назад',
+    GoBack: 'Назад',
     Followers: 'Підписники',
     Following: 'Підписки',
     Step1: 'Крок 1: Завантажити своє зображення',
@@ -103,7 +117,14 @@ const uk: Dictionary = {
     CreatePost: 'Створити публікацію',
     DeleteImage: 'Видалити зображення',
     Unsubscribe: 'Відписатися',
-    Subscribe: 'Підписуватися'
+    Subscribe: 'Підписуватися',
+    LogOut: 'Вийти',
+    Close: 'Закрити',
+    DelPost: 'Ви впевнені, що хочете видалити цей пост?',
+    Yes: 'Так',
+    No: 'Нi',
+    AreYou: 'Ви впевнені, що хочете',
+    deleteyouraccount: 'видалити свій обліковий запис'
 }
 
 const bl: Dictionary = {
@@ -125,7 +146,7 @@ const bl: Dictionary = {
     ProfileDecription: 'Апісанне профілю',
     EnterNewDecription: 'Увядзіце новае апісанне',
     Favorites: 'Выбранае',
-    GoBack: 'Вярнуцца назад',
+    GoBack: 'Назад',
     Followers: 'Падпісчыкі',
     Following: 'Падпіска',
     Step1: 'Крок 1: Загрузіце свой малюнак',
@@ -139,7 +160,14 @@ const bl: Dictionary = {
     CreatePost: 'Стварыць паведамленне',
     DeleteImage: 'Выдаліць малюнак',
     Unsubscribe: 'Адпісацца',
-    Subscribe: 'Падпісацца'
+    Subscribe: 'Падпісацца',
+    LogOut: 'Зачыніць',
+    Close: 'Зачыніць',
+    DelPost: 'Вы ўпэўненыя, што хочаце выдаліць гэты запіс?',
+    Yes: 'Так',
+    No: 'Не',
+    AreYou: 'Вы ўпэўненыя, што хочаце',
+    deleteyouraccount: 'выдаліць свой уліковы запіс'
 }
 
 const pl: Dictionary = {
@@ -175,7 +203,14 @@ const pl: Dictionary = {
     CreatePost: 'Utwórz post',
     DeleteImage: 'Usuń obraz',
     Unsubscribe: 'Przestań obserwować',
-    Subscribe: 'Obserwuj'
+    Subscribe: 'Obserwuj',
+    LogOut: 'Wyloguj się',
+    Close: 'Zamknij',
+    DelPost: 'Czy na pewno chcesz usunąć ten post?',
+    Yes: 'Tak',
+    No: 'Nie',
+    AreYou: 'Czy na pewno chcesz',
+    deleteyouraccount: 'usunąć swoje konto'
 };
 
 const dictionary: {[key: string]:Dictionary} = {

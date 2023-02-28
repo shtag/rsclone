@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti';
 import model from '../../../api/Model';
 import Router from '../../../router';
 import { checkSession } from '../../../types/functions';
+import dictionary from '../../staticElements/dictionary';
 
 class InteractionController {
     static language: string;
@@ -175,9 +176,10 @@ class InteractionController {
 
     static settingsLogOut(userId: string, sessionId: string) {
         const logOutBtn = document.querySelector('.settings__logOut') as HTMLButtonElement;
+        const ln = dictionary[localStorage.lang];
 
         logOutBtn.addEventListener('click', async () => {
-            InteractionController.settingsConfirmation('log out');
+            InteractionController.settingsConfirmation(`${ln.LogOut}`);
             const popupContainer = document.querySelector('.popup__container') as HTMLDivElement;
             const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
             const cancelButton = popupContainer.querySelector('.cancel_button') as HTMLButtonElement;
@@ -201,9 +203,10 @@ class InteractionController {
 
     static settingsDeleteAccount(userId: string, sessionId: string) {
         const deleteAccountBtn = document.querySelector('.settings__deleteAccount') as HTMLImageElement;
+        const ln = dictionary[localStorage.lang];
 
         deleteAccountBtn.addEventListener('click', async () => {
-            InteractionController.settingsConfirmation('delete your account');
+            InteractionController.settingsConfirmation(`${ln.deleteyouraccount}`);
 
             const popupContainer = document.querySelector('.popup__container') as HTMLDivElement;
             const confirmButton = popupContainer.querySelector('.confirm_button') as HTMLButtonElement;
@@ -228,14 +231,15 @@ class InteractionController {
 
     static settingsConfirmation(text: string) {
         const popup = document.createElement('div');
+        const ln = dictionary[localStorage.lang];
         popup.classList.add('popup');
         const popupHtml = `
                 <div class="popup">
                 <div class="popup_content">
-                    <p>Are you sure you want to ${text}?</p>
+                    <p>${ln.AreYou} ${text}?</p>
                     <div class="popup_buttons">
-                    <button class="popup_button confirm_button">Yes</button>
-                    <button class="popup_button cancel_button">No</button>
+                    <button class="popup_button confirm_button">${ln.Yes}</button>
+                    <button class="popup_button cancel_button">${ln.No}</button>
                     </div>
                 </div>
                 </div>

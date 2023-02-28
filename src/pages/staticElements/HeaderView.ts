@@ -7,6 +7,7 @@ import Router from '../../router';
 import { Post } from '../../types/types';
 import { disableScroll, enableScroll } from '../../types/functions';
 import search from './search/searchPopupController';
+import dictionary from './dictionary';
 
 export class HeaderView {
     static async renderHeaderContainer() {
@@ -123,10 +124,11 @@ export class HeaderView {
     }
 
     static renderLikedPostsContainer() {
+        const ln = dictionary[localStorage.lang];
         const popupHtml = `
             <div class="popup">
             <div class="popup_content liked_content"></div>
-            <button class="popup_button confirm_button liked_btn">Close</button>
+            <button class="popup_button confirm_button liked_btn">${ln.Close}</button>
             </div>                                
             `;
         const popupContainer = document.createElement('div');

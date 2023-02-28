@@ -70,12 +70,11 @@ class SettingsView {
         </button>
         <span class="settings__error_submit"></span>
         <button type="button" class="settings__logOut open__post-btn">
-        <div class="text_button">Log out</div>
+        <div class="text_button">${ln.LogOut}</div>
         </button>
         <img class="settings__deleteAccount" src="/img/icons/delete-account.png" alt="delete-account" />
         </div>
         </form>
-  
         `;
     }
 }

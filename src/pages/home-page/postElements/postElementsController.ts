@@ -255,6 +255,7 @@ class PostElementsController {
     }
 
     static async delPost(element: Event) {
+        const ln = dictionary[localStorage.lang];
         const sessionId = localStorage.getItem('sessionId') as string;
         const el = element.target as HTMLElement;
         const target = el.closest('.delete_btn') as HTMLElement;
@@ -269,10 +270,10 @@ class PostElementsController {
                     const popupHtml = `
                             <div class="popup">
                             <div class="popup_content">
-                                <p>Are you sure you want to delete this post?</p>
+                                <p>${ln.DelPost}</p>
                                 <div class="popup_buttons">
-                                <button class="popup_button confirm_button">Yes</button>
-                                <button class="popup_button cancel_button">No</button>
+                                <button class="popup_button confirm_button">${ln.Yes}</button>
+                                <button class="popup_button cancel_button">${ln.No}</button>
                                 </div>
                             </div>
                             </div>
