@@ -1,4 +1,4 @@
-@import "_variables.scss";
+@import '_variables.scss';
 
 .light-theme {
     background-color: $white-color;
@@ -99,7 +99,7 @@
         }
 
         .setting_popup {
-            background-color: #f9fdfea3;
+            background-color: rgba(0, 0, 0, 0.5);
             border: 1px solid #c4c4c454;
             -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
@@ -120,12 +120,13 @@
         background: $white-color;
     }
 
-    .login_btn, .signup_btn {
+    .login_btn,
+    .signup_btn {
         color: $white-color;
     }
 
-    .popup_wrapper{
-        h2{
+    .popup_wrapper {
+        h2 {
             color: $white-color;
         }
     }

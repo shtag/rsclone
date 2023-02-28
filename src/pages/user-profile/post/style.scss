@@ -6,8 +6,7 @@
         text-align: center;
         outline: none;
         border: none;
-        padding: 10px;
-        width: 115px;
+        padding: 10px 20px;
         border-radius: 50px;
         cursor: pointer;
         background: $medium-grey-color;
@@ -16,8 +15,8 @@
 
         &::after {
             position: absolute;
-            top: -2px;
-            left: -2px;
+            top: -0px;
+            left: -0px;
             opacity: 0;
             content: '';
             &::content {
@@ -57,7 +56,6 @@
                 transition: 0.5s;
                 border-radius: 50px;
             }
- 
         }
     }
 

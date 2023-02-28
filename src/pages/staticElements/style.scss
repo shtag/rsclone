@@ -245,7 +245,7 @@
     top: 50%;
     left: -100%;
     transform: translate(0, -50%);
-    background-color: #1e1e1e8b;
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 20px 40px;
     height: 650px;
     width: 700px;
@@ -263,15 +263,13 @@
 }
 
 .liked_content {
-        
-        width: 345px;
-        height: 220px;
-        border-radius: 50px;
-        overflow-y: scroll;
-        gap: 22px;
-        display: flex;
-        flex-wrap: wrap;
-      
+    width: 345px;
+    height: 220px;
+    border-radius: 50px;
+    overflow-y: scroll;
+    gap: 22px;
+    display: flex;
+    flex-wrap: wrap;
 
     &::-webkit-scrollbar {
         display: none;

@@ -134,12 +134,16 @@
         }
     }
 }
-
+.light-theme {
+    .drop-zone {
+        background-color: rgb(205, 188, 188);
+    }
+}
 .drop-zone {
     border: 2px dashed gray;
     height: 480px;
     width: 480px;
-    border-radius: 80px;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
