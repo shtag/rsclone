@@ -3,7 +3,7 @@ import './style.scss';
 
 class SettingsView {
     static renderSettings() {
-      const ln = dictionary[localStorage.lang];
+        const ln = dictionary[localStorage.lang];
         return `
         <img class="settings__icon" src="/img/icons/settings-icon.png"/>
         <form class="settings__form-credentials">
@@ -26,7 +26,30 @@ class SettingsView {
            <h2 class="settings__subtitle">${ln.UserInteraction}</h2>
            <div class="settings__lang-block">
               <h3 class="settings__block-title">${ln.Language}:</h3>
-              <input type="checkbox" class="settings__lang">
+              <div class="lang-menu">
+                 <div class="settings__lang">
+                    <img class="settings__lang-flag" src="https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png"/>
+                    <p class="settings__lang-text">English</p>
+                 </div>
+                 <div class="settings__lang-items">
+                    <div class="settings__lang-item">
+                       <img class="settings__en settings__lang-flag" src="https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png"/>
+                       <p class="setting__lang-name">English</p>
+                    </div>
+                    <div class="settings__lang-item">
+                       <img class="settings__uk settings__lang-flag" src="https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png"/>
+                       <p class="setting__lang-name">Український</p>
+                    </div>
+                    <div class="settings__lang-item">
+                       <img class="settings__bl settings__lang-flag" src="https://i.postimg.cc/tJNGH7cS/pl.png"/>
+                       <p class="setting__lang-name">Беларуская</p>
+                    </div>
+                    <div class="settings__lang-item">
+                       <img class="settings__pl settings__lang-flag" src="https://i.postimg.cc/MHPtRSfZ/a3.png"/>
+                       <p class="setting__lang-name">Polski</p>
+                    </div>
+                 </div>
+              </div>
            </div>
            <form class="settings__form-interaction">
               <div class="settings__name-block">
@@ -46,18 +69,17 @@ class SettingsView {
         <div class="text_button">${ln.SaveChanges}</div>
         </button>
         <span class="settings__error_submit"></span>
-
         <button type="button" class="settings__logOut open__post-btn">
         <div class="text_button">Log out</div>
         </button>
-
         <img class="settings__deleteAccount" src="/img/icons/delete-account.png" alt="delete-account" />
-
         </div>
-       
         </form>
+  
         `;
     }
 }
 
 export default SettingsView;
+
+// <input type="checkbox" class="settings__lang">

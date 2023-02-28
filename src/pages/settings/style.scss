@@ -155,47 +155,6 @@
         }
     }
 
-    &__lang {
-        position: relative;
-        width: 50px;
-        height: 25px;
-        -webkit-appearance: none;
-        appearance: none;
-        background: red;
-        outline: none;
-        cursor: pointer;
-        position: relative;
-        background-image: url(https://i.postimg.cc/65L8YXnf/640px-Flag-of-the-United-Kingdom-3-5-svg.png);
-        background-size: cover;
-        border-radius: 50px;
-        transition: background-image 0.9s;
-        box-shadow: 0px 2px 5px 1px grey;
-    }
-
-    &__lang::before {
-        content: '';
-        border-radius: 50%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        background: rgb(201 6 40);
-        border-radius: 50px;
-        transition: all 0.9s;
-    }
-
-    &__lang:checked {
-        background-image: url(https://i.postimg.cc/SKL9bZ7x/1200px-Flag-of-Ukraine-svg.png);
-        transition: background-image 0.9s;
-    }
-
-    &__lang:checked::before {
-        transform: translateX(100%);
-        background-color: rgb(253 215 3);
-        transition: all 0.9s;
-    }
-
     &__btns {
         margin: 20px 0;
         display: flex;
@@ -215,4 +174,58 @@
             transform: rotate(360deg);
         }
     }
+
+    &__lang {
+        display: flex;
+        cursor: pointer;
+        gap: 10px;
+        align-items: center;
+
+        &-flag {
+            width: 30px;
+            height: 20px;
+        }
+
+        &-text {
+            font-weight: 400;
+        }
+
+        &-items {
+            display: none;
+            flex-direction: column;
+            gap: 7px;
+            background: $gradient;
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            width: 170px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            transition: 0.5s ease-in-out;
+
+            &_open {
+                display: flex;
+            }
+        }
+
+        &-item {
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+
+            &:hover {
+                background-color: #f2f2f231;
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+.lang-menu {
+    width: 125px;
+    text-align: right;
+    font-weight: bold;
+    position: relative;
+    align-items: center;
 }
