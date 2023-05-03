@@ -1,0 +1,156 @@
+@import '/src/scss/base/variables';
+
+.search_popup_block {
+    height: calc(100vh - 150px);
+    width: 500px;
+    min-width: 450px;
+    max-width: 650px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    left: -3000px;
+    display: flex;
+    flex-direction: column;
+    top: 110px;
+    transition: 0.2s;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 50px;
+    gap: 20px;
+    overflow: hidden;
+    .search_input {
+        border-radius: 50px;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 40px;
+        width: 80%;
+        &:focus {
+            outline: none;
+        }
+    }
+    .search_nav {
+        display: flex;
+        gap: 20px;
+    }
+    button {
+        position: relative;
+        text-align: center;
+        outline: none;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 50px;
+        cursor: pointer;
+        background: $medium-grey-color;
+        transition: 0.5s;
+        border: 2px solid transparent;
+        &::after {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            opacity: 0;
+            content: '';
+            &::content {
+                text-align: center;
+                padding: 20px;
+            }
+            width: 100%;
+            height: 100%;
+            background: $gradient;
+            transition: 0.5s;
+            border-radius: 50px;
+            border: 2px solid transparent;
+        }
+        &:hover::after {
+            opacity: 1;
+            transition: 0.5s;
+            border: 2px solid white;
+        }
+        .text_button {
+            position: relative;
+            z-index: 3;
+        }
+    }
+    .search_results {
+        width: 200%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        overflow-x: hidden;
+        gap: 10px;
+        margin-bottom: 40px;
+        position: relative;
+        left: 300px;
+        &_users,
+        &_posts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 400px;
+            overflow-y: scroll;
+            border-radius: 10px 0 0 10px;
+            &::-webkit-scrollbar {
+                width: 4px;
+                transition: 0.3s;
+            }
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: #f1f1f100;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 3px;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+            .lds-ring {
+                position: relative;
+                left: calc(50% - 35px);
+            }
+        }
+        .search_post {
+            display: flex;
+            text-decoration: none;
+            gap: 30px;
+            color: white;
+            align-items: center;
+            &_image {
+                height: 70px;
+                width: 70px;
+                border-radius: 10px;
+                object-fit: cover;
+            }
+        }
+        .search_user {
+            display: flex;
+            text-decoration: none;
+            gap: 30px;
+            color: white;
+            align-items: center;
+            &_image {
+                height: 70px;
+                width: 70px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+    }
+    .posts_active {
+        left: -300px;
+    }
+}
+
+.search_active {
+    left: calc(50% - 200px);
+}
+
+.overflow_hidden {
+    overflow: hidden;
+    position: relative;
+}
